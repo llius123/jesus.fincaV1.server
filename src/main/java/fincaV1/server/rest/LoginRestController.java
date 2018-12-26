@@ -20,8 +20,13 @@ public class LoginRestController {
 	public String login(HttpServletRequest request, HttpSession session) {
 		session.invalidate();
 		HttpSession newSesion = request.getSession();
-		helper.consoleLog(newSesion.toString(), "/login");
 		return "Sesion creada";
+	}
+	
+	@RequestMapping(value="/logout", method=RequestMethod.GET )
+	public String logou(HttpSession session) {
+		session.invalidate();
+		return "Sesion cerrada";
 	}
 
 }

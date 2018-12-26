@@ -19,7 +19,7 @@ public class IncidenciaBean {
 	private int id;
 	
 	@Column(name="id_vecino")
-	private String id_vecino;
+	private int id_vecino;
 	
 	@Column(name="desc")
 	private String desc;
@@ -36,11 +36,11 @@ public class IncidenciaBean {
 		this.id = id;
 	}
 
-	public String getId_vecino() {
+	public int getId_vecino() {
 		return id_vecino;
 	}
 
-	public void setId_vecino(String id_vecino) {
+	public void setId_vecino(int id_vecino) {
 		this.id_vecino = id_vecino;
 	}
 
