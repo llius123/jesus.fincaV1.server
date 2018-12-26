@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name ="incidencia")
 public class VecinoBean {
@@ -56,7 +58,14 @@ public class VecinoBean {
 	
 	@Column(name="cod_poblacion")
 	private int cod_poblacion;
-
+	
+	@Column(name="login")
+	private String login;
+	
+	@JsonIgnore
+	@Column(name="pass")
+	private String pass;
+	
 	public int getId() {
 		return id;
 	}
@@ -168,6 +177,25 @@ public class VecinoBean {
 	public void setCod_poblacion(int cod_poblacion) {
 		this.cod_poblacion = cod_poblacion;
 	}
+	
+	
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	@JsonIgnore
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
 
 	@Override
 	public String toString() {
@@ -175,8 +203,10 @@ public class VecinoBean {
 				+ ", nif=" + nif + ", iban=" + iban + ", num_mandato=" + num_mandato + ", fecha=" + fecha
 				+ ", porcentaje_participacion=" + porcentaje_participacion + ", id_comunidad=" + id_comunidad
 				+ ", email=" + email + ", telefono=" + telefono + ", id_tipovecino=" + id_tipovecino
-				+ ", cod_poblacion=" + cod_poblacion + "]";
+				+ ", cod_poblacion=" + cod_poblacion + ", login=" + login + ", pass=" + pass + "]";
 	}
+
+
 	
 	
 

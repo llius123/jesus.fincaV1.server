@@ -2,10 +2,10 @@
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 25-12-2018 a las 19:44:24
--- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 7.2.10
+-- Servidor: localhost:3306
+-- Tiempo de generación: 26-12-2018 a las 02:22:28
+-- Versión del servidor: 5.7.24
+-- Versión de PHP: 7.1.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -37,6 +37,13 @@ CREATE TABLE `comunidad` (
   `sufijo` varchar(100) DEFAULT NULL,
   `cod_poblacion` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `comunidad`
+--
+
+INSERT INTO `comunidad` (`id`, `nombre`, `direccion`, `nif`, `iban`, `sufijo`, `cod_poblacion`) VALUES
+(1, 'test_comunidad', 'test_comunidad', 'test_comunidad', 'test_comunidad', 'test_comunidad', 1);
 
 -- --------------------------------------------------------
 
@@ -76,6 +83,13 @@ CREATE TABLE `incidencia` (
   `desc` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `incidencia`
+--
+
+INSERT INTO `incidencia` (`id`, `id_vecino`, `desc`) VALUES
+(1, 1, 'test_incidencia');
+
 -- --------------------------------------------------------
 
 --
@@ -87,6 +101,13 @@ CREATE TABLE `poblacion` (
   `desc` varchar(100) DEFAULT NULL,
   `cod_provincia` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `poblacion`
+--
+
+INSERT INTO `poblacion` (`cod_postal`, `desc`, `cod_provincia`) VALUES
+(1, 'test_poblacion', 1);
 
 -- --------------------------------------------------------
 
@@ -113,6 +134,13 @@ CREATE TABLE `provincia` (
   `cod_provincia` int(11) NOT NULL,
   `desc` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `provincia`
+--
+
+INSERT INTO `provincia` (`cod_provincia`, `desc`) VALUES
+(1, 'test_provincia');
 
 -- --------------------------------------------------------
 
@@ -152,6 +180,13 @@ CREATE TABLE `tipovecino` (
   `desc` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `tipovecino`
+--
+
+INSERT INTO `tipovecino` (`id`, `desc`) VALUES
+(1, 'test_tipovecino');
+
 -- --------------------------------------------------------
 
 --
@@ -172,8 +207,17 @@ CREATE TABLE `vecino` (
   `email` varchar(100) DEFAULT NULL,
   `telefono` varchar(100) DEFAULT NULL,
   `id_tipovecino` int(11) DEFAULT NULL,
-  `cod_poblacion` int(11) DEFAULT NULL
+  `cod_poblacion` int(11) DEFAULT NULL,
+  `login` varchar(100) NOT NULL,
+  `pass` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `vecino`
+--
+
+INSERT INTO `vecino` (`id`, `nombre`, `direccion`, `numero`, `nif`, `iban`, `num_mandato`, `fecha_mandato`, `porcentaje_participacion`, `id_comunidad`, `email`, `telefono`, `id_tipovecino`, `cod_poblacion`, `login`, `pass`) VALUES
+(1, 'test_vecino', 'test_vecino', 'test_vecino', 'test_vecino', 'test_vecino', 'test_vecino', '2018-12-05 00:00:00', 0, 1, 'test_vecino', 'test_vecino', 1, 1, '', '');
 
 --
 -- Índices para tablas volcadas
@@ -258,7 +302,7 @@ ALTER TABLE `vecino`
 -- AUTO_INCREMENT de la tabla `comunidad`
 --
 ALTER TABLE `comunidad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `factura_proveedor`
@@ -288,13 +332,13 @@ ALTER TABLE `tipofactura`
 -- AUTO_INCREMENT de la tabla `tipovecino`
 --
 ALTER TABLE `tipovecino`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `vecino`
 --
 ALTER TABLE `vecino`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
