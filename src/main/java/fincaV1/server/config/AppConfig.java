@@ -26,7 +26,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableTransactionManagement
 @ComponentScan("fincaV1.server")
 @PropertySource({ "classpath:persistence-mysql.properties" })
-public class DemoAppConfig implements WebMvcConfigurer {
+public class AppConfig implements WebMvcConfigurer {
 
 	@Autowired
 	private Environment env;
@@ -49,8 +49,8 @@ public class DemoAppConfig implements WebMvcConfigurer {
 		}
 		
 		// for sanity's sake, let's log url and user ... just to make sure we are reading the data
-		logger.info("jdbc.url=" + env.getProperty("jdbc.url"));
-		logger.info("jdbc.user=" + env.getProperty("jdbc.user"));
+//		logger.info("jdbc.url=" + env.getProperty("jdbc.url"));
+//		logger.info("jdbc.user=" + env.getProperty("jdbc.user"));
 		
 		// set database connection props
 		myDataSource.setJdbcUrl(env.getProperty("jdbc.url"));

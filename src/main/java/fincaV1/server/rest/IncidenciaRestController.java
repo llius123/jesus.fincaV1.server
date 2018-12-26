@@ -23,7 +23,6 @@ import fincaV1.server.service.IncidenciaServiceImp;
 
 
 @RestController
-@RequestMapping("/test")
 public class IncidenciaRestController {
 	
 	@Autowired
