@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name ="incidencia")
+@Table(name ="vecino")
 public class VecinoBean {
 	
 	@Id
@@ -38,10 +38,10 @@ public class VecinoBean {
 	@Column(name="num_mandato")
 	private String num_mandato;
 	
-	@Column(name="fecha")
-	private Date fecha;
+	@Column(name="fecha_mandato")
+	private Date fecha_mandato;
 	
-	@Column(name="porccentaje_participacion")
+	@Column(name="porcentaje_participacion")
 	private int porcentaje_participacion;
 	
 	@Column(name="id_comunidad")
@@ -62,7 +62,6 @@ public class VecinoBean {
 	@Column(name="login")
 	private String login;
 	
-	@JsonIgnore
 	@Column(name="pass")
 	private String pass;
 	
@@ -121,13 +120,13 @@ public class VecinoBean {
 	public void setNum_mandato(String num_mandato) {
 		this.num_mandato = num_mandato;
 	}
-
-	public Date getFecha() {
-		return fecha;
+	
+	public Date getFecha_mandato() {
+		return fecha_mandato;
 	}
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setFecha_mandato(Date fecha_mandato) {
+		this.fecha_mandato = fecha_mandato;
 	}
 
 	public int getPorcentaje_participacion() {
@@ -200,11 +199,13 @@ public class VecinoBean {
 	@Override
 	public String toString() {
 		return "VecinoBean [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", numero=" + numero
-				+ ", nif=" + nif + ", iban=" + iban + ", num_mandato=" + num_mandato + ", fecha=" + fecha
-				+ ", porcentaje_participacion=" + porcentaje_participacion + ", id_comunidad=" + id_comunidad
-				+ ", email=" + email + ", telefono=" + telefono + ", id_tipovecino=" + id_tipovecino
+				+ ", nif=" + nif + ", iban=" + iban + ", num_mandato=" + num_mandato + ", fecha_mandato="
+				+ fecha_mandato + ", porcentaje_participacion=" + porcentaje_participacion + ", id_comunidad="
+				+ id_comunidad + ", email=" + email + ", telefono=" + telefono + ", id_tipovecino=" + id_tipovecino
 				+ ", cod_poblacion=" + cod_poblacion + ", login=" + login + ", pass=" + pass + "]";
 	}
+
+
 
 
 	

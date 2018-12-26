@@ -1,32 +1,54 @@
 package fincaV1.server.rest;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import fincaV1.server.entity.ResponseBean;
+import fincaV1.server.entity.VecinoBean;
 import fincaV1.server.helper.Helper;
+import fincaV1.server.service.VecinoService;
+import fincaV1.server.service.VecinoServiceImp;
 
 @RestController
 public class LoginRestController {
 	@Autowired
-	Helper helper;
+	private Helper helper;
+	@Autowired
+	private VecinoService vecinoService;
+
+	private ResponseBean responseBean;
 	
 	
-	@RequestMapping(value="/login", method=RequestMethod.GET )
-	public String login(HttpServletRequest request, HttpSession session) {
+	@RequestMapping(value="/login/{user}/{pass}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE )
+	public ResponseBean login(HttpServletResponse response, HttpServletRequest request, HttpSession session, @PathVariable String user,@PathVariable String pass) {
 		session.invalidate();
-		HttpSession newSesion = request.getSession();
-		return "Sesion creada";
+		List<VecinoBean> oVecinoBean = vecinoService.login(user, pass);
+
+		if(!oVecinoBean.isEmpty()) {
+			HttpSession newSesion = request.getSession();
+			newSesion.setAttribute("user", oVecinoBean);
+			responseBean =  new ResponseBean(200, "Login correcto");
+		}else {
+			responseBean = new ResponseBean(401, "Bad login");
+		}
+		response.setStatus(responseBean.getStatus());
+		return responseBean;
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET )
-	public String logou(HttpSession session) {
+	public ResponseBean logou(HttpSession session) {
 		session.invalidate();
-		return "Sesion cerrada";
+		return new ResponseBean(200,"logout correcto");
 	}
 
 }
