@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 26-12-2018 a las 02:22:28
+-- Tiempo de generación: 27-12-2018 a las 02:57:04
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.1.24
 
@@ -66,7 +66,7 @@ CREATE TABLE `factura_proveedor` (
   `cuota_iva1` decimal(10,2) DEFAULT NULL,
   `cuota_iva2` decimal(10,2) DEFAULT NULL,
   `cuota_iva3` decimal(10,2) DEFAULT NULL,
-  `total` double DEFAULT NULL,
+  `total` decimal(10,2) DEFAULT NULL,
   `id_comunidad` int(11) DEFAULT NULL,
   `num_factura` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -151,7 +151,7 @@ INSERT INTO `provincia` (`cod_provincia`, `desc`) VALUES
 CREATE TABLE `recibo` (
   `id` int(11) NOT NULL,
   `fecha_emision` datetime DEFAULT NULL,
-  `num_registro` int(11) DEFAULT NULL,
+  `num_registro` decimal(10,2) DEFAULT NULL,
   `id_vecino` int(11) DEFAULT NULL,
   `descripcion` varchar(100) DEFAULT NULL,
   `importe` int(11) DEFAULT NULL,
@@ -202,7 +202,7 @@ CREATE TABLE `vecino` (
   `iban` varchar(100) DEFAULT NULL,
   `num_mandato` varchar(100) DEFAULT NULL,
   `fecha_mandato` datetime DEFAULT NULL,
-  `porcentaje_participacion` int(11) DEFAULT NULL,
+  `porcentaje_participacion` decimal(5,2) DEFAULT NULL,
   `id_comunidad` int(11) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
   `telefono` varchar(100) DEFAULT NULL,
@@ -217,7 +217,7 @@ CREATE TABLE `vecino` (
 --
 
 INSERT INTO `vecino` (`id`, `nombre`, `direccion`, `numero`, `nif`, `iban`, `num_mandato`, `fecha_mandato`, `porcentaje_participacion`, `id_comunidad`, `email`, `telefono`, `id_tipovecino`, `cod_poblacion`, `login`, `pass`) VALUES
-(1, 'test_vecino', 'test_vecino', 'test_vecino', 'test_vecino', 'test_vecino', 'test_vecino', '2018-12-05 00:00:00', 0, 1, 'test_vecino', 'test_vecino', 1, 1, '', '');
+(1, 'test_vecino', 'test_vecino', 'test_vecino', 'test_vecino', 'test_vecino', 'test_vecino', '2018-12-05 00:00:00', '0.00', 1, 'test_vecino', 'test_vecino', 1, 1, 'admin', 'admin');
 
 --
 -- Índices para tablas volcadas

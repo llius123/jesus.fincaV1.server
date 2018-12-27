@@ -16,6 +16,7 @@ import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "vecino")
@@ -63,9 +64,6 @@ public class VecinoBean {
 
 	@Column(name = "id_tipovecino")
 	private int id_tipovecino;
-
-//	@Column(name = "cod_poblacion")
-//	private int cod_poblacion;
 
 	@Column(name = "login")
 	private String login;
@@ -189,14 +187,6 @@ public class VecinoBean {
 		this.id_tipovecino = id_tipovecino;
 	}
 
-//	public int getCod_poblacion() {
-//		return cod_poblacion;
-//	}
-//
-//	public void setCod_poblacion(int cod_poblacion) {
-//		this.cod_poblacion = cod_poblacion;
-//	}
-
 	public String getLogin() {
 		return login;
 	}
@@ -205,22 +195,25 @@ public class VecinoBean {
 		this.login = login;
 	}
 
+	@JsonIgnore
 	public String getPass() {
 		return pass;
 	}
 
-	@JsonIgnore
+	@JsonProperty
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "VecinoBean [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", numero=" + numero
-//				+ ", nif=" + nif + ", iban=" + iban + ", num_mandato=" + num_mandato + ", fecha_mandato="
-//				+ fecha_mandato + ", porcentaje_participacion=" + porcentaje_participacion + ", id_comunidad="
-//				+ id_comunidad + ", email=" + email + ", telefono=" + telefono + ", id_tipovecino=" + id_tipovecino
-//				+ ", cod_poblacion=" + cod_poblacion + ", login=" + login + ", pass=" + pass + "]";
-//	}
+	@Override
+	public String toString() {
+		return "VecinoBean [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", numero=" + numero
+				+ ", nif=" + nif + ", iban=" + iban + ", num_mandato=" + num_mandato + ", fecha_mandato="
+				+ fecha_mandato + ", porcentaje_participacion=" + porcentaje_participacion + ", id_comunidad="
+				+ id_comunidad + ", email=" + email + ", telefono=" + telefono + ", id_tipovecino=" + id_tipovecino
+				+ ", login=" + login + ", pass=" + pass + ", poblacion=" + poblacion + "]";
+	}
+
+
 
 }
