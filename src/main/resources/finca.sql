@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 27-12-2018 a las 02:57:04
+-- Tiempo de generación: 27-12-2018 a las 03:32:13
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.1.24
 
@@ -118,7 +118,6 @@ INSERT INTO `poblacion` (`cod_postal`, `desc`, `cod_provincia`) VALUES
 CREATE TABLE `proveedor` (
   `id` int(11) NOT NULL,
   `direccion` varchar(100) DEFAULT NULL,
-  `poblacion` varchar(100) DEFAULT NULL,
   `telefono` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `cod_poblacion` int(11) DEFAULT NULL
