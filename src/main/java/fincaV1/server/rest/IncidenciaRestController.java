@@ -27,12 +27,6 @@ public class IncidenciaRestController {
 	
 	@Autowired
 	private IncidenciaService oIncidenciaService;
-
-	
-	@RequestMapping(value="/testapi", method=RequestMethod.GET )
-	public List<IncidenciaBean> testApi() {
-		return oIncidenciaService.testApi();
-	}
 	
 	
 }

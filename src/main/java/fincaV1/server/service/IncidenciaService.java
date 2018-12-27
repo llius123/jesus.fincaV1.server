@@ -6,5 +6,4 @@ import fincaV1.server.entity.IncidenciaBean;
 
 public interface IncidenciaService {
 
-	public List<IncidenciaBean> testApi();
 }

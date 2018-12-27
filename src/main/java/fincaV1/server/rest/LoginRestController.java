@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import fincaV1.server.dao.GenericDaoImp;
 import fincaV1.server.entity.ResponseBean;
 import fincaV1.server.entity.VecinoBean;
 import fincaV1.server.helper.Helper;
@@ -25,7 +26,7 @@ public class LoginRestController {
 	private Helper helper;
 	@Autowired
 	private VecinoService vecinoService;
-
+	
 	private ResponseBean responseBean;
 	
 	
@@ -33,12 +34,11 @@ public class LoginRestController {
 	public ResponseBean login(HttpServletResponse response, HttpServletRequest request, HttpSession session, @PathVariable String user,@PathVariable String pass) {
 		session.invalidate();
 		List<VecinoBean> oVecinoBean = vecinoService.login(user, pass);
-
+		
 		if(!oVecinoBean.isEmpty()) {
 			HttpSession newSesion = request.getSession();
 			newSesion.setAttribute("vecino", oVecinoBean.get(0));
-			VecinoBean test = (VecinoBean) newSesion.getAttribute("vecino");
-			responseBean =  new ResponseBean(200,(test).getPass());
+			responseBean =  new ResponseBean(200,"Login correcto");
 		}else {
 			responseBean = new ResponseBean(401, "Bad login");
 		}
@@ -47,7 +47,7 @@ public class LoginRestController {
 	}
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET )
-	public ResponseBean logou(HttpSession session) {
+	public ResponseBean logout(HttpSession session) {
 		session.invalidate();
 		return new ResponseBean(200,"logout correcto");
 	}

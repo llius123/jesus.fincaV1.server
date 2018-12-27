@@ -14,10 +14,5 @@ public class IncidenciaServiceImp implements IncidenciaService {
 
 	@Autowired
 	private IncidenciaDao oIncidenciaDao;
-	
-	@Transactional
-	public List<IncidenciaBean> testApi() {
-		return oIncidenciaDao.testApi();
-	}
 
 }

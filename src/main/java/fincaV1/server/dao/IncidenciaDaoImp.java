@@ -16,17 +16,4 @@ public class IncidenciaDaoImp implements IncidenciaDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public List<IncidenciaBean> testApi() {
-		// get the current hibernate session
-		Session currentSession = sessionFactory.getCurrentSession();
-
-		// create a query ... sort by last name
-		Query<IncidenciaBean> theQuery = currentSession.createQuery(" from IncidenciaBean", IncidenciaBean.class);
-
-		// execute query and get result list
-		List<IncidenciaBean> incidencia = theQuery.getResultList();
-		
-		return incidencia;
-	}
-
 }
