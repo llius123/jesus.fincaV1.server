@@ -2,69 +2,89 @@ package fincaV1.server.entity;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
+import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name ="vecino")
+@Table(name = "vecino")
+@SecondaryTables({
+		@SecondaryTable(name = "poblacion", pkJoinColumns = { @PrimaryKeyJoinColumn(name = "cod_postal") }) })
 public class VecinoBean {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-	
-	@Column(name="nombre")
+
+	@Column(name = "nombre")
 	private String nombre;
-	
-	@Column(name="direccion")
+
+	@Column(name = "direccion")
 	private String direccion;
-	
-	@Column(name="numero")
+
+	@Column(name = "numero")
 	private String numero;
-	
-	@Column(name="nif")
+
+	@Column(name = "nif")
 	private String nif;
-	
-	@Column(name="iban")
+
+	@Column(name = "iban")
 	private String iban;
-	
-	@Column(name="num_mandato")
+
+	@Column(name = "num_mandato")
 	private String num_mandato;
-	
-	@Column(name="fecha_mandato")
+
+	@Column(name = "fecha_mandato")
 	private Date fecha_mandato;
-	
-	@Column(name="porcentaje_participacion")
+
+	@Column(name = "porcentaje_participacion")
 	private int porcentaje_participacion;
-	
-	@Column(name="id_comunidad")
+
+	@Column(name = "id_comunidad")
 	private int id_comunidad;
-	
-	@Column(name="email")
+
+	@Column(name = "email")
 	private String email;
-	
-	@Column(name="telefono")
+
+	@Column(name = "telefono")
 	private String telefono;
-	
-	@Column(name="id_tipovecino")
+
+	@Column(name = "id_tipovecino")
 	private int id_tipovecino;
-	
-	@Column(name="cod_poblacion")
-	private int cod_poblacion;
-	
-	@Column(name="login")
+
+//	@Column(name = "cod_poblacion")
+//	private int cod_poblacion;
+
+	@Column(name = "login")
 	private String login;
-	
-	@Column(name="pass")
+
+	@Column(name = "pass")
 	private String pass;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "cod_poblacion")
+	private PoblacionBean poblacion;
+
+	public void setPoblacion(PoblacionBean poblacion) {
+		this.poblacion = poblacion;
+	}
+
+	public PoblacionBean getPoblacion() {
+		return poblacion;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -120,7 +140,7 @@ public class VecinoBean {
 	public void setNum_mandato(String num_mandato) {
 		this.num_mandato = num_mandato;
 	}
-	
+
 	public Date getFecha_mandato() {
 		return fecha_mandato;
 	}
@@ -169,15 +189,13 @@ public class VecinoBean {
 		this.id_tipovecino = id_tipovecino;
 	}
 
-	public int getCod_poblacion() {
-		return cod_poblacion;
-	}
-
-	public void setCod_poblacion(int cod_poblacion) {
-		this.cod_poblacion = cod_poblacion;
-	}
-	
-	
+//	public int getCod_poblacion() {
+//		return cod_poblacion;
+//	}
+//
+//	public void setCod_poblacion(int cod_poblacion) {
+//		this.cod_poblacion = cod_poblacion;
+//	}
 
 	public String getLogin() {
 		return login;
@@ -196,19 +214,13 @@ public class VecinoBean {
 		this.pass = pass;
 	}
 
-	@Override
-	public String toString() {
-		return "VecinoBean [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", numero=" + numero
-				+ ", nif=" + nif + ", iban=" + iban + ", num_mandato=" + num_mandato + ", fecha_mandato="
-				+ fecha_mandato + ", porcentaje_participacion=" + porcentaje_participacion + ", id_comunidad="
-				+ id_comunidad + ", email=" + email + ", telefono=" + telefono + ", id_tipovecino=" + id_tipovecino
-				+ ", cod_poblacion=" + cod_poblacion + ", login=" + login + ", pass=" + pass + "]";
-	}
-
-
-
-
-	
-	
+//	@Override
+//	public String toString() {
+//		return "VecinoBean [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", numero=" + numero
+//				+ ", nif=" + nif + ", iban=" + iban + ", num_mandato=" + num_mandato + ", fecha_mandato="
+//				+ fecha_mandato + ", porcentaje_participacion=" + porcentaje_participacion + ", id_comunidad="
+//				+ id_comunidad + ", email=" + email + ", telefono=" + telefono + ", id_tipovecino=" + id_tipovecino
+//				+ ", cod_poblacion=" + cod_poblacion + ", login=" + login + ", pass=" + pass + "]";
+//	}
 
 }
