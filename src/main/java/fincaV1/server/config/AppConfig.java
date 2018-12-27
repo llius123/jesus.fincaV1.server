@@ -26,7 +26,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableTransactionManagement
 @ComponentScan("fincaV1.server")
 @PropertySource({ "classpath:persistence-mysql.properties" })
-public class AppConfig implements WebMvcConfigurer {
+public class AppConfig implements WebMvcConfigurer{
 
 	@Autowired
 	private Environment env;

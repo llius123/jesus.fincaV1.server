@@ -15,7 +15,7 @@ public class GenericDaoImp implements GenericDao {
 	//Revisar que pasa cuando sea el resultado null
 	public <T> T getAll(final Class<T> type) {
 		Session session = sessionFactory.getCurrentSession();
-		return (T) session.createQuery("FROM  " + type).getResultList();			
+		return (T) session.createQuery("FROM  " + type.getSimpleName()).getResultList();			
 	}
 
 	public <T> T get(final Class<T> type, final Long id) {
