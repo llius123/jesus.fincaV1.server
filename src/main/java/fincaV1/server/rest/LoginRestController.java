@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import fincaV1.server.dao.GenericDaoImp;
+import fincaV1.server.daogeneric.GenericDaoImp;
 import fincaV1.server.entity.ResponseBean;
 import fincaV1.server.entity.VecinoBean;
 import fincaV1.server.helper.Helper;
