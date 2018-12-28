@@ -16,8 +16,8 @@ public class ProvinciaBean {
 	@Column(name = "cod_provincia")
 	private int cod_provincia;
 
-	@Column(name = "desc")
-	private String desc;
+	@Column(name = "descripcion")
+	private String descripcion;
 
 	public int getCod_provincia() {
 		return cod_provincia;
@@ -27,17 +27,17 @@ public class ProvinciaBean {
 		this.cod_provincia = cod_provincia;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	@Override
 	public String toString() {
-		return "ProvinciaBean [cod_provincia=" + cod_provincia + ", desc=" + desc + "]";
+		return "ProvinciaBean [cod_provincia=" + cod_provincia + ", descripcion=" + descripcion + "]";
 	}
 
 }

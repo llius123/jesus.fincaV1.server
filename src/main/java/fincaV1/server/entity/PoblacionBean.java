@@ -15,8 +15,8 @@ public class PoblacionBean {
 	@Column(name = "cod_postal")
 	private int cod_postal;
 	
-	@Column(name="desc")
-	private String desc;
+	@Column(name="descripcion")
+	private String descripcion;
 	
 	@Column(name="cod_provincia")
 	private int cod_provincia;
@@ -29,12 +29,12 @@ public class PoblacionBean {
 		this.cod_postal = cod_postal;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public int getCod_provincia() {
@@ -47,7 +47,7 @@ public class PoblacionBean {
 
 	@Override
 	public String toString() {
-		return "PoblacionBean [cod_postal=" + cod_postal + ", desc=" + desc + ", cod_provincia=" + cod_provincia + "]";
+		return "PoblacionBean [cod_postal=" + cod_postal + ", descripcion=" + descripcion + ", cod_provincia=" + cod_provincia + "]";
 	}
 	
 	

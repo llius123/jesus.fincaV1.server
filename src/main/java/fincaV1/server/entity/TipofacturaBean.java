@@ -16,8 +16,8 @@ public class TipofacturaBean {
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name = "desc")
-	private String desc;
+	@Column(name = "descripcion")
+	private String descripcion;
 
 	public int getId() {
 		return id;
@@ -27,17 +27,17 @@ public class TipofacturaBean {
 		this.id = id;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	@Override
 	public String toString() {
-		return "TipofacturaBean [id=" + id + ", desc=" + desc + "]";
+		return "TipofacturaBean [id=" + id + ", descripcion=" + descripcion + "]";
 	}
 	
 	

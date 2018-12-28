@@ -21,8 +21,8 @@ public class IncidenciaBean {
 	@Column(name="id_vecino")
 	private int id_vecino;
 	
-	@Column(name="desc")
-	private String desc;
+	@Column(name="descripcion")
+	private String descripcion;
 	
 	public IncidenciaBean() {
 		
@@ -44,17 +44,17 @@ public class IncidenciaBean {
 		this.id_vecino = id_vecino;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	@Override
 	public String toString() {
-		return "IncidenciaBean [id=" + id + ", id_vecino=" + id_vecino + ", desc=" + desc + "]";
+		return "IncidenciaBean [id=" + id + ", id_vecino=" + id_vecino + ", descripcion=" + descripcion + "]";
 	}
 	
 	
