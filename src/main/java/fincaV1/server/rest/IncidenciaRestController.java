@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fincaV1.server.entity.IncidenciaBean;
@@ -44,9 +45,9 @@ public class IncidenciaRestController {
 		return (IncidenciaBean) genericService.get(IncidenciaBean.class, id);
 	}
 	
-	@RequestMapping(value="/incidencias", method=RequestMethod.DELETE)
-	public ResponseBean incidenciadelete(@RequestBody IncidenciaBean incidencia) {
-		return new ResponseBean(200, genericService.delete(incidencia));
+	@RequestMapping(value="/incidencias/{id}", method=RequestMethod.DELETE)
+	public ResponseBean incidenciadelete(@PathVariable int id) {
+		return new ResponseBean(200, genericService.delete(genericService.get(IncidenciaBean.class, id)));
 	}
 	
 	@RequestMapping(value="/incidencias", method=RequestMethod.POST)
