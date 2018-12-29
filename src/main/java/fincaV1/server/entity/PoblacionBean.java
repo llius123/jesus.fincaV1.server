@@ -5,10 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
+import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
 
 @Entity
 @Table(name ="poblacion")
+@SecondaryTables({
+	@SecondaryTable(name = "provincia", pkJoinColumns = { @PrimaryKeyJoinColumn(name = "cod_provincia") }) })
 public class PoblacionBean {
 	
 	@Id
@@ -18,8 +25,9 @@ public class PoblacionBean {
 	@Column(name="descripcion")
 	private String descripcion;
 	
-	@Column(name="cod_provincia")
-	private int cod_provincia;
+	@ManyToOne
+	@JoinColumn(name="cod_provincia")
+	private ProvinciaBean cod_provincia;
 
 	public int getCod_postal() {
 		return cod_postal;
@@ -37,19 +45,18 @@ public class PoblacionBean {
 		this.descripcion = descripcion;
 	}
 
-	public int getCod_provincia() {
+	public ProvinciaBean getCod_provincia() {
 		return cod_provincia;
 	}
 
-	public void setCod_provincia(int cod_provincia) {
+	public void setCod_provincia(ProvinciaBean cod_provincia) {
 		this.cod_provincia = cod_provincia;
 	}
 
 	@Override
 	public String toString() {
-		return "PoblacionBean [cod_postal=" + cod_postal + ", descripcion=" + descripcion + ", cod_provincia=" + cod_provincia + "]";
+		return "PoblacionBean [cod_postal=" + cod_postal + ", descripcion=" + descripcion + ", cod_provincia="
+				+ cod_provincia + "]";
 	}
-	
-	
 
 }

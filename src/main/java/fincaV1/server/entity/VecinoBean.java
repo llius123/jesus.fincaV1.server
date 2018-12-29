@@ -22,7 +22,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Table(name = "vecino")
 @SecondaryTables({
-		@SecondaryTable(name = "poblacion", pkJoinColumns = { @PrimaryKeyJoinColumn(name = "cod_postal") }) })
+		@SecondaryTable(name = "poblacion", pkJoinColumns = { @PrimaryKeyJoinColumn(name = "cod_postal") }),
+		@SecondaryTable(name = "comunidad", pkJoinColumns = { @PrimaryKeyJoinColumn(name = "id") }),
+		@SecondaryTable(name = "tipovecino", pkJoinColumns = { @PrimaryKeyJoinColumn(name = "id") })
+})
 public class VecinoBean {
 
 	@Id
@@ -54,17 +57,19 @@ public class VecinoBean {
 	@Column(name = "porcentaje_participacion")
 	private int porcentaje_participacion;
 
-	@Column(name = "id_comunidad")
-	private int id_comunidad;
+	@ManyToOne
+	@JoinColumn(name = "id_comunidad")
+	private ComunidadBean comunidad;
 
 	@Column(name = "email")
 	private String email;
 
 	@Column(name = "telefono")
 	private String telefono;
-
-	@Column(name = "id_tipovecino")
-	private int id_tipovecino;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_tipovecino")
+	private TipovecinoBean id_tipovecino;
 
 	@Column(name = "login")
 	private String login;
@@ -156,12 +161,12 @@ public class VecinoBean {
 		this.porcentaje_participacion = porcentaje_participacion;
 	}
 
-	public int getId_comunidad() {
-		return id_comunidad;
+	public ComunidadBean getComunidad() {
+		return comunidad;
 	}
 
-	public void setId_comunidad(int id_comunidad) {
-		this.id_comunidad = id_comunidad;
+	public void setComunidad(ComunidadBean comunidad) {
+		this.comunidad = comunidad;
 	}
 
 	public String getEmail() {
@@ -180,11 +185,11 @@ public class VecinoBean {
 		this.telefono = telefono;
 	}
 
-	public int getId_tipovecino() {
+	public TipovecinoBean getId_tipovecino() {
 		return id_tipovecino;
 	}
 
-	public void setId_tipovecino(int id_tipovecino) {
+	public void setId_tipovecino(TipovecinoBean id_tipovecino) {
 		this.id_tipovecino = id_tipovecino;
 	}
 
@@ -210,10 +215,14 @@ public class VecinoBean {
 	public String toString() {
 		return "VecinoBean [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", numero=" + numero
 				+ ", nif=" + nif + ", iban=" + iban + ", num_mandato=" + num_mandato + ", fecha_mandato="
-				+ fecha_mandato + ", porcentaje_participacion=" + porcentaje_participacion + ", id_comunidad="
-				+ id_comunidad + ", email=" + email + ", telefono=" + telefono + ", id_tipovecino=" + id_tipovecino
-				+ ", login=" + login + ", pass=" + pass + ", poblacion=" + poblacion + "]";
+				+ fecha_mandato + ", porcentaje_participacion=" + porcentaje_participacion + ", comunidad=" + comunidad
+				+ ", email=" + email + ", telefono=" + telefono + ", id_tipovecino=" + id_tipovecino + ", login="
+				+ login + ", pass=" + pass + ", poblacion=" + poblacion + "]";
 	}
+
+
+
+
 
 
 

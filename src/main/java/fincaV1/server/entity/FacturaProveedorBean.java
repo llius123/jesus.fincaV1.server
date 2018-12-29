@@ -21,10 +21,6 @@ import javax.persistence.Table;
 		@SecondaryTable(name = "proveedor", pkJoinColumns = { @PrimaryKeyJoinColumn(name = "id") }) })
 public class FacturaProveedorBean {
 
-	@ManyToOne
-	@JoinColumn(name = "cod_poblacion")
-	private PoblacionBean poblacion;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -80,14 +76,6 @@ public class FacturaProveedorBean {
 
 	@Column(name = "num_factura")
 	private String num_factura;
-
-	public PoblacionBean getPoblacion() {
-		return poblacion;
-	}
-
-	public void setPoblacion(PoblacionBean poblacion) {
-		this.poblacion = poblacion;
-	}
 
 	public int getId() {
 		return id;
@@ -227,12 +215,14 @@ public class FacturaProveedorBean {
 
 	@Override
 	public String toString() {
-		return "FacturaProveedorBean [poblacion=" + poblacion + ", id=" + id + ", fecha_registro=" + fecha_registro
-				+ ", proveedor=" + proveedor + ", tipofactura=" + tipofactura + ", base_imponible0=" + base_imponible0
-				+ ", base_imponible1=" + base_imponible1 + ", base_imponible2=" + base_imponible2 + ", base_imponible3="
-				+ base_imponible3 + ", tipo_iva1=" + tipo_iva1 + ", tipo_iva2=" + tipo_iva2 + ", tipo_iva3=" + tipo_iva3
-				+ ", cuota_iva1=" + cuota_iva1 + ", cuota_iva2=" + cuota_iva2 + ", cuota_iva3=" + cuota_iva3
-				+ ", total=" + total + ", comunidad=" + comunidad + ", num_factura=" + num_factura + "]";
+		return "FacturaProveedorBean [id=" + id + ", fecha_registro=" + fecha_registro + ", proveedor=" + proveedor
+				+ ", tipofactura=" + tipofactura + ", base_imponible0=" + base_imponible0 + ", base_imponible1="
+				+ base_imponible1 + ", base_imponible2=" + base_imponible2 + ", base_imponible3=" + base_imponible3
+				+ ", tipo_iva1=" + tipo_iva1 + ", tipo_iva2=" + tipo_iva2 + ", tipo_iva3=" + tipo_iva3 + ", cuota_iva1="
+				+ cuota_iva1 + ", cuota_iva2=" + cuota_iva2 + ", cuota_iva3=" + cuota_iva3 + ", total=" + total
+				+ ", comunidad=" + comunidad + ", num_factura=" + num_factura + "]";
 	}
+
+
 
 }
