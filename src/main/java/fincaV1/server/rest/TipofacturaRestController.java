@@ -20,27 +20,27 @@ public class TipofacturaRestController {
 	private GenericServiceImp genericService;
 	
 	@RequestMapping(value="/tipofacturas", method=RequestMethod.GET)
-	public List<TipofacturaBean> incidencias() {
+	public List<TipofacturaBean> tipofacturas() {
 		return (List<TipofacturaBean>) genericService.getAll(TipofacturaBean.class);
 	}
 	
 	@RequestMapping(value="/tipofacturas/{id}", method=RequestMethod.GET)
-	public TipofacturaBean incidencia(@PathVariable int id) {
+	public TipofacturaBean tipofactura(@PathVariable int id) {
 		return (TipofacturaBean) genericService.get(TipofacturaBean.class, id);
 	}
 	
 	@RequestMapping(value="/tipofacturas/{id}", method=RequestMethod.DELETE)
-	public ResponseBean incidenciadelete(@PathVariable int id) {
+	public ResponseBean tipofacturadelete(@PathVariable int id) {
 		return new ResponseBean(200, genericService.delete(genericService.get(TipofacturaBean.class, id)));
 	}
 	
 	@RequestMapping(value="/tipofacturas", method=RequestMethod.POST)
-	public ResponseBean incidenciasave(@RequestBody TipofacturaBean incidencia) {
-		return new ResponseBean(200, "Registro creado con id: " + genericService.save(incidencia));
+	public ResponseBean tipofacturasave(@RequestBody TipofacturaBean tipofactura) {
+		return new ResponseBean(200, "Registro creado con id: " + genericService.save(tipofactura));
 	}
 	
 	@RequestMapping(value="/tipofacturas", method=RequestMethod.PUT)
-	public ResponseBean incidenciaupdate(@RequestBody TipofacturaBean incidencia) {
-		return new ResponseBean(200, genericService.saveOrUpdate(incidencia));
+	public ResponseBean tipofacturaupdate(@RequestBody TipofacturaBean tipofactura) {
+		return new ResponseBean(200, genericService.saveOrUpdate(tipofactura));
 	}
 }

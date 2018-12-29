@@ -20,27 +20,27 @@ public class VecinoRestController {
 	private GenericServiceImp genericService;
 	
 	@RequestMapping(value="/vecinos", method=RequestMethod.GET)
-	public List<VecinoBean> incidencias() {
+	public List<VecinoBean> vecinos() {
 		return (List<VecinoBean>) genericService.getAll(VecinoBean.class);
 	}
 	
 	@RequestMapping(value="/vecinos/{id}", method=RequestMethod.GET)
-	public VecinoBean incidencia(@PathVariable int id) {
+	public VecinoBean vecino(@PathVariable int id) {
 		return (VecinoBean) genericService.get(VecinoBean.class, id);
 	}
 	
 	@RequestMapping(value="/vecinos/{id}", method=RequestMethod.DELETE)
-	public ResponseBean incidenciadelete(@PathVariable int id) {
+	public ResponseBean vecinodelete(@PathVariable int id) {
 		return new ResponseBean(200, genericService.delete(genericService.get(VecinoBean.class, id)));
 	}
 	
 	@RequestMapping(value="/vecinos", method=RequestMethod.POST)
-	public ResponseBean incidenciasave(@RequestBody VecinoBean incidencia) {
-		return new ResponseBean(200, "Registro creado con id: " + genericService.save(incidencia));
+	public ResponseBean vecinosave(@RequestBody VecinoBean vecino) {
+		return new ResponseBean(200, "Registro creado con id: " + genericService.save(vecino));
 	}
 	
 	@RequestMapping(value="/vecinos", method=RequestMethod.PUT)
-	public ResponseBean incidenciaupdate(@RequestBody VecinoBean incidencia) {
-		return new ResponseBean(200, genericService.saveOrUpdate(incidencia));
+	public ResponseBean vecinoupdate(@RequestBody VecinoBean vecino) {
+		return new ResponseBean(200, genericService.saveOrUpdate(vecino));
 	}
 }

@@ -20,27 +20,27 @@ public class ComunidadRestController {
 	private GenericServiceImp genericService;
 	
 	@RequestMapping(value="/comunidades", method=RequestMethod.GET)
-	public List<ComunidadBean> incidencias() {
+	public List<ComunidadBean> getAll() {
 		return (List<ComunidadBean>) genericService.getAll(ComunidadBean.class);
 	}
 	
 	@RequestMapping(value="/comunidades/{id}", method=RequestMethod.GET)
-	public ComunidadBean incidencia(@PathVariable int id) {
+	public ComunidadBean get(@PathVariable int id) {
 		return (ComunidadBean) genericService.get(ComunidadBean.class, id);
 	}
 	
 	@RequestMapping(value="/comunidades/{id}", method=RequestMethod.DELETE)
-	public ResponseBean incidenciadelete(@PathVariable int id) {
+	public ResponseBean delete(@PathVariable int id) {
 		return new ResponseBean(200, genericService.delete(genericService.get(ComunidadBean.class, id)));
 	}
 	
 	@RequestMapping(value="/comunidades", method=RequestMethod.POST)
-	public ResponseBean incidenciasave(@RequestBody ComunidadBean incidencia) {
-		return new ResponseBean(200, "Registro creado con id: " + genericService.save(incidencia));
+	public ResponseBean save(@RequestBody ComunidadBean comunidad) {
+		return new ResponseBean(200, "Registro creado con id: " + genericService.save(comunidad));
 	}
 	
 	@RequestMapping(value="/comunidades", method=RequestMethod.PUT)
-	public ResponseBean incidenciaupdate(@RequestBody ComunidadBean incidencia) {
-		return new ResponseBean(200, genericService.saveOrUpdate(incidencia));
+	public ResponseBean update(@RequestBody ComunidadBean comunidad) {
+		return new ResponseBean(200, genericService.saveOrUpdate(comunidad));
 	}
 }

@@ -20,28 +20,28 @@ public class ReciboRestController {
 	private GenericServiceImp genericService;
 	
 	@RequestMapping(value="/recibos", method=RequestMethod.GET)
-	public List<ReciboBean> incidencias() {
+	public List<ReciboBean> recibos() {
 		return (List<ReciboBean>) genericService.getAll(ReciboBean.class);
 	}
 	
 	@RequestMapping(value="/recibos/{id}", method=RequestMethod.GET)
-	public ReciboBean incidencia(@PathVariable int id) {
+	public ReciboBean recibo(@PathVariable int id) {
 		return (ReciboBean) genericService.get(ReciboBean.class, id);
 	}
 	
 	@RequestMapping(value="/recibos/{id}", method=RequestMethod.DELETE)
-	public ResponseBean incidenciadelete(@PathVariable int id) {
+	public ResponseBean recibodelete(@PathVariable int id) {
 		return new ResponseBean(200, genericService.delete(genericService.get(ReciboBean.class, id)));
 	}
 	
 	@RequestMapping(value="/recibos", method=RequestMethod.POST)
-	public ResponseBean incidenciasave(@RequestBody ReciboBean incidencia) {
-		return new ResponseBean(200, "Registro creado con id: " + genericService.save(incidencia));
+	public ResponseBean recibosave(@RequestBody ReciboBean recibo) {
+		return new ResponseBean(200, "Registro creado con id: " + genericService.save(recibo));
 	}
 	
 	@RequestMapping(value="/recibos", method=RequestMethod.PUT)
-	public ResponseBean incidenciaupdate(@RequestBody ReciboBean incidencia) {
-		return new ResponseBean(200, genericService.saveOrUpdate(incidencia));
+	public ResponseBean reciboupdate(@RequestBody ReciboBean recibo) {
+		return new ResponseBean(200, genericService.saveOrUpdate(recibo));
 	}
 
 }

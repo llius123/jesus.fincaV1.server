@@ -20,27 +20,27 @@ public class TipovecinoRestController {
 	private GenericServiceImp genericService;
 	
 	@RequestMapping(value="/tipovecinos", method=RequestMethod.GET)
-	public List<TipovecinoBean> incidencias() {
+	public List<TipovecinoBean> tipovecinos() {
 		return (List<TipovecinoBean>) genericService.getAll(TipovecinoBean.class);
 	}
 	
 	@RequestMapping(value="/tipovecinos/{id}", method=RequestMethod.GET)
-	public TipovecinoBean incidencia(@PathVariable int id) {
+	public TipovecinoBean tipovecino(@PathVariable int id) {
 		return (TipovecinoBean) genericService.get(TipovecinoBean.class, id);
 	}
 	
 	@RequestMapping(value="/tipovecinos/{id}", method=RequestMethod.DELETE)
-	public ResponseBean incidenciadelete(@PathVariable int id) {
+	public ResponseBean tipovecinodelete(@PathVariable int id) {
 		return new ResponseBean(200, genericService.delete(genericService.get(TipovecinoBean.class, id)));
 	}
 	
 	@RequestMapping(value="/tipovecinos", method=RequestMethod.POST)
-	public ResponseBean incidenciasave(@RequestBody TipovecinoBean incidencia) {
-		return new ResponseBean(200, "Registro creado con id: " + genericService.save(incidencia));
+	public ResponseBean tipovecinosave(@RequestBody TipovecinoBean tipovecino) {
+		return new ResponseBean(200, "Registro creado con id: " + genericService.save(tipovecino));
 	}
 	
 	@RequestMapping(value="/tipovecinos", method=RequestMethod.PUT)
-	public ResponseBean incidenciaupdate(@RequestBody TipovecinoBean incidencia) {
-		return new ResponseBean(200, genericService.saveOrUpdate(incidencia));
+	public ResponseBean tipovecinoupdate(@RequestBody TipovecinoBean tipovecino) {
+		return new ResponseBean(200, genericService.saveOrUpdate(tipovecino));
 	}
 }

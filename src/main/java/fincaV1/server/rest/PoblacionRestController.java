@@ -20,27 +20,27 @@ public class PoblacionRestController {
 	private GenericServiceImp genericService;
 	
 	@RequestMapping(value="/poblaciones", method=RequestMethod.GET)
-	public List<PoblacionBean> incidencias() {
+	public List<PoblacionBean> poblacions() {
 		return (List<PoblacionBean>) genericService.getAll(PoblacionBean.class);
 	}
 	
 	@RequestMapping(value="/poblaciones/{id}", method=RequestMethod.GET)
-	public PoblacionBean incidencia(@PathVariable int id) {
+	public PoblacionBean poblacion(@PathVariable int id) {
 		return (PoblacionBean) genericService.get(PoblacionBean.class, id);
 	}
 	
 	@RequestMapping(value="/poblaciones/{id}", method=RequestMethod.DELETE)
-	public ResponseBean incidenciadelete(@PathVariable int id) {
+	public ResponseBean poblaciondelete(@PathVariable int id) {
 		return new ResponseBean(200, genericService.delete(genericService.get(PoblacionBean.class, id)));
 	}
 	
 	@RequestMapping(value="/poblaciones", method=RequestMethod.POST)
-	public ResponseBean incidenciasave(@RequestBody PoblacionBean incidencia) {
-		return new ResponseBean(200, "Registro creado con id: " + genericService.save(incidencia));
+	public ResponseBean poblacionsave(@RequestBody PoblacionBean poblacion) {
+		return new ResponseBean(200, "Registro creado con id: " + genericService.save(poblacion));
 	}
 	
 	@RequestMapping(value="/poblaciones", method=RequestMethod.PUT)
-	public ResponseBean incidenciaupdate(@RequestBody PoblacionBean incidencia) {
-		return new ResponseBean(200, genericService.saveOrUpdate(incidencia));
+	public ResponseBean poblacionupdate(@RequestBody PoblacionBean poblacion) {
+		return new ResponseBean(200, genericService.saveOrUpdate(poblacion));
 	}
 }

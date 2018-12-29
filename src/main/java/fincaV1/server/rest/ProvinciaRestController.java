@@ -20,27 +20,27 @@ public class ProvinciaRestController {
 	private GenericServiceImp genericService;
 	
 	@RequestMapping(value="/provincias", method=RequestMethod.GET)
-	public List<ProvinciaBean> incidencias() {
+	public List<ProvinciaBean> provincias() {
 		return (List<ProvinciaBean>) genericService.getAll(ProvinciaBean.class);
 	}
 	
 	@RequestMapping(value="/provincias/{id}", method=RequestMethod.GET)
-	public ProvinciaBean incidencia(@PathVariable int id) {
+	public ProvinciaBean provincia(@PathVariable int id) {
 		return (ProvinciaBean) genericService.get(ProvinciaBean.class, id);
 	}
 	
 	@RequestMapping(value="/provincias/{id}", method=RequestMethod.DELETE)
-	public ResponseBean incidenciadelete(@PathVariable int id) {
+	public ResponseBean provinciadelete(@PathVariable int id) {
 		return new ResponseBean(200, genericService.delete(genericService.get(ProvinciaBean.class, id)));
 	}
 	
 	@RequestMapping(value="/provincias", method=RequestMethod.POST)
-	public ResponseBean incidenciasave(@RequestBody ProvinciaBean incidencia) {
-		return new ResponseBean(200, "Registro creado con id: " + genericService.save(incidencia));
+	public ResponseBean provinciasave(@RequestBody ProvinciaBean provincia) {
+		return new ResponseBean(200, "Registro creado con id: " + genericService.save(provincia));
 	}
 	
 	@RequestMapping(value="/provincias", method=RequestMethod.PUT)
-	public ResponseBean incidenciaupdate(@RequestBody ProvinciaBean incidencia) {
-		return new ResponseBean(200, genericService.saveOrUpdate(incidencia));
+	public ResponseBean provinciaupdate(@RequestBody ProvinciaBean provincia) {
+		return new ResponseBean(200, genericService.saveOrUpdate(provincia));
 	}
 }
