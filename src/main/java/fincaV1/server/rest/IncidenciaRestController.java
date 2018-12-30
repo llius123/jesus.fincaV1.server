@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fincaV1.server.entity.IncidenciaBean;
 import fincaV1.server.entity.ResponseBean;
+import fincaV1.server.factory.SecureFactory;
 import fincaV1.server.helper.Helper;
 import fincaV1.server.servicegeneric.GenericServiceImp;
 
@@ -22,6 +23,8 @@ public class IncidenciaRestController {
 	private Helper helper;
 	@Autowired
 	private GenericServiceImp genericService;
+	@Autowired
+	private SecureFactory secureFactory;
 	
 	@RequestMapping(value="/incidencias", method=RequestMethod.GET)
 	public List<IncidenciaBean> incidencias() {
