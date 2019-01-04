@@ -76,6 +76,9 @@ public class FacturaProveedorBean {
 
 	@Column(name = "num_factura")
 	private String num_factura;
+	
+	@Column(name="cobrado")
+	private String cobrado;
 
 	public int getId() {
 		return id;
@@ -213,6 +216,14 @@ public class FacturaProveedorBean {
 		this.num_factura = num_factura;
 	}
 
+	public String getCobrado() {
+		return cobrado;
+	}
+
+	public void setCobrado(String cobrado) {
+		this.cobrado = cobrado;
+	}
+
 	@Override
 	public String toString() {
 		return "FacturaProveedorBean [id=" + id + ", fecha_registro=" + fecha_registro + ", proveedor=" + proveedor
@@ -220,8 +231,9 @@ public class FacturaProveedorBean {
 				+ base_imponible1 + ", base_imponible2=" + base_imponible2 + ", base_imponible3=" + base_imponible3
 				+ ", tipo_iva1=" + tipo_iva1 + ", tipo_iva2=" + tipo_iva2 + ", tipo_iva3=" + tipo_iva3 + ", cuota_iva1="
 				+ cuota_iva1 + ", cuota_iva2=" + cuota_iva2 + ", cuota_iva3=" + cuota_iva3 + ", total=" + total
-				+ ", comunidad=" + comunidad + ", num_factura=" + num_factura + "]";
+				+ ", comunidad=" + comunidad + ", num_factura=" + num_factura + ", cobrado=" + cobrado + "]";
 	}
+
 
 
 

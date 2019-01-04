@@ -1,5 +1,7 @@
 package fincaV1.server.entity;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +25,12 @@ public class IncidenciaBean {
 	
 	@Column(name="descripcion")
 	private String descripcion;
+	
+	@Column(name="fecha_creacion")
+	private Date fecha_creacion;
+	
+	@Column(name="atendido")
+	private String atendido;
 	
 	public IncidenciaBean() {
 		
@@ -52,10 +60,28 @@ public class IncidenciaBean {
 		this.descripcion = descripcion;
 	}
 
+	public Date getFecha_creacion() {
+		return fecha_creacion;
+	}
+
+	public void setFecha_creacion(Date fecha_creacion) {
+		this.fecha_creacion = fecha_creacion;
+	}
+
+	public String getAtendido() {
+		return atendido;
+	}
+
+	public void setAtendido(String atendido) {
+		this.atendido = atendido;
+	}
+
 	@Override
 	public String toString() {
-		return "IncidenciaBean [id=" + id + ", id_vecino=" + id_vecino + ", descripcion=" + descripcion + "]";
+		return "IncidenciaBean [id=" + id + ", id_vecino=" + id_vecino + ", descripcion=" + descripcion
+				+ ", fecha_creacion=" + fecha_creacion + ", atendido=" + atendido + "]";
 	}
+
 	
 	
 
