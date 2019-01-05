@@ -40,7 +40,6 @@ Cojer el war del proyecto y añadirlo en tomcat/webapps
 <br />
 Ahora ir a bin y ejecutar catalina.sh y tomcat solo se encarcagara de ejecutar el war
 <br />
-(No funciona, sale un error raro PREGUNTAR)
 
 Postman JSON file
 =============
