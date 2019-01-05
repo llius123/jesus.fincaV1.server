@@ -32,6 +32,15 @@ Enlaces de ayuda
 [Doc Session Hibernate](http://docs.jboss.org/hibernate/orm/5.4/javadocs/org/hibernate/Session.html#saveOrUpdate-java.lang.Object-)
 [CRUD generico StackOverflow](https://stackoverflow.com/questions/9721383/hibernate-crud-generic-dao)
 
+Como ejecutar el servidor
+=============
+Necesario: Tomcat 
+<br />
+Cojer el war del proyecto y añadirlo en tomcat/webapps
+<br />
+Ahora ir a bin y ejecutar catalina.sh y tomcat solo se encarcagara de ejecutar el war
+<br />
+(No funciona, sale un error raro PREGUNTAR)
 
 Postman JSON file
 =============
