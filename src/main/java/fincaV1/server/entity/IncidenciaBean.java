@@ -23,7 +23,7 @@ public class IncidenciaBean {
 	@Column(name="id_vecino")
 	private int id_vecino;
 	
-	@Column(name="descripcion")
+	@Column(name="descripcion", nullable=false)
 	private String descripcion;
 	
 	@Column(name="fecha_creacion")
