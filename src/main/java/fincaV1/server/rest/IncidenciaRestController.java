@@ -2,6 +2,9 @@ package fincaV1.server.rest;
 
 import java.util.List;
 
+import javax.validation.ValidationException;
+import javax.validation.Validator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +28,8 @@ public class IncidenciaRestController {
 	private GenericServiceImp genericService;
 	@Autowired
 	private SecureFactory secureFactory;
+	@Autowired
+	private Validator validator;
 	
 	@RequestMapping(value="/incidencias", method=RequestMethod.GET)
 	public List<IncidenciaBean> incidencias() {
@@ -42,7 +47,7 @@ public class IncidenciaRestController {
 	}
 	
 	@RequestMapping(value="/incidencias", method=RequestMethod.POST)
-	public ResponseBean incidenciasave(@RequestBody IncidenciaBean incidencia) {
+	public ResponseBean incidenciasave(@RequestBody IncidenciaBean incidencia){
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(incidencia));
 	}
 	
