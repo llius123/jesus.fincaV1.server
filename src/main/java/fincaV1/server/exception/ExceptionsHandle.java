@@ -10,13 +10,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.util.NestedServletException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import fincaV1.server.entity.ResponseBean;
+import fincaV1.server.helper.Helper;
 
 
 @ControllerAdvice
 public class ExceptionsHandle {
+	@Autowired
+	Helper helper;
 	
 	public ResponseBean responseBean;
 	
@@ -28,8 +32,7 @@ public class ExceptionsHandle {
     
     @ExceptionHandler
     public ResponseEntity<ResponseBean> notLogginSesionException(NotLogginSesionException exc){
-    	responseBean.setMsg(exc.getMessage());
-    	responseBean.setStatus(401);
+    	responseBean = new ResponseBean(401, exc.getMessage());
     	return new ResponseEntity<ResponseBean>(responseBean, HttpStatus.UNAUTHORIZED);
     }
     

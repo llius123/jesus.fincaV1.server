@@ -11,6 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "proveedor")
@@ -21,19 +22,24 @@ public class ProveedorBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
+	@NotNull
 	private int id;
 	
 	@Column(name = "direccion")
+	@NotNull
 	private String direccion;
 	
 	@Column(name = "telefono")
+	@NotNull
 	private String telefono;
 	
 	@Column(name = "email")
+	@NotNull
 	private String email;
 	
 	@ManyToOne
 	@JoinColumn(name = "cod_poblacion")
+	@NotNull
 	private PoblacionBean poblacion;
 
 	public int getId() {

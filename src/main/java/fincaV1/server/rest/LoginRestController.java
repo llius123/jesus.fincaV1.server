@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import fincaV1.server.daogeneric.GenericDaoImp;
 import fincaV1.server.entity.ResponseBean;
 import fincaV1.server.entity.VecinoBean;
+import fincaV1.server.exception.NotLogginSesionException;
 import fincaV1.server.helper.Helper;
 import fincaV1.server.service.VecinoService;
 import fincaV1.server.service.VecinoServiceImp;
@@ -26,30 +27,36 @@ public class LoginRestController {
 	private Helper helper;
 	@Autowired
 	private VecinoService vecinoService;
-	
+
 	private ResponseBean responseBean;
-	
-	
-	@RequestMapping(value="/login/{user}/{pass}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE )
-	public ResponseBean login(HttpServletResponse response, HttpServletRequest request, HttpSession session, @PathVariable String user,@PathVariable String pass) {
+
+	@RequestMapping(value = "/login/{user}/{pass}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseBean login(HttpServletResponse response, HttpServletRequest request, HttpSession session,
+			@PathVariable String user, @PathVariable String pass) {
 		session.invalidate();
 		List<VecinoBean> oVecinoBean = vecinoService.login(user, pass);
-		
-		if(!oVecinoBean.isEmpty()) {
+
+		if (!oVecinoBean.isEmpty()) {
 			HttpSession newSesion = request.getSession();
 			newSesion.setAttribute("vecino", oVecinoBean.get(0));
-			responseBean =  new ResponseBean(200,"Login correcto");
-		}else {
+			responseBean = new ResponseBean(200, "Login correcto");
+		} else {
 			responseBean = new ResponseBean(401, "Bad login");
 		}
 		response.setStatus(responseBean.getStatus());
 		return responseBean;
 	}
-	
-	@RequestMapping(value="/logout", method=RequestMethod.GET )
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ResponseBean logout(HttpSession session) {
 		session.invalidate();
-		return new ResponseBean(200,"logout correcto");
+		return new ResponseBean(200, "logout correcto");
+	}
+
+	@RequestMapping(value = "/check", method = RequestMethod.GET)
+	public VecinoBean check(HttpServletRequest session) {
+		if(session.getSession().getAttribute("vecino") == null) throw new NotLogginSesionException("No estas logeado");
+		return (VecinoBean) session.getSession().getAttribute("vecino");
 	}
 
 }

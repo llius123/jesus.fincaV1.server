@@ -11,6 +11,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "comunidad")
@@ -21,23 +22,30 @@ public class ComunidadBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
+	@NotNull
 	private int id;
 	
 	@Column(name = "nombre")
+	@NotNull
 	private String nombre;
 	
+	@NotNull
 	@Column(name = "direccion")
 	private String direccion;
 	
+	@NotNull
 	@Column(name = "nif")
 	private String nif;
 	
+	@NotNull
 	@Column(name = "iban")
 	private String iban;
 	
+	@NotNull
 	@Column(name = "sufijo")
 	private String sufijo;
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "cod_poblacion")
 	private PoblacionBean poblacion;

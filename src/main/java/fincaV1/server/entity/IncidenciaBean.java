@@ -19,9 +19,11 @@ public class IncidenciaBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
+	@NotNull
 	private int id;
 	
 	@Column(name="id_vecino")
+	@NotNull
 	private int id_vecino;
 	
 	@Column(name="descripcion")
@@ -29,9 +31,11 @@ public class IncidenciaBean {
 	private String descripcion;
 	
 	@Column(name="fecha_creacion")
+	@NotNull
 	private Date fecha_creacion;
 	
 	@Column(name="atendido")
+	@NotNull
 	private String atendido;
 	
 	public IncidenciaBean() {

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "provincia")
@@ -14,9 +15,11 @@ public class ProvinciaBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_provincia")
+	@NotNull
 	private int cod_provincia;
 
 	@Column(name = "descripcion")
+	@NotNull
 	private String descripcion;
 
 	public int getCod_provincia() {

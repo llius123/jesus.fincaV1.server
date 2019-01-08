@@ -13,6 +13,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "factura_proveedor")
@@ -24,60 +25,78 @@ public class FacturaProveedorBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
+	@NotNull
 	private int id;
 
 	@Column(name = "fecha_registro")
+	@NotNull
 	private Date fecha_registro;
 
 	@ManyToOne
 	@JoinColumn(name = "id_proveedor")
+	@NotNull
 	private ProveedorBean proveedor;
 
 	@ManyToOne
 	@JoinColumn(name = "id_tipofactura")
+	@NotNull
 	private TipofacturaBean tipofactura;
 
 	@Column(name = "base_imponible0")
+	@NotNull
 	private double base_imponible0;
 
 	@Column(name = "base_imponible1")
+	@NotNull
 	private double base_imponible1;
 
 	@Column(name = "base_imponible2")
+	@NotNull
 	private double base_imponible2;
 
 	@Column(name = "base_imponible3")
+	@NotNull
 	private double base_imponible3;
 
 	@Column(name = "tipo_iva1")
+	@NotNull
 	private double tipo_iva1;
 
 	@Column(name = "tipo_iva2")
+	@NotNull
 	private double tipo_iva2;
 
 	@Column(name = "tipo_iva3")
+	@NotNull
 	private double tipo_iva3;
 
 	@Column(name = "cuota_iva1")
+	@NotNull
 	private double cuota_iva1;
 
 	@Column(name = "cuota_iva2")
+	@NotNull
 	private double cuota_iva2;
 
 	@Column(name = "cuota_iva3")
+	@NotNull
 	private double cuota_iva3;
 
 	@Column(name = "total")
+	@NotNull
 	private double total;
 
 	@ManyToOne
 	@JoinColumn(name = "id_comunidad")
+	@NotNull
 	private ComunidadBean comunidad;
 
 	@Column(name = "num_factura")
+	@NotNull
 	private String num_factura;
 	
 	@Column(name="cobrado")
+	@NotNull
 	private String cobrado;
 
 	public int getId() {

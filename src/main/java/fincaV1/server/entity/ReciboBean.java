@@ -13,6 +13,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "recibo")
@@ -23,25 +24,32 @@ public class ReciboBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
+	@NotNull
 	private int id;
 	
 	@Column(name = "fecha_emision")
+	@NotNull
 	private Date fecha_emision;
 	
 	@Column(name = "num_registro")
+	@NotNull
 	private double num_registro;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_vecino")
+	@NotNull
 	private VecinoBean vecino;
 	
-	@Column(name = "descripcion")	
+	@Column(name = "descripcion")
+	@NotNull
 	private String descripcion;
 	
 	@Column(name = "importe")
+	@NotNull
 	private double importe;
 	
 	@Column(name = "fecha_cobro")
+	@NotNull
 	private Date fecha_cobro;
 
 	public int getId() {
