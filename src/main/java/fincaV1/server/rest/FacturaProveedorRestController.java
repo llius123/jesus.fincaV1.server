@@ -1,5 +1,6 @@
 package fincaV1.server.rest;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fincaV1.server.entity.FacturaProveedorBean;
 import fincaV1.server.entity.ResponseBean;
+import fincaV1.server.factory.CheckForeignKey;
 import fincaV1.server.servicegeneric.GenericServiceImp;
 
 @RestController
@@ -18,6 +20,8 @@ public class FacturaProveedorRestController {
 
 	@Autowired
 	private GenericServiceImp genericService;
+	@Autowired
+	private CheckForeignKey checkForeignKey;
 	
 	@RequestMapping(value="/facturaproveedores", method=RequestMethod.GET)
 	public List<FacturaProveedorBean> facturas() {
@@ -35,12 +39,23 @@ public class FacturaProveedorRestController {
 	}
 	
 	@RequestMapping(value="/facturaproveedores", method=RequestMethod.POST)
-	public ResponseBean facturasave(@RequestBody FacturaProveedorBean factura) {
+	public<T> ResponseBean facturasave(@RequestBody FacturaProveedorBean factura) {
+		HashMap<T, Integer> datos = new HashMap<T, Integer>();
+		datos.put((T) factura.getProveedor(),factura.getProveedor().getId());
+		datos.put((T) factura.getTipofactura(), factura.getTipofactura().getId());
+		datos.put((T) factura.getComunidad(), factura.getComunidad().getId());
+		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(factura));
 	}
 	
 	@RequestMapping(value="/facturaproveedores", method=RequestMethod.PUT)
-	public ResponseBean facturaupdate(@RequestBody FacturaProveedorBean factura) {
+	public<T> ResponseBean facturaupdate(@RequestBody FacturaProveedorBean factura) {
+		HashMap<T, Integer> datos = new HashMap<T, Integer>();
+		datos.put((T) factura,factura.getId());
+		datos.put((T) factura.getProveedor(),factura.getProveedor().getId());
+		datos.put((T) factura.getTipofactura(), factura.getTipofactura().getId());
+		datos.put((T) factura.getComunidad(), factura.getComunidad().getId());
+		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, genericService.saveOrUpdate(factura));
 	}
 }

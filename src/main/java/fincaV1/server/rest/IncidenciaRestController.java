@@ -1,5 +1,6 @@
 package fincaV1.server.rest;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.validation.ValidationException;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fincaV1.server.entity.IncidenciaBean;
 import fincaV1.server.entity.ResponseBean;
+import fincaV1.server.factory.CheckForeignKey;
 import fincaV1.server.factory.SecureFactory;
 import fincaV1.server.helper.Helper;
 import fincaV1.server.servicegeneric.GenericServiceImp;
@@ -30,6 +32,8 @@ public class IncidenciaRestController {
 	private SecureFactory secureFactory;
 	@Autowired
 	private Validator validator;
+	@Autowired 
+	private CheckForeignKey checkForeignKey;
 	
 	@RequestMapping(value="/incidencias", method=RequestMethod.GET)
 	public List<IncidenciaBean> incidencias() {
@@ -47,12 +51,19 @@ public class IncidenciaRestController {
 	}
 	
 	@RequestMapping(value="/incidencias", method=RequestMethod.POST)
-	public ResponseBean incidenciasave(@RequestBody IncidenciaBean incidencia){
+	public<T> ResponseBean incidenciasave(@RequestBody IncidenciaBean incidencia){
+		HashMap<T, Integer> datos = new HashMap<T, Integer>();
+		datos.put((T) incidencia.getVecino(),incidencia.getVecino().getId());
+		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(incidencia));
 	}
 	
 	@RequestMapping(value="/incidencias", method=RequestMethod.PUT)
-	public ResponseBean incidenciaupdate(@RequestBody IncidenciaBean incidencia) {
+	public<T> ResponseBean incidenciaupdate(@RequestBody IncidenciaBean incidencia) {
+		HashMap<T, Integer> datos = new HashMap<T, Integer>();
+		datos.put((T) incidencia,incidencia.getId());
+		datos.put((T) incidencia.getVecino(),incidencia.getVecino().getId());
+		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, genericService.saveOrUpdate(incidencia));
 	}
 	

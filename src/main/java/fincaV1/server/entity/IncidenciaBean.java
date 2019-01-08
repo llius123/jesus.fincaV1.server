@@ -7,13 +7,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SecondaryTable;
+import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-
-
 @Entity
-@Table(name ="incidencia")
+@Table(name = "incidencia")
+@SecondaryTables({ @SecondaryTable(name = "vecino", pkJoinColumns = { @PrimaryKeyJoinColumn(name = "id") }) })
 public class IncidenciaBean {
 
 	@Id
@@ -21,25 +25,26 @@ public class IncidenciaBean {
 	@Column(name = "id")
 	@NotNull
 	private int id;
-	
-	@Column(name="id_vecino")
+
+	@ManyToOne
+	@JoinColumn(name = "id_vecino")
 	@NotNull
-	private int id_vecino;
-	
-	@Column(name="descripcion")
+	private VecinoBean vecino;
+
+	@Column(name = "descripcion")
 	@NotNull
 	private String descripcion;
-	
-	@Column(name="fecha_creacion")
+
+	@Column(name = "fecha_creacion")
 	@NotNull
 	private Date fecha_creacion;
-	
-	@Column(name="atendido")
+
+	@Column(name = "atendido")
 	@NotNull
 	private String atendido;
-	
+
 	public IncidenciaBean() {
-		
+
 	}
 
 	public int getId() {
@@ -50,12 +55,12 @@ public class IncidenciaBean {
 		this.id = id;
 	}
 
-	public int getId_vecino() {
-		return id_vecino;
+	public VecinoBean getVecino() {
+		return vecino;
 	}
 
-	public void setId_vecino(int id_vecino) {
-		this.id_vecino = id_vecino;
+	public void setVecino(VecinoBean vecino) {
+		this.vecino = vecino;
 	}
 
 	public String getDescripcion() {
@@ -84,11 +89,8 @@ public class IncidenciaBean {
 
 	@Override
 	public String toString() {
-		return "IncidenciaBean [id=" + id + ", id_vecino=" + id_vecino + ", descripcion=" + descripcion
-				+ ", fecha_creacion=" + fecha_creacion + ", atendido=" + atendido + "]";
+		return "IncidenciaBean [id=" + id + ", vecino=" + vecino + ", descripcion=" + descripcion + ", fecha_creacion="
+				+ fecha_creacion + ", atendido=" + atendido + "]";
 	}
-
-	
-	
 
 }
