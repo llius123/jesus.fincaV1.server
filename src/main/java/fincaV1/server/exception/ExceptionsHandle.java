@@ -1,5 +1,6 @@
 package fincaV1.server.exception;
 
+import javax.persistence.NoResultException;
 import javax.validation.ValidationException;
 
 import org.aspectj.weaver.ast.Test;
@@ -37,10 +38,16 @@ public class ExceptionsHandle {
     }
     
     //Aqui recojo las excepciones que ocurren con la anotacion @NotNull de hibernate
-    @ExceptionHandler()
+    @ExceptionHandler
     public ResponseEntity<ResponseBean> notNull(PropertyValueException exc){
     	responseBean = new ResponseBean(500, exc.getMessage());
     	return new ResponseEntity<ResponseBean>(responseBean, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    
+    @ExceptionHandler
+    public ResponseEntity<ResponseBean> notExistForeignKey(NotExistForeignKey exc){
+    	responseBean = new ResponseBean(500, exc.getMessage());
+    	return new ResponseEntity<ResponseBean>(responseBean, HttpStatus.INTERNAL_SERVER_ERROR);
+    }    
     
 }
