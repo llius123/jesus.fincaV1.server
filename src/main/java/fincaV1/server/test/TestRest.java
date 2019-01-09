@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import fincaV1.server.entity.ReciboVecinoBean;
 import fincaV1.server.entity.ResponseBean;
 import fincaV1.server.entity.TipovecinoBean;
 import fincaV1.server.entity.VecinoBean;
@@ -23,9 +24,13 @@ public class TestRest {
 //	private GenericService genericService;
 	@Autowired
 	private Helper helper;
+	@Autowired
+	private GenericServiceImp genericService;
 	
-	private ResponseBean responseBean;
-	
+	@RequestMapping(value="/test", method=RequestMethod.GET)
+	public List<ReciboVecinoBean> test() {
+		return (List<ReciboVecinoBean>) genericService.getAll(ReciboVecinoBean.class);
+	}
 //	@RequestMapping(value="/testgetall", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 //	public List<VecinoBean> test() {
 //		List<VecinoBean> vecinos= (List<VecinoBean>) genericService.getAll(VecinoBean.class);
