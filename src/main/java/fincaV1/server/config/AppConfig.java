@@ -22,7 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import fincaV1.server.before.BeforeBody;
+import fincaV1.server.interceptor.FactoryInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -122,10 +122,13 @@ public class AppConfig implements WebMvcConfigurer{
 	
 	//Intercepto todas las peticiones aqui
 	@Autowired
-	BeforeBody beforeBody;
+	FactoryInterceptor beforeBody;
 	
 	public void addInterceptors(InterceptorRegistry registry){
+		//registry.addInterceptor(beforeLogin)addPathPatterns("/login/*/*");
         registry.addInterceptor(beforeBody).addPathPatterns("/*");
+        registry.addInterceptor(beforeBody).addPathPatterns("/*/*");
+        registry.addInterceptor(beforeBody).addPathPatterns("/*/*/*");
     }
 	
 }
