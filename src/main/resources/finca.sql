@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 04-01-2019 a las 00:59:20
+-- Tiempo de generación: 09-01-2019 a las 01:35:42
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.1.24
 
@@ -38,6 +38,13 @@ CREATE TABLE `comunidad` (
   `cod_poblacion` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `comunidad`
+--
+
+INSERT INTO `comunidad` (`id`, `nombre`, `direccion`, `nif`, `iban`, `sufijo`, `cod_poblacion`) VALUES
+(1, 'test_comunidad', 'test_comunidad', 'test_comunidad', 'test_comunidad', 'test_comunidad', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -65,6 +72,14 @@ CREATE TABLE `factura_proveedor` (
   `cobrado` char(1) DEFAULT 'n'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `factura_proveedor`
+--
+
+INSERT INTO `factura_proveedor` (`id`, `fecha_registro`, `id_proveedor`, `id_tipofactura`, `base_imponible0`, `base_imponible1`, `base_imponible2`, `base_imponible3`, `tipo_iva1`, `tipo_iva2`, `tipo_iva3`, `cuota_iva1`, `cuota_iva2`, `cuota_iva3`, `total`, `id_comunidad`, `num_factura`, `cobrado`) VALUES
+(1, '2018-12-20 00:00:00', 1, 1, '12.00', '12.00', '12.00', '12.00', '12.00', '12.00', '12.00', '12.00', '12.00', '12.00', '12.00', 1, '12', 'n'),
+(2, '2018-12-20 00:00:00', 1, 1, '12.00', '12.00', '12.00', '12.00', '12.00', '12.00', '12.00', '12.00', '12.00', '12.00', '12.00', 1, '12', 'n');
+
 -- --------------------------------------------------------
 
 --
@@ -79,6 +94,18 @@ CREATE TABLE `incidencia` (
   `atendido` char(1) NOT NULL DEFAULT 'n'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `incidencia`
+--
+
+INSERT INTO `incidencia` (`id`, `id_vecino`, `descripcion`, `fecha_creacion`, `atendido`) VALUES
+(1, 1, 'post', NULL, 'n'),
+(10, 1, 'wqe', '2019-01-02', 'n'),
+(12, 1, NULL, '2018-12-12', 's'),
+(14, 1, NULL, '2018-12-12', 's'),
+(15, 1, NULL, '2018-12-12', 's'),
+(16, 1, 'test', '2018-12-12', 's');
+
 -- --------------------------------------------------------
 
 --
@@ -90,6 +117,16 @@ CREATE TABLE `poblacion` (
   `descripcion` varchar(100) DEFAULT NULL,
   `cod_provincia` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `poblacion`
+--
+
+INSERT INTO `poblacion` (`cod_postal`, `descripcion`, `cod_provincia`) VALUES
+(0, 'test_poblacion', 1),
+(1, 'test_poblacion', 1),
+(3, 'test', 1),
+(4, 'test', 1);
 
 -- --------------------------------------------------------
 
@@ -105,6 +142,15 @@ CREATE TABLE `proveedor` (
   `cod_poblacion` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`id`, `direccion`, `telefono`, `email`, `cod_poblacion`) VALUES
+(1, 'test', 'test', 'test', 1),
+(2, '2', '2', '2', 1),
+(3, '2', '2', '2', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -116,6 +162,13 @@ CREATE TABLE `provincia` (
   `descripcion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `provincia`
+--
+
+INSERT INTO `provincia` (`cod_provincia`, `descripcion`) VALUES
+(1, 'test_provincia');
+
 -- --------------------------------------------------------
 
 --
@@ -126,11 +179,40 @@ CREATE TABLE `recibo` (
   `id` int(11) NOT NULL,
   `fecha_emision` datetime DEFAULT NULL,
   `num_registro` decimal(10,2) DEFAULT NULL,
-  `id_vecino` int(11) DEFAULT NULL,
   `descripcion` varchar(100) DEFAULT NULL,
   `importe` int(11) DEFAULT NULL,
   `fecha_cobro` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `recibo`
+--
+
+INSERT INTO `recibo` (`id`, `fecha_emision`, `num_registro`, `descripcion`, `importe`, `fecha_cobro`) VALUES
+(1, '2018-12-27 00:00:00', '12.00', 'test', 12, '2018-12-19 00:00:00'),
+(2, '2018-12-27 00:00:00', '12.00', 'test', 12, '2018-12-19 00:00:00'),
+(3, '2018-12-27 00:00:00', '12.00', 'test', 12, '2018-12-19 00:00:00'),
+(4, '2018-12-27 00:00:00', '12.00', 'test', 12, '2018-12-19 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recibo_vecino`
+--
+
+CREATE TABLE `recibo_vecino` (
+  `id` int(11) NOT NULL,
+  `id_vecino` int(11) NOT NULL,
+  `id_recibo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `recibo_vecino`
+--
+
+INSERT INTO `recibo_vecino` (`id`, `id_vecino`, `id_recibo`) VALUES
+(1, 1, 1),
+(2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -143,6 +225,13 @@ CREATE TABLE `tipofactura` (
   `descripcion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `tipofactura`
+--
+
+INSERT INTO `tipofactura` (`id`, `descripcion`) VALUES
+(1, 'test');
+
 -- --------------------------------------------------------
 
 --
@@ -153,6 +242,20 @@ CREATE TABLE `tipovecino` (
   `id` int(11) NOT NULL,
   `descripcion` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tipovecino`
+--
+
+INSERT INTO `tipovecino` (`id`, `descripcion`) VALUES
+(1, 'test_tipovecino'),
+(4, 'updated2'),
+(5, 'hola'),
+(6, 'hola'),
+(7, 'updated2'),
+(8, 'updated2'),
+(9, 'hola'),
+(10, 'test');
 
 -- --------------------------------------------------------
 
@@ -178,6 +281,13 @@ CREATE TABLE `vecino` (
   `login` varchar(100) NOT NULL,
   `pass` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `vecino`
+--
+
+INSERT INTO `vecino` (`id`, `nombre`, `direccion`, `numero`, `nif`, `iban`, `num_mandato`, `fecha_mandato`, `porcentaje_participacion`, `id_comunidad`, `email`, `telefono`, `id_tipovecino`, `cod_poblacion`, `login`, `pass`) VALUES
+(1, 'test_vecino', 'test_vecino', 'test_vecino', 'test_vecino', 'test_vecino', 'test_vecino', '2018-12-05 00:00:00', '0.00', 1, 'test_vecino', 'test_vecino', 1, 1, 'admin', 'admin');
 
 --
 -- Índices para tablas volcadas
@@ -230,8 +340,15 @@ ALTER TABLE `provincia`
 -- Indices de la tabla `recibo`
 --
 ALTER TABLE `recibo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `recibo_vecino`
+--
+ALTER TABLE `recibo_vecino`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `recibo_vecino_fk` (`id_vecino`);
+  ADD KEY `recibo_vecino_vecino_fk` (`id_vecino`),
+  ADD KEY `recibo_vecino_recibo_fk` (`id_recibo`);
 
 --
 -- Indices de la tabla `tipofactura`
@@ -262,49 +379,55 @@ ALTER TABLE `vecino`
 -- AUTO_INCREMENT de la tabla `comunidad`
 --
 ALTER TABLE `comunidad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `factura_proveedor`
 --
 ALTER TABLE `factura_proveedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `incidencia`
 --
 ALTER TABLE `incidencia`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `recibo`
 --
 ALTER TABLE `recibo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `recibo_vecino`
+--
+ALTER TABLE `recibo_vecino`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tipofactura`
 --
 ALTER TABLE `tipofactura`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tipovecino`
 --
 ALTER TABLE `tipovecino`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `vecino`
 --
 ALTER TABLE `vecino`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -343,10 +466,11 @@ ALTER TABLE `proveedor`
   ADD CONSTRAINT `proveedor_poblacion_fk` FOREIGN KEY (`cod_poblacion`) REFERENCES `poblacion` (`cod_postal`);
 
 --
--- Filtros para la tabla `recibo`
+-- Filtros para la tabla `recibo_vecino`
 --
-ALTER TABLE `recibo`
-  ADD CONSTRAINT `recibo_vecino_fk` FOREIGN KEY (`id_vecino`) REFERENCES `vecino` (`id`);
+ALTER TABLE `recibo_vecino`
+  ADD CONSTRAINT `recibo_vecino_recibo_fk` FOREIGN KEY (`id_recibo`) REFERENCES `recibo` (`id`),
+  ADD CONSTRAINT `recibo_vecino_vecino_fk` FOREIGN KEY (`id_vecino`) REFERENCES `vecino` (`id`);
 
 --
 -- Filtros para la tabla `vecino`
