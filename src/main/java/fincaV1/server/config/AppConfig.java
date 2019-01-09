@@ -17,9 +17,12 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+import fincaV1.server.before.BeforeBody;
 
 @Configuration
 @EnableWebMvc
@@ -116,6 +119,14 @@ public class AppConfig implements WebMvcConfigurer{
 
 		return txManager;
 	}	
+	
+	//Intercepto todas las peticiones aqui
+	@Autowired
+	BeforeBody beforeBody;
+	
+	public void addInterceptors(InterceptorRegistry registry){
+        registry.addInterceptor(beforeBody).addPathPatterns("/*");
+    }
 	
 }
 

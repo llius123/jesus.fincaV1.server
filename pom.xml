@@ -45,9 +45,8 @@
 			<artifactId>c3p0</artifactId>
 			<version>0.9.5.2</version>
 		</dependency>
-
 		<!-- Servlet+JSP+JSTL -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
@@ -57,34 +56,34 @@
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>javax.servlet.jsp-api</artifactId>
 			<version>2.3.1</version>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 	<build>
 		<finalName>fincaV1.server</finalName>
 		<plugins>
 			<plugin>
-              <artifactId>maven-assembly-plugin</artifactId>
-              <configuration>
-                <archive>
-                  <manifest>
-                    <addClasspath>true</addClasspath>
-                    <mainClass>fincaV1.server.config.Main</mainClass>
-                  </manifest>
-                </archive>
-                <descriptorRefs>
-                  <descriptorRef>jar-with-dependencies</descriptorRef>
-                </descriptorRefs>
-              </configuration>
-              <executions>
-                <execution>
-                  <id>assemble-all</id>
-                  <phase>package</phase>
-                  <goals>
-                    <goal>single</goal>
-                  </goals>
-                </execution>
-              </executions>
-          </plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>fincaV1.server.config.Main</mainClass>
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+				</configuration>
+				<executions>
+					<execution>
+						<id>assemble-all</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>

@@ -1,5 +1,6 @@
 package fincaV1.server.rest;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fincaV1.server.entity.ReciboBean;
 import fincaV1.server.entity.ResponseBean;
+import fincaV1.server.factory.CheckForeignKey;
 import fincaV1.server.servicegeneric.GenericServiceImp;
 
 @RestController
@@ -18,6 +20,8 @@ public class ReciboRestController {
 	
 	@Autowired
 	private GenericServiceImp genericService;
+	@Autowired
+	private CheckForeignKey checkForeignKey;
 	
 	@RequestMapping(value="/recibos", method=RequestMethod.GET)
 	public List<ReciboBean> recibos() {
@@ -35,12 +39,19 @@ public class ReciboRestController {
 	}
 	
 	@RequestMapping(value="/recibos", method=RequestMethod.POST)
-	public ResponseBean recibosave(@RequestBody ReciboBean recibo) {
+	public<T> ResponseBean recibosave(@RequestBody ReciboBean recibo) {
+		HashMap<T, Integer> datos = new HashMap<T, Integer>();
+		datos.put((T) recibo.getVecino(), recibo.getVecino().getId());
+		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(recibo));
 	}
 	
 	@RequestMapping(value="/recibos", method=RequestMethod.PUT)
-	public ResponseBean reciboupdate(@RequestBody ReciboBean recibo) {
+	public<T> ResponseBean reciboupdate(@RequestBody ReciboBean recibo) {
+		HashMap<T, Integer> datos = new HashMap<T, Integer>();
+		datos.put((T) recibo, recibo.getId());
+		datos.put((T) recibo.getVecino(), recibo.getVecino().getId());
+		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, genericService.saveOrUpdate(recibo));
 	}
 

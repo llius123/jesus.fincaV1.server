@@ -50,7 +50,11 @@ public class PoblacionRestController {
 	}
 	
 	@RequestMapping(value="/poblaciones", method=RequestMethod.PUT)
-	public ResponseBean poblacionupdate(@RequestBody PoblacionBean poblacion) {
+	public <T> ResponseBean poblacionupdate(@RequestBody PoblacionBean poblacion) {
+		HashMap<T, Integer> datos = new HashMap<T, Integer>();
+		datos.put((T) poblacion, poblacion.getCod_postal());
+		datos.put((T) poblacion.getCod_provincia(), poblacion.getCod_provincia().getCod_provincia());
+		checkForeignKey.checkForeignKey(datos);		
 		return new ResponseBean(200, genericService.saveOrUpdate(poblacion));
 	}
 }

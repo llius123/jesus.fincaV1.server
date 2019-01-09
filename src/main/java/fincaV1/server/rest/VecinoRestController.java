@@ -2,6 +2,7 @@ package fincaV1.server.rest;
 
 import java.util.List;
 
+import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,7 @@ public class VecinoRestController {
 		return new ResponseBean(200, genericService.delete(genericService.get(VecinoBean.class, id)));
 	}
 	
+	@Before("execution(* fincaV1.server.before.BeforeBody*.checkBody*()")
 	@RequestMapping(value="/vecinos", method=RequestMethod.POST)
 	public ResponseBean vecinosave(@RequestBody VecinoBean vecino) {
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(vecino));
