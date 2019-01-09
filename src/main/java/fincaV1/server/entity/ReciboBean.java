@@ -17,6 +17,8 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "recibo")
+@SecondaryTables({
+	@SecondaryTable(name = "vecino", pkJoinColumns = { @PrimaryKeyJoinColumn(name = "id") }) })
 public class ReciboBean {
 	
 	@Id
@@ -44,6 +46,11 @@ public class ReciboBean {
 	@Column(name = "fecha_cobro")
 	@NotNull
 	private Date fecha_cobro;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_vecino")
+	@NotNull
+	private VecinoBean vecino;
 
 	public int getId() {
 		return id;
@@ -93,10 +100,19 @@ public class ReciboBean {
 		this.fecha_cobro = fecha_cobro;
 	}
 
+	public VecinoBean getVecino() {
+		return vecino;
+	}
+
+	public void setVecino(VecinoBean vecino) {
+		this.vecino = vecino;
+	}
+
 	@Override
 	public String toString() {
 		return "ReciboBean [id=" + id + ", fecha_emision=" + fecha_emision + ", num_registro=" + num_registro
-				+ ", descripcion=" + descripcion + ", importe=" + importe + ", fecha_cobro=" + fecha_cobro + "]";
-	}	
+				+ ", descripcion=" + descripcion + ", importe=" + importe + ", fecha_cobro=" + fecha_cobro + ", vecino="
+				+ vecino + "]";
+	}
 
 }
