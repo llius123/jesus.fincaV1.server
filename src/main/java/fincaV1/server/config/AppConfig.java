@@ -123,11 +123,12 @@ public class AppConfig implements WebMvcConfigurer {
 	FactoryInterceptor factoryInterceptor;
 
 	public void addInterceptors(InterceptorRegistry registry) {
-		// registry.addInterceptor(beforeLogin)addPathPatterns("/login/*/*");
-//		  registry.addInterceptor(factoryInterceptor).addPathPatterns("/*");
-//        registry.addInterceptor(factoryInterceptor).addPathPatterns("/*/*");
-//        registry.addInterceptor(factoryInterceptor).addPathPatterns("/*/*/*");
-//		System.out.print("INTERCEPTOR");
+		
+		
+		
+		
+		
+		
 		registry.addInterceptor(factoryInterceptor).addPathPatterns("/**");
 	}
 

@@ -52,9 +52,6 @@ public class IncidenciaRestController {
 	
 	@RequestMapping(value="/incidencias", method=RequestMethod.POST)
 	public<T> ResponseBean incidenciasave(@RequestBody IncidenciaBean incidencia){
-		HashMap<T, Integer> datos = new HashMap<T, Integer>();
-		datos.put((T) incidencia.getVecino(),incidencia.getVecino().getId());
-		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(incidencia));
 	}
 	
