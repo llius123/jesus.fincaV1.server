@@ -123,12 +123,6 @@ public class AppConfig implements WebMvcConfigurer {
 	FactoryInterceptor factoryInterceptor;
 
 	public void addInterceptors(InterceptorRegistry registry) {
-		
-		
-		
-		
-		
-		
 		registry.addInterceptor(factoryInterceptor).addPathPatterns("/**");
 	}
 

@@ -29,8 +29,8 @@ public class FactoryInterceptor extends HandlerInterceptorAdapter {
 	@Autowired
 	HttpServletRequest request;
 
-	@ModelAttribute
-	public boolean preHandle(@RequestBody Object o,HttpServletRequest request, HttpServletResponse response, Object handler)
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
 		// Forma de saber si el ususario se quiere logear
