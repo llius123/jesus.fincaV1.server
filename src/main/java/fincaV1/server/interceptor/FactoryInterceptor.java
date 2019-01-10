@@ -5,26 +5,41 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import fincaV1.server.entity.ComunidadBean;
 import fincaV1.server.entity.VecinoBean;
 import fincaV1.server.exception.NotLogginSesionException;
+import fincaV1.server.factory.CheckForeignKey;
 
 @Component
 public class FactoryInterceptor extends HandlerInterceptorAdapter {
 
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
+	@Autowired
+	CheckForeignKey checkForeignKey;
+	@Autowired
+	HttpServletRequest request;
+	
 
-		//Forma de saber si el ususario se quiere logear
-		String login = request.getRequestURI().substring(16, 21);
-		if(login.equals("login")) return true;
+	public <T> boolean preHandle() throws Exception {
+
+		throw new NotLogginSesionException("HOLA");
 		
-		//Compruebo si esta el usurio logeado
-		if (request.getSession().getAttribute("vecino") == null)
-			throw new NotLogginSesionException("No estas loegado");
+		// Forma de saber si el ususario se quiere logear
+//		String login = request.getRequestURI().substring(16, 21);
+//		if (login.equals("login"))
+//			return true;
+//
+//		// Compruebo si esta el usurio logeado
+//		if (request.getSession().getAttribute("vecino") == null)
+//			throw new NotLogginSesionException("No estas loegado");
 
-		return true;
+//		if (request.getMethod().equals("POST")) {
+//			if (object.getClass().toString().equals("ComunidadBean")) {
+//				throw new NotLogginSesionException("Funciona");
+//			}
+//		}
+		//return true;
 	}
 }

@@ -122,13 +122,14 @@ public class AppConfig implements WebMvcConfigurer{
 	
 	//Intercepto todas las peticiones aqui
 	@Autowired
-	FactoryInterceptor beforeBody;
+	FactoryInterceptor factoryInterceptor;
 	
 	public void addInterceptors(InterceptorRegistry registry){
 		//registry.addInterceptor(beforeLogin)addPathPatterns("/login/*/*");
-        registry.addInterceptor(beforeBody).addPathPatterns("/*");
-        registry.addInterceptor(beforeBody).addPathPatterns("/*/*");
-        registry.addInterceptor(beforeBody).addPathPatterns("/*/*/*");
+		registry.addInterceptor(factoryInterceptor).addPathPatterns("/*");
+//        registry.addInterceptor(factoryInterceptor).addPathPatterns("/login/*/*");
+//        registry.addInterceptor(factoryInterceptor).addPathPatterns("/*/*");
+//        registry.addInterceptor(factoryInterceptor).addPathPatterns("/*/*/*");
     }
 	
 }
