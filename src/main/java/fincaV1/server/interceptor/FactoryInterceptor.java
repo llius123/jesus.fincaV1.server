@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fincaV1.server.entity.ComunidadBean;
 import fincaV1.server.entity.IncidenciaBean;
 import fincaV1.server.entity.VecinoBean;
+import fincaV1.server.exception.BadBeanFormat;
 import fincaV1.server.exception.NotExistForeignKey;
 import fincaV1.server.exception.NotLogginSesionException;
 import fincaV1.server.factory.CheckForeignKey;
@@ -47,7 +48,6 @@ public class FactoryInterceptor extends HandlerInterceptorAdapter {
 			throw new NotLogginSesionException("No estas logeado");
 
 		// Factoria de control para el body de PUT/POST
-		// System.err.println(request.getServletPath());
 		if(request.getMethod().contentEquals("POST") || request.getMethod().contentEquals("PUT")) {
 			String body = request.getReader().lines().collect(Collectors.joining());
 			factoryBody(request, body);
@@ -78,8 +78,10 @@ public class FactoryInterceptor extends HandlerInterceptorAdapter {
 		String table = "";
 		String auxS = "/";
 		int count = 0;
+		//Obtengo la tabla a la que estoy haciendo el request
+		//http...../incidencias/...
+		//Estoy recojiendo incidencias en este bucle
 		for (int i = 0; i < path.length(); i++) {
-			boolean auxB = true;
 
 			if (auxS.equals(String.valueOf(path.charAt(i)))) {
 				if (count == 0) {
@@ -91,9 +93,11 @@ public class FactoryInterceptor extends HandlerInterceptorAdapter {
 				table = table + path.charAt(i);
 			}
 		}
+		//Aqui llamo a la factoria de permisos
+		
+		//Aqui valido el body a ver si las claves ajenas son correctas
 		if (table.equals("incidencias")) {
 			IncidenciaBean o = stringTopojo(body, IncidenciaBean.class);
-			System.err.println(o.getVecino().getId());
 		}
 		return true;
 	}
@@ -104,14 +108,11 @@ public class FactoryInterceptor extends HandlerInterceptorAdapter {
 		try {
 			o = objectMapper.readValue(body,type);
 		} catch (JsonParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new BadBeanFormat("Formato del bean incorrecto");
 		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new BadBeanFormat("Formato del bean incorrecto");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new BadBeanFormat("Formato del bean incorrecto");
 		}
 		return (T) o;
 	}

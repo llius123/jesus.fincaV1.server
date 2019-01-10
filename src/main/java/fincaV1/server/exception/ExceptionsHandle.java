@@ -48,6 +48,13 @@ public class ExceptionsHandle {
     public ResponseEntity<ResponseBean> notExistForeignKey(NotExistForeignKey exc){
     	responseBean = new ResponseBean(500, exc.getMessage());
     	return new ResponseEntity<ResponseBean>(responseBean, HttpStatus.INTERNAL_SERVER_ERROR);
-    }    
+    }
+    
+    //El formato del Bean no es el correcto
+    @ExceptionHandler
+    public ResponseEntity<ResponseBean> badBeanFormat(BadBeanFormat exc){
+    	responseBean = new ResponseBean(500, exc.getMessage());
+    	return new ResponseEntity<ResponseBean>(responseBean, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
     
 }
