@@ -48,10 +48,10 @@ public class FactoryInterceptor extends HandlerInterceptorAdapter {
 			throw new NotLogginSesionException("No estas logeado");
 
 		// Factoria de control para el body de PUT/POST
-		if(request.getMethod().contentEquals("POST") || request.getMethod().contentEquals("PUT")) {
-			String body = request.getReader().lines().collect(Collectors.joining());
-			factoryBody(request, body);
-		}
+//		if(request.getMethod().contentEquals("POST") || request.getMethod().contentEquals("PUT")) {
+//			String body = request.getReader().lines().collect(Collectors.joining());
+//			factoryBody(request, body);
+//		}
 		return true;
 	}
 
@@ -72,50 +72,50 @@ public class FactoryInterceptor extends HandlerInterceptorAdapter {
 		}
 	}
 
-	private <T> boolean factoryBody(HttpServletRequest request, String body) {
-		HashMap<T, Integer> hashMap = new HashMap<T, Integer>();
-		String path = request.getServletPath();
-		String table = "";
-		String auxS = "/";
-		int count = 0;
-		//Obtengo la tabla a la que estoy haciendo el request
-		//http...../incidencias/...
-		//Estoy recojiendo incidencias en este bucle
-		for (int i = 0; i < path.length(); i++) {
-
-			if (auxS.equals(String.valueOf(path.charAt(i)))) {
-				if (count == 0) {
-					count++;
-				} else {
-					i = path.length();
-				}
-			} else {
-				table = table + path.charAt(i);
-			}
-		}
-		//Aqui llamo a la factoria de permisos
-		
-		//Aqui valido el body a ver si las claves ajenas son correctas
-		if (table.equals("incidencias")) {
-			IncidenciaBean o = stringTopojo(body, IncidenciaBean.class);
-		}
-		return true;
-	}
-	
-	private <T> T stringTopojo(String body, Class<T> type) {
-		ObjectMapper objectMapper = new ObjectMapper();
-		Object o = null;
-		try {
-			o = objectMapper.readValue(body,type);
-		} catch (JsonParseException e) {
-			throw new BadBeanFormat("Formato del bean incorrecto");
-		} catch (JsonMappingException e) {
-			throw new BadBeanFormat("Formato del bean incorrecto");
-		} catch (IOException e) {
-			throw new BadBeanFormat("Formato del bean incorrecto");
-		}
-		return (T) o;
-	}
+//	private <T> boolean factoryBody(HttpServletRequest request, String body) {
+//		HashMap<T, Integer> hashMap = new HashMap<T, Integer>();
+//		String path = request.getServletPath();
+//		String table = "";
+//		String auxS = "/";
+//		int count = 0;
+//		//Obtengo la tabla a la que estoy haciendo el request
+//		//http...../incidencias/...
+//		//Estoy recojiendo incidencias en este bucle
+//		for (int i = 0; i < path.length(); i++) {
+//
+//			if (auxS.equals(String.valueOf(path.charAt(i)))) {
+//				if (count == 0) {
+//					count++;
+//				} else {
+//					i = path.length();
+//				}
+//			} else {
+//				table = table + path.charAt(i);
+//			}
+//		}
+//		//Aqui llamo a la factoria de permisos
+//		
+//		//Aqui valido el body a ver si las claves ajenas son correctas
+//		if (table.equals("incidencias")) {
+//			IncidenciaBean o = stringTopojo(body, IncidenciaBean.class);
+//		}
+//		return true;
+//	}
+//	
+//	private <T> T stringTopojo(String body, Class<T> type) {
+//		ObjectMapper objectMapper = new ObjectMapper();
+//		Object o = null;
+//		try {
+//			o = objectMapper.readValue(body,type);
+//		} catch (JsonParseException e) {
+//			throw new BadBeanFormat("Formato del bean incorrecto");
+//		} catch (JsonMappingException e) {
+//			throw new BadBeanFormat("Formato del bean incorrecto");
+//		} catch (IOException e) {
+//			throw new BadBeanFormat("Formato del bean incorrecto");
+//		}
+//		return (T) o;
+//	}
 
 //	private Object o;
 //

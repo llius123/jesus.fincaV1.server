@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.util.NestedServletException;
+
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
@@ -57,4 +60,10 @@ public class ExceptionsHandle {
     	return new ResponseEntity<ResponseBean>(responseBean, HttpStatus.INTERNAL_SERVER_ERROR);
     }
     
+    //Formato de json a pojo incorrecto
+    @ExceptionHandler
+    public ResponseEntity<ResponseBean> badJaksonFormat(InvalidFormatException exc){
+    	responseBean = new ResponseBean(500, "Error conviertiendo json a " + exc.getTargetType() + " ,valor: " + exc.getValue() );
+    	return new ResponseEntity<ResponseBean>(responseBean, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

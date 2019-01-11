@@ -3,10 +3,12 @@ package fincaV1.server.rest;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.validation.ValidationException;
 import javax.validation.Validator;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,19 +21,16 @@ import fincaV1.server.factory.CheckForeignKey;
 import fincaV1.server.factory.SecureFactory;
 import fincaV1.server.helper.Helper;
 import fincaV1.server.servicegeneric.GenericServiceImp;
+import fincaV1.server.validator.IncidenciaBeanValidator;
 
 
 @RestController
 public class IncidenciaRestController {
 	
 	@Autowired
-	private Helper helper;
+	private IncidenciaBeanValidator validator;
 	@Autowired
 	private GenericServiceImp genericService;
-	@Autowired
-	private SecureFactory secureFactory;
-	@Autowired
-	private Validator validator;
 	@Autowired 
 	private CheckForeignKey checkForeignKey;
 	
@@ -52,6 +51,7 @@ public class IncidenciaRestController {
 	
 	@RequestMapping(value="/incidencias", method=RequestMethod.POST)
 	public<T> ResponseBean incidenciasave(@RequestBody IncidenciaBean incidencia){
+		validator.postValidator(incidencia);
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(incidencia));
 	}
 	
