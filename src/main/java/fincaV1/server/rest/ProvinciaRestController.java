@@ -1,5 +1,6 @@
 package fincaV1.server.rest;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import fincaV1.server.entity.ProvinciaBean;
 import fincaV1.server.entity.ResponseBean;
 import fincaV1.server.servicegeneric.GenericServiceImp;
+import fincaV1.server.validator.CheckForeignKey;
 
 @RestController
 public class ProvinciaRestController {
 
 	@Autowired
 	private GenericServiceImp genericService;
+	@Autowired
+	private CheckForeignKey checkForeignKey;
 	
 	@RequestMapping(value="/provincias", method=RequestMethod.GET)
 	public List<ProvinciaBean> provincias() {
@@ -40,7 +44,10 @@ public class ProvinciaRestController {
 	}
 	
 	@RequestMapping(value="/provincias", method=RequestMethod.PUT)
-	public ResponseBean provinciaupdate(@RequestBody ProvinciaBean provincia) {
+	public<T> ResponseBean provinciaupdate(@RequestBody ProvinciaBean provincia) {
+		HashMap<T, Integer> datos = new HashMap<T, Integer>();
+		datos.put((T) provincia, provincia.getCod_provincia());
+		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, genericService.saveOrUpdate(provincia));
 	}
 }

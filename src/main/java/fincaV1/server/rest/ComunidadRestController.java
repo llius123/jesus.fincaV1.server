@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fincaV1.server.entity.ComunidadBean;
 import fincaV1.server.entity.ResponseBean;
-import fincaV1.server.factory.CheckForeignKey;
 import fincaV1.server.servicegeneric.GenericServiceImp;
+import fincaV1.server.validator.CheckForeignKey;
 
 @RestController
 public class ComunidadRestController {

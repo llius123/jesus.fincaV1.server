@@ -15,8 +15,8 @@ import com.fasterxml.jackson.core.io.DataOutputAsStream;
 import fincaV1.server.entity.PoblacionBean;
 import fincaV1.server.entity.ProvinciaBean;
 import fincaV1.server.entity.ResponseBean;
-import fincaV1.server.factory.CheckForeignKey;
 import fincaV1.server.servicegeneric.GenericServiceImp;
+import fincaV1.server.validator.CheckForeignKey;
 
 @RestController
 public class PoblacionRestController {

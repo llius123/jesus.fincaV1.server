@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import fincaV1.server.exception.NotLogginSesionException;
-import fincaV1.server.factory.CheckForeignKey;
+import fincaV1.server.validator.CheckForeignKey;
 
 @Repository
 public class FactoryInterceptor extends HandlerInterceptorAdapter {

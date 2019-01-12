@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fincaV1.server.entity.ReciboBean;
 import fincaV1.server.entity.ResponseBean;
-import fincaV1.server.factory.CheckForeignKey;
 import fincaV1.server.servicegeneric.GenericServiceImp;
+import fincaV1.server.validator.CheckForeignKey;
+import fincaV1.server.validator.SpecificValidators;
 
 @RestController
 public class ReciboRestController {
@@ -22,6 +23,8 @@ public class ReciboRestController {
 	private GenericServiceImp genericService;
 	@Autowired
 	private CheckForeignKey checkForeignKey;
+	@Autowired
+	SpecificValidators specificValidator;
 	
 	@RequestMapping(value="/recibos", method=RequestMethod.GET)
 	public List<ReciboBean> recibos() {
@@ -43,6 +46,8 @@ public class ReciboRestController {
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		datos.put((T) recibo.getVecino(), recibo.getVecino().getId());
 		checkForeignKey.checkForeignKey(datos);
+		specificValidator.isDateValid(recibo.getFecha_emision().toString());
+		specificValidator.isDateValid(recibo.getFecha_cobro().toString());
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(recibo));
 	}
 	
@@ -52,6 +57,8 @@ public class ReciboRestController {
 		datos.put((T) recibo, recibo.getId());
 		datos.put((T) recibo.getVecino(), recibo.getVecino().getId());
 		checkForeignKey.checkForeignKey(datos);
+		specificValidator.isDateValid(recibo.getFecha_emision().toString());
+		specificValidator.isDateValid(recibo.getFecha_cobro().toString());
 		return new ResponseBean(200, genericService.saveOrUpdate(recibo));
 	}
 

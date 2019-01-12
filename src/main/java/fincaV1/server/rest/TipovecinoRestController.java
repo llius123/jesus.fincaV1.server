@@ -1,5 +1,6 @@
 package fincaV1.server.rest;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import fincaV1.server.entity.TipovecinoBean;
 import fincaV1.server.entity.ResponseBean;
 import fincaV1.server.servicegeneric.GenericServiceImp;
+import fincaV1.server.validator.CheckForeignKey;
 
 @RestController
 public class TipovecinoRestController {
 
 	@Autowired
 	private GenericServiceImp genericService;
+	@Autowired 
+	private CheckForeignKey checkForeignKey;
 	
 	@RequestMapping(value="/tipovecinos", method=RequestMethod.GET)
 	public List<TipovecinoBean> tipovecinos() {
@@ -40,7 +44,10 @@ public class TipovecinoRestController {
 	}
 	
 	@RequestMapping(value="/tipovecinos", method=RequestMethod.PUT)
-	public ResponseBean tipovecinoupdate(@RequestBody TipovecinoBean tipovecino) {
+	public<T> ResponseBean tipovecinoupdate(@RequestBody TipovecinoBean tipovecino) {
+		HashMap<T, Integer> datos = new HashMap<T, Integer>();
+		datos.put((T) tipovecino, tipovecino.getId());
+		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, genericService.saveOrUpdate(tipovecino));
 	}
 }

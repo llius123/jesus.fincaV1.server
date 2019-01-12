@@ -1,5 +1,6 @@
 package fincaV1.server.rest;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.aspectj.lang.annotation.Before;
@@ -13,12 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 import fincaV1.server.entity.VecinoBean;
 import fincaV1.server.entity.ResponseBean;
 import fincaV1.server.servicegeneric.GenericServiceImp;
+import fincaV1.server.validator.CheckForeignKey;
+import fincaV1.server.validator.SpecificValidators;
 
 @RestController
 public class VecinoRestController {
 
 	@Autowired
 	private GenericServiceImp genericService;
+	@Autowired 
+	private CheckForeignKey checkForeignKey;
+	@Autowired
+	SpecificValidators specificValidator;
 	
 	@RequestMapping(value="/vecinos", method=RequestMethod.GET)
 	public List<VecinoBean> vecinos() {
@@ -37,12 +44,25 @@ public class VecinoRestController {
 	
 	@Before("execution(* fincaV1.server.before.BeforeBody*.checkBody*()")
 	@RequestMapping(value="/vecinos", method=RequestMethod.POST)
-	public ResponseBean vecinosave(@RequestBody VecinoBean vecino) {
+	public<T> ResponseBean vecinosave(@RequestBody VecinoBean vecino) {
+		HashMap<T, Integer> datos = new HashMap<T, Integer>();
+		datos.put((T) vecino.getComunidad(),vecino.getComunidad().getId());
+		datos.put((T) vecino.getId_tipovecino() ,vecino.getId_tipovecino().getId());
+		datos.put((T) vecino.getPoblacion(),vecino.getPoblacion().getCod_postal());
+		checkForeignKey.checkForeignKey(datos);
+		specificValidator.isDateValid(vecino.getFecha_mandato().toString());
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(vecino));
 	}
 	
 	@RequestMapping(value="/vecinos", method=RequestMethod.PUT)
-	public ResponseBean vecinoupdate(@RequestBody VecinoBean vecino) {
+	public<T> ResponseBean vecinoupdate(@RequestBody VecinoBean vecino) {
+		HashMap<T, Integer> datos = new HashMap<T, Integer>();
+		datos.put((T) vecino,vecino.getId());
+		datos.put((T) vecino.getComunidad(),vecino.getComunidad().getId());
+		datos.put((T) vecino.getId_tipovecino() ,vecino.getId_tipovecino().getId());
+		datos.put((T) vecino.getPoblacion(),vecino.getPoblacion().getCod_postal());
+		checkForeignKey.checkForeignKey(datos);
+		specificValidator.isDateValid(vecino.getFecha_mandato().toString());
 		return new ResponseBean(200, genericService.saveOrUpdate(vecino));
 	}
 }

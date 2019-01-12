@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fincaV1.server.entity.FacturaProveedorBean;
 import fincaV1.server.entity.ResponseBean;
-import fincaV1.server.factory.CheckForeignKey;
 import fincaV1.server.servicegeneric.GenericServiceImp;
+import fincaV1.server.validator.CheckForeignKey;
+import fincaV1.server.validator.SpecificValidators;
 
 @RestController
 public class FacturaProveedorRestController {
@@ -22,6 +24,8 @@ public class FacturaProveedorRestController {
 	private GenericServiceImp genericService;
 	@Autowired
 	private CheckForeignKey checkForeignKey;
+	@Autowired
+	private SpecificValidators specificValidator;
 	
 	@RequestMapping(value="/facturaproveedores", method=RequestMethod.GET)
 	public List<FacturaProveedorBean> facturas() {
@@ -45,6 +49,7 @@ public class FacturaProveedorRestController {
 		datos.put((T) factura.getTipofactura(), factura.getTipofactura().getId());
 		datos.put((T) factura.getComunidad(), factura.getComunidad().getId());
 		checkForeignKey.checkForeignKey(datos);
+		specificValidator.isDateValid(factura.getFecha_registro().toString());
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(factura));
 	}
 	
@@ -56,6 +61,7 @@ public class FacturaProveedorRestController {
 		datos.put((T) factura.getTipofactura(), factura.getTipofactura().getId());
 		datos.put((T) factura.getComunidad(), factura.getComunidad().getId());
 		checkForeignKey.checkForeignKey(datos);
+		specificValidator.isDateValid(factura.getFecha_registro().toString());
 		return new ResponseBean(200, genericService.saveOrUpdate(factura));
 	}
 }
