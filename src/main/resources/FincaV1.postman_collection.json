@@ -1,0 +1,526 @@
+{
+	"info": {
+		"_postman_id": "9c8f1a6b-178d-4027-ba67-a0758a761af0",
+		"name": "FincaV1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/fincaV1.server/incidencias/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"fincaV1.server",
+								"incidencias",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "testsaveorupdate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"id\": 1,\n        \"vecino\": {\n            \"id\": 12\n        },\n        \"descripcion\": \"hola\",\n        \"atendido\": \"n\",\n        \"fecha_creacion\": \"2018-12-12\"\n        }"
+						},
+						"url": {
+							"raw": "http://localhost:8081/fincaV1.server/incidencias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"fincaV1.server",
+								"incidencias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "testdelete",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/fincaV1.server/testdelete/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"fincaV1.server",
+								"testdelete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getall",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/fincaV1.server/proveedores",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"fincaV1.server",
+								"proveedores"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Incidencias",
+			"item": [
+				{
+					"name": "incidencias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/fincaV1.server/incidencias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"fincaV1.server",
+								"incidencias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "incidencias(id)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/fincaV1.server/incidencias/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"fincaV1.server",
+								"incidencias",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "incidencias",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": 1230,\n        \"vecino\":{\n        \t\"id\":2\n        },\n        \"descripcion\": \"post\",\n        \"fecha_creacion\":12 ,\n        \"atendido\": \"s\"\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:8081/fincaV1.server/incidencias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"fincaV1.server",
+								"incidencias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "incidencias",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": 2,\n        \"id_vecino\": 1,\n        \"descripcion\": \"updated\"\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:8081/fincaV1.server/incidencias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"fincaV1.server",
+								"incidencias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "incidencias",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8081/fincaV1.server/incidencias/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"fincaV1.server",
+								"incidencias",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PUT/UPDATE",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "8",
+							"type": "text"
+						},
+						{
+							"key": "archivo",
+							"value": "edit",
+							"type": "text"
+						},
+						{
+							"key": "fecha",
+							"value": "2018-12-12",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/?actions=update&table=actas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "actions",
+							"value": "update"
+						},
+						{
+							"key": "table",
+							"value": "actas"
+						},
+						{
+							"key": "id",
+							"value": "3",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE/DELETE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/?actions=delete&table=actas&id=8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "actions",
+							"value": "delete"
+						},
+						{
+							"key": "table",
+							"value": "actas"
+						},
+						{
+							"key": "id",
+							"value": "8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST/INSERT",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "archivo",
+							"value": "qwe",
+							"type": "text"
+						},
+						{
+							"key": "fecha",
+							"value": "2018-12-12",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/?actions=insert&table=actas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "actions",
+							"value": "insert"
+						},
+						{
+							"key": "table",
+							"value": "actas"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET/ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/?table=factura&actions=get&id=8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						""
+					],
+					"query": [
+						{
+							"key": "table",
+							"value": "factura"
+						},
+						{
+							"key": "actions",
+							"value": "get"
+						},
+						{
+							"key": "id",
+							"value": "8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/fincaV1.server/login/admin/admin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"fincaV1.server",
+						"login",
+						"admin",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/fincaV1.server/check",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"fincaV1.server",
+						"check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8081/fincaV1.server/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"fincaV1.server",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
