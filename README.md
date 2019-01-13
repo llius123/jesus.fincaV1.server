@@ -44,6 +44,13 @@ Validaciones
 + Validaciones globales simple(Todo esta con anotaciones de @NotNull)
 + Validaciones de claves externas(No puedes crear registros si las claves externas no existen)
 + Validaciones de fechas. Aceptado el formato string yyyy-MM-dd
++ Nota: Cambiar las validaciones globales a validaciones de Jackson o anotaciones customizadas
+
+Permisos
+=============
++ Dependiendo del tipovecino tendras acceso a una parte de la api o a otra
++ 1 = Administrador
++ 2 = Vecino 
 
 Enlaces de ayuda
 =============

@@ -25,6 +25,8 @@ public class FactoryInterceptor extends HandlerInterceptorAdapter {
 
 	@Autowired
 	CheckForeignKey checkForeignKey;
+	@Autowired
+	PermissionInterceptor permissionInterceptor;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -37,6 +39,9 @@ public class FactoryInterceptor extends HandlerInterceptorAdapter {
 		if (!isLogged(request))
 			throw new NotLogginSesionException("No estas logeado");
 
+		//Compruebo los permisos
+		permissionInterceptor.permissionCheck(request);
+		
 		return true;
 	}
 

@@ -66,4 +66,11 @@ public class ExceptionsHandle {
     	responseBean = new ResponseBean(500, "Error conviertiendo json a " + exc.getTargetType() + " ,valor: " + exc.getValue() );
     	return new ResponseEntity<ResponseBean>(responseBean, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    
+    //El usuario no tiene permiso para ejecutar esa orden
+    @ExceptionHandler
+    public ResponseEntity<ResponseBean> notPermission(NotPermissionException exc){
+    	responseBean = new ResponseBean(401, exc.getMessage() );
+    	return new ResponseEntity<ResponseBean>(responseBean, HttpStatus.UNAUTHORIZED);
+    }    
 }

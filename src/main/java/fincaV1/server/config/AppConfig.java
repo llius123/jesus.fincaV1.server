@@ -23,6 +23,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import fincaV1.server.interceptor.FactoryInterceptor;
+import fincaV1.server.interceptor.PermissionInterceptor;
 
 @Configuration
 @EnableWebMvc
