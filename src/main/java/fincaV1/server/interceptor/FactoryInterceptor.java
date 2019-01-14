@@ -40,7 +40,7 @@ public class FactoryInterceptor extends HandlerInterceptorAdapter {
 			throw new NotLogginSesionException("No estas logeado");
 
 		//Compruebo los permisos
-		permissionInterceptor.permissionCheck(request);
+		//permissionInterceptor.permissionCheck(request);
 		
 		return true;
 	}

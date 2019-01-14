@@ -16,6 +16,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -23,7 +24,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 import fincaV1.server.interceptor.FactoryInterceptor;
-import fincaV1.server.interceptor.PermissionInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -127,4 +127,10 @@ public class AppConfig implements WebMvcConfigurer {
 		registry.addInterceptor(factoryInterceptor).addPathPatterns("/**");
 	}
 
+	//Cors
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST", "PUT",
+				"DELETE").allowedHeaders("*");
+	}
 }
