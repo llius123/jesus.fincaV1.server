@@ -34,13 +34,12 @@ public class LoginRestController {
 	@RequestMapping(value = "/login/{user}/{pass}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseBean login(HttpServletResponse response, HttpServletRequest request, HttpSession session,
 			@PathVariable String user, @PathVariable String pass) {
-		//session.invalidate();
+		session.invalidate();
 		List<VecinoBean> oVecinoBean = vecinoService.login(user, pass);
 
 		if (!oVecinoBean.isEmpty()) {
 			HttpSession newSesion = request.getSession();
 			newSesion.setAttribute("vecino", oVecinoBean.get(0));
-			//request.getSession().setAttribute("vecino", oVecinoBean);
 			responseBean = new ResponseBean(200, "Login correcto");
 		} else {
 			responseBean = new ResponseBean(401, "Bad login");
@@ -55,7 +54,7 @@ public class LoginRestController {
 		return new ResponseBean(200, "logout correcto");
 	}
 
-	@RequestMapping(value = "/check", method = RequestMethod.GET)
+	@RequestMapping(value = "/check", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public VecinoBean check(HttpServletRequest session) {
 		if(session.getSession().getAttribute("vecino") == null) throw new NotLogginSesionException("No estas logeado");
 		return (VecinoBean) session.getSession().getAttribute("vecino");

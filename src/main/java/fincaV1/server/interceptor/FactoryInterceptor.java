@@ -19,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import fincaV1.server.exception.NotLogginSesionException;
 import fincaV1.server.validator.CheckForeignKey;
+import javax.servlet.http.HttpSession;
 
 @Repository
 public class FactoryInterceptor extends HandlerInterceptorAdapter {
@@ -32,6 +33,7 @@ public class FactoryInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 
+            System.err.println("SESION " + request.getSession());
 		// Forma de saber si el ususario se quiere logear
 		if (isLogin(request))
 			return true;
@@ -40,7 +42,7 @@ public class FactoryInterceptor extends HandlerInterceptorAdapter {
 			throw new NotLogginSesionException("No estas logeado");
 
 		//Compruebo los permisos
-		//permissionInterceptor.permissionCheck(request);
+		permissionInterceptor.permissionCheck(request);
 		
 		return true;
 	}
