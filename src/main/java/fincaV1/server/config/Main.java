@@ -11,13 +11,13 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+//@SpringBootApplication(exclude=HibernateJpaAutoConfiguration.class)
+//@EnableAutoConfiguration
+//@ComponentScan("fincaV1.server")
 @SpringBootApplication(exclude=HibernateJpaAutoConfiguration.class)
-@EnableAutoConfiguration
-@ComponentScan("fincaV1.server")
 public class Main {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Main.class, args);
 	}
-
 }

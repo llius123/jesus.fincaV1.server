@@ -123,14 +123,15 @@ public class AppConfig implements WebMvcConfigurer {
 	@Autowired
 	FactoryInterceptor factoryInterceptor;
 
+	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(factoryInterceptor).addPathPatterns("/**");
+		//registry.addInterceptor(factoryInterceptor).addPathPatterns("/**");
 	}
 
-	//Cors
+	// Cors
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST", "PUT",
-				"DELETE").allowedHeaders("*");
+		registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD").allowedOrigins("http://localhost:4200")
+				.allowedHeaders("Origin, X-Requested-With, Content-Type, Accept");
 	}
 }

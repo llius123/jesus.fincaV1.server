@@ -38,9 +38,9 @@ public class LoginRestController {
 		List<VecinoBean> oVecinoBean = vecinoService.login(user, pass);
 
 		if (!oVecinoBean.isEmpty()) {
-//			HttpSession newSesion = request.getSession();
-//			newSesion.setAttribute("vecino", oVecinoBean.get(0));
-			request.getSession().setAttribute("vecino", oVecinoBean);
+			HttpSession newSesion = request.getSession();
+			newSesion.setAttribute("vecino", oVecinoBean.get(0));
+			//request.getSession().setAttribute("vecino", oVecinoBean);
 			responseBean = new ResponseBean(200, "Login correcto");
 		} else {
 			responseBean = new ResponseBean(401, "Bad login");
