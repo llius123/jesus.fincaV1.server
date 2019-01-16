@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fincaV1.server.entity.TareaBean;
 import fincaV1.server.entity.ResponseBean;
+import fincaV1.server.entity.TagBean;
 import fincaV1.server.entity.TareaBean;
 import fincaV1.server.entity.TipofacturaBean;
 import fincaV1.server.servicegeneric.GenericServiceImp;
@@ -29,27 +30,29 @@ public class TareaRestController {
 	SpecificValidators specificValidator;
 	
 	@RequestMapping(value="/tareas", method=RequestMethod.GET)
-	public List<TareaBean> tipofacturas() {
-		return (List<TareaBean>) genericService.getAll(TareaBean.class);
+	public List<TareaBean> tareas() {
+		System.err.println(genericService.getAll(TareaBean.class));
+		//return (List<TareaBean>) genericService.getAll(TareaBean.class);
+		return null;
 	}
 	
 	@RequestMapping(value="/tareas/{id}", method=RequestMethod.GET)
-	public TareaBean recibo(@PathVariable int id) {
+	public TareaBean tareas(@PathVariable int id) {
 		return (TareaBean) genericService.get(TareaBean.class, id);
 	}
 	
 	@RequestMapping(value="/tareas/{id}", method=RequestMethod.DELETE)
-	public ResponseBean recibodelete(@PathVariable int id) {
+	public ResponseBean tareasdelete(@PathVariable int id) {
 		return new ResponseBean(200, genericService.delete(genericService.get(TareaBean.class, id)));
 	}
 	
 	@RequestMapping(value="/tareas", method=RequestMethod.POST)
-	public<T> ResponseBean tareasave(@RequestBody TareaBean tarea) {
+	public<T> ResponseBean tareassave(@RequestBody TareaBean tarea) {
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(tarea));
 	}
 	
 	@RequestMapping(value="/tareas", method=RequestMethod.PUT)
-	public<T> ResponseBean reciboupdate(@RequestBody TareaBean tarea) {
+	public<T> ResponseBean tareasupdate(@RequestBody TareaBean tarea) {
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		datos.put((T) tarea, tarea.getId());
 		checkForeignKey.checkForeignKey(datos);

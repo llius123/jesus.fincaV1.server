@@ -1,32 +1,35 @@
 package fincaV1.server.entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="tarea")
+@Table(name = "tarea")
 public class TareaBean {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	@NotNull
 	private int id;
-	
+
 	@Column(name = "fecha")
 	@NotNull
 	private Date fecha;
-	
+
 	@Column(name = "descripcion")
 	@NotNull
 	private String descripcion;
+
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "tarea_tag", joinColumns = @JoinColumn(name = "id_tarea"), inverseJoinColumns = @JoinColumn(name = "id_tag"))
+	private List<TagBean> tags = new ArrayList<>();
 
 	public int getId() {
 		return id;
@@ -52,11 +55,19 @@ public class TareaBean {
 		this.descripcion = descripcion;
 	}
 
+	public List<TagBean> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<TagBean> tags) {
+		this.tags = tags;
+	}
+
 	@Override
 	public String toString() {
-		return "TareaBean [id=" + id + ", fecha=" + fecha + ", descripcion=" + descripcion + "]";
+		return "TareaBean [id=" + id + ", fecha=" + fecha + ", descripcion=" + descripcion + ", tags=" + tags + "]";
 	}
-	
-	
+
+
 
 }
