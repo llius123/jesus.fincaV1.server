@@ -29,9 +29,9 @@ public class TareaBean {
 	@NotNull
 	private String descripcion;
 
-	@ManyToMany(cascade = CascadeType.PERSIST)
-	@JoinTable(name = "tarea_tag", joinColumns = @JoinColumn(name = "id_tarea"), inverseJoinColumns = @JoinColumn(name = "id_tag"))
-	private Set<TagBean> tags;
+//	@ManyToMany(cascade = CascadeType.PERSIST)
+//	@JoinTable(name = "tarea_tag", joinColumns = @JoinColumn(name = "id_tarea"), inverseJoinColumns = @JoinColumn(name = "id_tag"))
+//	private Set<TagBean> tags;
 
 	public int getId() {
 		return id;
@@ -57,19 +57,24 @@ public class TareaBean {
 		this.descripcion = descripcion;
 	}
 
-	public Set<TagBean> getTags() {
-		return tags;
-	}
-
-	@JsonDeserialize(as=TagBean.class)
-	public void setTags(Set<TagBean> tags) {
-		this.tags = tags;
-	}
-
+//	public Set<TagBean> getTags() {
+//		return tags;
+//	}
+//
+//	@JsonDeserialize(as=TagBean.class)
+//	public void setTags(Set<TagBean> tags) {
+//		this.tags = tags;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "TareaBean [id=" + id + ", fecha=" + fecha + ", descripcion=" + descripcion + ", tags=" + tags + "]";
+//	}
+	
 	@Override
 	public String toString() {
-		return "TareaBean [id=" + id + ", fecha=" + fecha + ", descripcion=" + descripcion + ", tags=" + tags + "]";
-	}
+		return "TareaBean [id=" + id + ", fecha=" + fecha + ", descripcion=" + descripcion + "]";
+	}	
 	
 	
 
