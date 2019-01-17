@@ -18,7 +18,6 @@ public class GenericDaoImp implements GenericDao {
 
 	public <T> T getAll(final Class<T> type) {
 		Session session = sessionFactory.getCurrentSession();
-		System.err.println("HOLA------>" + session.createQuery("FROM  " + type.getSimpleName()).getResultList());
 		return (T) session.createQuery("FROM  " + type.getSimpleName()).getResultList();
 	}
 

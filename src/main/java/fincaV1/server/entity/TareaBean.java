@@ -9,6 +9,8 @@ import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 @Entity
 @Table(name = "tarea")
 public class TareaBean {
@@ -27,9 +29,9 @@ public class TareaBean {
 	@NotNull
 	private String descripcion;
 
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "tarea_tag", joinColumns = @JoinColumn(name = "id_tarea"), inverseJoinColumns = @JoinColumn(name = "id_tag"))
-	private List<TagBean> tags = new ArrayList<>();
+	private Set<TagBean> tags;
 
 	public int getId() {
 		return id;
@@ -55,11 +57,12 @@ public class TareaBean {
 		this.descripcion = descripcion;
 	}
 
-	public List<TagBean> getTags() {
+	public Set<TagBean> getTags() {
 		return tags;
 	}
 
-	public void setTags(List<TagBean> tags) {
+	@JsonDeserialize(as=TagBean.class)
+	public void setTags(Set<TagBean> tags) {
 		this.tags = tags;
 	}
 
@@ -67,7 +70,7 @@ public class TareaBean {
 	public String toString() {
 		return "TareaBean [id=" + id + ", fecha=" + fecha + ", descripcion=" + descripcion + ", tags=" + tags + "]";
 	}
-
-
+	
+	
 
 }
