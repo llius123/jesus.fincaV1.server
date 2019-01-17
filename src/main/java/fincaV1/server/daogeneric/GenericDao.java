@@ -11,6 +11,8 @@ public interface GenericDao {
 	public <T> String delete(final T o);
 	
     public <T> int save(final T o);
+    
+    public int count(String table);
 
 
 }

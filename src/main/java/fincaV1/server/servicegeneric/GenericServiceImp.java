@@ -10,7 +10,7 @@ import fincaV1.server.daogeneric.GenericDaoImp;
 import fincaV1.server.test.TestDao;
 
 @Service
-public class GenericServiceImp {
+public class GenericServiceImp implements GenericService{
 		@Autowired
 		private GenericDaoImp genericDao;
 		
@@ -38,5 +38,10 @@ public class GenericServiceImp {
 	    public <T> int save(final T o){
 	       return genericDao.save(o);
 	      }
+
+		@Transactional
+		public int count(String table) {
+			return genericDao.count(table);
+		}
 
 }
