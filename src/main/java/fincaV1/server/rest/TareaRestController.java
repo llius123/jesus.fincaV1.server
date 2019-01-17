@@ -40,6 +40,8 @@ public class TareaRestController {
 	@RequestMapping(value="/tareas", method=RequestMethod.GET)
 	@Transactional
 	public List<TareaBean> tareas() {
+		//Si quito este system.err.println explota la aplicacion,no entiendo el porque
+		System.err.print(genericService.getAll(TareaBean.class));
 		return (List<TareaBean>) genericService.getAll(TareaBean.class);
 	}
 	
