@@ -66,7 +66,8 @@ public class IncidenciaRestController {
 	
 	@RequestMapping(value="/incidenciascount", method=RequestMethod.GET)
 	public ResponseBean incidenciascount() {
-		return new ResponseBean(200, incidenciaServiceImp.incidenciascount().toString());
+		String numberString = String.valueOf(incidenciaServiceImp.incidenciascount().get(0));
+		return new ResponseBean(200, numberString);
 	}
 	
 	
