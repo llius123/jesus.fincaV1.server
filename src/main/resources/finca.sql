@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2019 at 12:45 PM
+-- Generation Time: Jan 23, 2019 at 11:54 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -43,7 +43,8 @@ CREATE TABLE `comunidad` (
 --
 
 INSERT INTO `comunidad` (`id`, `nombre`, `direccion`, `nif`, `iban`, `sufijo`, `cod_poblacion`) VALUES
-(1, 'test', 'test', 'test', 'test', 'test', 1);
+(1, 'test', 'test', 'test', 'test', 'test', 1),
+(2, 'test', 'q', 'qweqweqwewq', 'qwe', 'test', 1);
 
 -- --------------------------------------------------------
 
@@ -95,21 +96,21 @@ INSERT INTO `incidencia` (`id`, `id_vecino`, `descripcion`, `fecha_creacion`, `a
 (2, 2, 'post', '2018-12-12', 'n'),
 (3, 2, 'post', '2018-12-12', 'n'),
 (4, 2, 'post', '2018-12-12', 'n'),
-(5, 2, 'post', '2018-12-12', '1'),
-(6, 2, 'post', '1970-01-01', '1'),
-(7, 2, 'post', '1970-01-01', '1'),
-(8, 2, 'post', '1970-01-01', 's'),
-(9, 2, 'post', '1970-01-01', 's'),
-(10, 2, 'post', '1970-01-01', 's'),
-(11, 2, 'post', '1973-11-26', 's'),
-(12, 2, 'post', '2018-12-11', 's'),
-(13, 2, 'post', '2018-12-11', 's'),
-(14, 2, 'post', '2018-12-11', 's'),
-(15, 2, 'post', '2018-12-12', 's'),
-(16, 2, 'post', '1970-01-01', 's'),
-(17, 2, '12', '1970-01-01', 's'),
+(5, 2, 'post', '2018-12-12', 'n'),
+(6, 2, 'post', '1970-01-01', 'n'),
+(7, 2, 'post', '1970-01-01', 'n'),
+(8, 2, 'post', '1970-01-01', 'n'),
+(9, 2, 'post', '1970-01-01', 'n'),
+(10, 2, 'post', '1970-01-01', 'n'),
+(11, 2, 'post', '1973-11-26', 'n'),
+(12, 2, 'post', '2018-12-11', 'n'),
+(13, 2, 'post', '2018-12-11', 'n'),
+(14, 2, 'post', '2018-12-11', 'n'),
+(15, 2, 'post', '2018-12-12', 'n'),
+(16, 2, 'post', '1970-01-01', 'n'),
+(17, 2, '12', '1970-01-01', 'n'),
 (18, 2, '12', '1973-11-26', 's'),
-(19, 2, 'hola', '2018-12-12', 'n');
+(19, 2, 'hola', '2018-12-12', 's');
 
 -- --------------------------------------------------------
 
@@ -128,7 +129,8 @@ CREATE TABLE `poblacion` (
 --
 
 INSERT INTO `poblacion` (`cod_postal`, `descripcion`, `cod_provincia`) VALUES
-(1, 'test', 1);
+(1, 'test', 1),
+(2, 'qweqwewqe', 1);
 
 -- --------------------------------------------------------
 
@@ -143,6 +145,13 @@ CREATE TABLE `proveedor` (
   `email` varchar(100) DEFAULT NULL,
   `cod_poblacion` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `proveedor`
+--
+
+INSERT INTO `proveedor` (`id`, `direccion`, `telefono`, `email`, `cod_poblacion`) VALUES
+(1, 'qwe', 'wqe', 'qwe', 2);
 
 -- --------------------------------------------------------
 
@@ -160,7 +169,7 @@ CREATE TABLE `provincia` (
 --
 
 INSERT INTO `provincia` (`cod_provincia`, `descripcion`) VALUES
-(1, 'test');
+(1, 'qwe');
 
 -- --------------------------------------------------------
 
@@ -186,14 +195,14 @@ CREATE TABLE `recibo` (
 
 CREATE TABLE `tag` (
   `id` int(11) NOT NULL,
-  `tag` varchar(50) DEFAULT NULL
+  `descripcion` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tag`
 --
 
-INSERT INTO `tag` (`id`, `tag`) VALUES
+INSERT INTO `tag` (`id`, `descripcion`) VALUES
 (1, 'test'),
 (2, 'segundo');
 
@@ -214,8 +223,10 @@ CREATE TABLE `tarea` (
 --
 
 INSERT INTO `tarea` (`id`, `fecha`, `descripcion`) VALUES
-(1, '2019-01-16', 'test'),
-(2, '2019-01-16', 'qwe');
+(2, '2019-01-16', 'qwe'),
+(3, '2019-01-17', 'qwe'),
+(6, '2019-01-17', 'qwe'),
+(8, '2019-01-22', 'qwe');
 
 -- --------------------------------------------------------
 
@@ -224,7 +235,6 @@ INSERT INTO `tarea` (`id`, `fecha`, `descripcion`) VALUES
 --
 
 CREATE TABLE `tarea_tag` (
-  `id` int(11) NOT NULL,
   `id_tarea` int(11) DEFAULT '0',
   `id_tag` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -233,11 +243,9 @@ CREATE TABLE `tarea_tag` (
 -- Dumping data for table `tarea_tag`
 --
 
-INSERT INTO `tarea_tag` (`id`, `id_tarea`, `id_tag`) VALUES
-(2, 1, 2),
-(3, 1, 1),
-(5, 2, 2),
-(6, 2, 1);
+INSERT INTO `tarea_tag` (`id_tarea`, `id_tag`) VALUES
+(2, 2),
+(2, 1);
 
 -- --------------------------------------------------------
 
@@ -255,7 +263,7 @@ CREATE TABLE `tipofactura` (
 --
 
 INSERT INTO `tipofactura` (`id`, `descripcion`) VALUES
-(1, 'web');
+(1, 'qwe');
 
 -- --------------------------------------------------------
 
@@ -275,7 +283,7 @@ CREATE TABLE `tipovecino` (
 INSERT INTO `tipovecino` (`id`, `descripcion`) VALUES
 (1, 'admin'),
 (2, 'vecino'),
-(3, 'hola'),
+(3, 'qwe'),
 (4, 'hola'),
 (5, 'hola'),
 (6, 'hola'),
@@ -312,7 +320,7 @@ CREATE TABLE `vecino` (
 
 INSERT INTO `vecino` (`id`, `nombre`, `direccion`, `numero`, `nif`, `iban`, `num_mandato`, `fecha_mandato`, `porcentaje_participacion`, `id_comunidad`, `email`, `telefono`, `id_tipovecino`, `cod_poblacion`, `login`, `pass`) VALUES
 (2, 'test', 'test', 'test', 'test', 'test', 'test', '2019-01-02 00:00:00', '1.00', 1, 'test', 'test', 1, 1, 'admin', 'admin'),
-(3, 'qwe', 'qwe', 'qew', 'qwe', 'qwe', 'qwe', '2019-01-15 00:00:00', '1.00', 1, 'qwe', 'qwe', 2, 1, 'user', 'user');
+(3, 'qwe', 'ewq', 'qweeee', 'qwe', 'qwe', 'qwe', '2019-01-15 00:00:00', '1.00', 1, 'qwe', 'qwe', 3, 2, 'user', 'qwe');
 
 --
 -- Indexes for dumped tables
@@ -384,7 +392,6 @@ ALTER TABLE `tarea`
 -- Indexes for table `tarea_tag`
 --
 ALTER TABLE `tarea_tag`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `FK_tarea_tag_tarea` (`id_tarea`),
   ADD KEY `FK_tarea_tag_tag` (`id_tag`);
 
@@ -417,7 +424,7 @@ ALTER TABLE `vecino`
 -- AUTO_INCREMENT for table `comunidad`
 --
 ALTER TABLE `comunidad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `factura_proveedor`
@@ -435,7 +442,7 @@ ALTER TABLE `incidencia`
 -- AUTO_INCREMENT for table `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `recibo`
@@ -453,13 +460,7 @@ ALTER TABLE `tag`
 -- AUTO_INCREMENT for table `tarea`
 --
 ALTER TABLE `tarea`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tarea_tag`
---
-ALTER TABLE `tarea_tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tipofactura`
