@@ -90,7 +90,6 @@ public class VecinoBean {
 	private String login;
 
 	@Column(name = "pass")
-	@NotNull
 	private String pass;
 
 	@ManyToOne

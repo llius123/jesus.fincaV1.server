@@ -63,6 +63,13 @@ public class VecinoRestController {
 		datos.put((T) vecino.getPoblacion(),vecino.getPoblacion().getCod_postal());
 		checkForeignKey.checkForeignKey(datos);
 		specificValidator.isDateValid(vecino.getFecha_mandato().toString());
+		
+		if(vecino.getPass().equals("")) {
+			VecinoBean vecinoAux = genericService.get(VecinoBean.class, vecino.getId());
+			vecino.setPass(vecinoAux.getPass());
+		}
+		
+		
 		return new ResponseBean(200, genericService.saveOrUpdate(vecino));
 	}
 }
