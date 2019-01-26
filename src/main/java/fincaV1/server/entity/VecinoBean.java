@@ -16,6 +16,8 @@ import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -27,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 		@SecondaryTable(name = "comunidad", pkJoinColumns = { @PrimaryKeyJoinColumn(name = "id") }),
 		@SecondaryTable(name = "tipovecino", pkJoinColumns = { @PrimaryKeyJoinColumn(name = "id") })
 })
+@DynamicUpdate(value=true)
 public class VecinoBean {
 
 	@Id
@@ -90,7 +93,6 @@ public class VecinoBean {
 	private String login;
 
 	@Column(name = "pass")
-	@NotNull
 	private String pass;
 
 	@ManyToOne
