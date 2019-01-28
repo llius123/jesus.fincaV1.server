@@ -50,7 +50,6 @@ public class VecinoRestController {
 		datos.put((T) vecino.getId_tipovecino() ,vecino.getId_tipovecino().getId());
 		datos.put((T) vecino.getPoblacion(),vecino.getPoblacion().getCod_postal());
 		checkForeignKey.checkForeignKey(datos);
-		specificValidator.isDateValid(vecino.getFecha_mandato().toString());
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(vecino));
 	}
 	
@@ -62,7 +61,6 @@ public class VecinoRestController {
 		datos.put((T) vecino.getId_tipovecino() ,vecino.getId_tipovecino().getId());
 		datos.put((T) vecino.getPoblacion(),vecino.getPoblacion().getCod_postal());
 		checkForeignKey.checkForeignKey(datos);
-		specificValidator.isDateValid(vecino.getFecha_mandato().toString());
 		
 		if(vecino.getPass().equals("")) {
 			VecinoBean vecinoAux = genericService.get(VecinoBean.class, vecino.getId());

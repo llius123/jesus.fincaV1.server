@@ -44,7 +44,7 @@ public class PoblacionRestController {
 	@RequestMapping(value="/poblaciones", method=RequestMethod.POST)
 	public <T> ResponseBean poblacionsave(@RequestBody PoblacionBean poblacion) {
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
-		datos.put((T) poblacion.getCod_provincia(), poblacion.getCod_provincia().getCod_provincia());
+		datos.put((T) poblacion.getCod_provincia(), poblacion.getCod_provincia().getId());
 		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(poblacion));
 	}
@@ -53,7 +53,7 @@ public class PoblacionRestController {
 	public <T> ResponseBean poblacionupdate(@RequestBody PoblacionBean poblacion) {
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		datos.put((T) poblacion, poblacion.getCod_postal());
-		datos.put((T) poblacion.getCod_provincia(), poblacion.getCod_provincia().getCod_provincia());
+		datos.put((T) poblacion.getCod_provincia(), poblacion.getCod_provincia().getId());
 		checkForeignKey.checkForeignKey(datos);		
 		return new ResponseBean(200, genericService.saveOrUpdate(poblacion));
 	}

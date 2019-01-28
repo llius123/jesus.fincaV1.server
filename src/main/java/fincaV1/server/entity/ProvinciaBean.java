@@ -14,21 +14,19 @@ public class ProvinciaBean {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cod_provincia")
+	@Column(name = "id")
 	@NotNull
-	private int cod_provincia;
+	private int id;
 
 	@Column(name = "descripcion")
 	@NotNull
 	private String descripcion;
+	
+	@Column(name = "cod_provincia")
+	@NotNull
+	private String cod_provincia;
 
-	public int getCod_provincia() {
-		return cod_provincia;
-	}
 
-	public void setCod_provincia(int cod_provincia) {
-		this.cod_provincia = cod_provincia;
-	}
 
 	public String getDescripcion() {
 		return descripcion;
@@ -38,9 +36,26 @@ public class ProvinciaBean {
 		this.descripcion = descripcion;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCod_provincia() {
+		return cod_provincia;
+	}
+
+	public void setCod_provincia(String cod_provincia) {
+		this.cod_provincia = cod_provincia;
+	}
+
 	@Override
 	public String toString() {
-		return "ProvinciaBean [cod_provincia=" + cod_provincia + ", descripcion=" + descripcion + "]";
+		return "ProvinciaBean [id=" + id + ", descripcion=" + descripcion + ", cod_provincia=" + cod_provincia + "]";
 	}
+
 
 }

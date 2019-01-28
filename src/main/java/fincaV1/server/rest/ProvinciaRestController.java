@@ -46,7 +46,7 @@ public class ProvinciaRestController {
 	@RequestMapping(value="/provincias", method=RequestMethod.PUT)
 	public<T> ResponseBean provinciaupdate(@RequestBody ProvinciaBean provincia) {
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
-		datos.put((T) provincia, provincia.getCod_provincia());
+		datos.put((T) provincia, provincia.getId());
 		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, genericService.saveOrUpdate(provincia));
 	}

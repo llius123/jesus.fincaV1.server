@@ -16,12 +16,15 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name ="poblacion")
 @SecondaryTables({
-	@SecondaryTable(name = "provincia", pkJoinColumns = { @PrimaryKeyJoinColumn(name = "cod_provincia") }) })
+	@SecondaryTable(name = "provincia", pkJoinColumns = { @PrimaryKeyJoinColumn(name = "id") }) })
 public class PoblacionBean {
-	
 	@Id
-	@Column(name = "cod_postal")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	@NotNull
+	private int id;
+	
+	@Column(name = "cod_postal")
 	private int cod_postal;
 	
 	@Column(name="descripcion")

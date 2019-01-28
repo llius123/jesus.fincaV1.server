@@ -58,14 +58,6 @@ public class VecinoBean {
 	@NotNull
 	private String iban;
 
-	@Column(name = "num_mandato")
-	@NotNull
-	private String num_mandato;
-
-	@Column(name = "fecha_mandato")
-	@NotNull
-	private Date fecha_mandato;
-
 	@Column(name = "porcentaje_participacion")
 	@NotNull
 	private int porcentaje_participacion;
@@ -156,22 +148,6 @@ public class VecinoBean {
 		this.iban = iban;
 	}
 
-	public String getNum_mandato() {
-		return num_mandato;
-	}
-
-	public void setNum_mandato(String num_mandato) {
-		this.num_mandato = num_mandato;
-	}
-
-	public Date getFecha_mandato() {
-		return fecha_mandato;
-	}
-
-	public void setFecha_mandato(Date fecha_mandato) {
-		this.fecha_mandato = fecha_mandato;
-	}
-
 	public int getPorcentaje_participacion() {
 		return porcentaje_participacion;
 	}
@@ -233,16 +209,9 @@ public class VecinoBean {
 	@Override
 	public String toString() {
 		return "VecinoBean [id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", numero=" + numero
-				+ ", nif=" + nif + ", iban=" + iban + ", num_mandato=" + num_mandato + ", fecha_mandato="
-				+ fecha_mandato + ", porcentaje_participacion=" + porcentaje_participacion + ", comunidad=" + comunidad
-				+ ", email=" + email + ", telefono=" + telefono + ", id_tipovecino=" + id_tipovecino + ", login="
-				+ login + ", pass=" + pass + ", poblacion=" + poblacion + "]";
+				+ ", nif=" + nif + ", iban=" + iban + ", porcentaje_participacion=" + porcentaje_participacion
+				+ ", comunidad=" + comunidad + ", email=" + email + ", telefono=" + telefono + ", id_tipovecino="
+				+ id_tipovecino + ", login=" + login + ", pass=" + pass + ", poblacion=" + poblacion + "]";
 	}
-
-
-
-
-
-
 
 }
