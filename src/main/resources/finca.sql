@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2019 at 11:54 AM
+-- Generation Time: Jan 28, 2019 at 12:39 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -101,7 +101,7 @@ INSERT INTO `incidencia` (`id`, `id_vecino`, `descripcion`, `fecha_creacion`, `a
 (7, 2, 'post', '1970-01-01', 'n'),
 (8, 2, 'post', '1970-01-01', 'n'),
 (9, 2, 'post', '1970-01-01', 'n'),
-(10, 2, 'post', '1970-01-01', 'n'),
+(10, 2, 'post', '1970-01-01', 's'),
 (11, 2, 'post', '1973-11-26', 'n'),
 (12, 2, 'post', '2018-12-11', 'n'),
 (13, 2, 'post', '2018-12-11', 'n'),
@@ -119,18 +119,22 @@ INSERT INTO `incidencia` (`id`, `id_vecino`, `descripcion`, `fecha_creacion`, `a
 --
 
 CREATE TABLE `poblacion` (
-  `cod_postal` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `descripcion` varchar(100) DEFAULT NULL,
-  `cod_provincia` int(11) DEFAULT NULL
+  `cod_provincia` int(11) DEFAULT NULL,
+  `cod_postal` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `poblacion`
 --
 
-INSERT INTO `poblacion` (`cod_postal`, `descripcion`, `cod_provincia`) VALUES
-(1, 'test', 1),
-(2, 'qweqwewqe', 1);
+INSERT INTO `poblacion` (`id`, `descripcion`, `cod_provincia`, `cod_postal`) VALUES
+(1, 'test2', 1, 1),
+(2, 'qweqwewqe', 1, 2),
+(3, 'e', 2, 3),
+(4, 'e', 2, 3),
+(5, 'e', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -160,16 +164,18 @@ INSERT INTO `proveedor` (`id`, `direccion`, `telefono`, `email`, `cod_poblacion`
 --
 
 CREATE TABLE `provincia` (
-  `cod_provincia` int(11) NOT NULL,
-  `descripcion` varchar(100) DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(100) DEFAULT NULL,
+  `cod_provincia` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `provincia`
 --
 
-INSERT INTO `provincia` (`cod_provincia`, `descripcion`) VALUES
-(1, 'qwe');
+INSERT INTO `provincia` (`id`, `descripcion`, `cod_provincia`) VALUES
+(1, 'qweqw', '1'),
+(2, 'qwe', 'qwe');
 
 -- --------------------------------------------------------
 
@@ -263,7 +269,8 @@ CREATE TABLE `tipofactura` (
 --
 
 INSERT INTO `tipofactura` (`id`, `descripcion`) VALUES
-(1, 'qwe');
+(1, 'qweqweqweqwe'),
+(3, 'qweqweqwe');
 
 -- --------------------------------------------------------
 
@@ -281,13 +288,14 @@ CREATE TABLE `tipovecino` (
 --
 
 INSERT INTO `tipovecino` (`id`, `descripcion`) VALUES
-(1, 'admin'),
+(1, 'qweqweqwe'),
 (2, 'vecino'),
-(3, 'qwe'),
-(4, 'hola'),
-(5, 'hola'),
-(6, 'hola'),
-(7, 'web');
+(3, 'qweqweqwe'),
+(7, 'qweqwee'),
+(8, 'qeqweqweqwe'),
+(12, 'qwe'),
+(13, 'qweqwe'),
+(14, 'qweqweeqwe');
 
 -- --------------------------------------------------------
 
@@ -302,8 +310,6 @@ CREATE TABLE `vecino` (
   `numero` varchar(100) DEFAULT NULL,
   `nif` varchar(100) DEFAULT NULL,
   `iban` varchar(100) DEFAULT NULL,
-  `num_mandato` varchar(100) DEFAULT NULL,
-  `fecha_mandato` datetime DEFAULT NULL,
   `porcentaje_participacion` decimal(5,2) DEFAULT NULL,
   `id_comunidad` int(11) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
@@ -318,9 +324,13 @@ CREATE TABLE `vecino` (
 -- Dumping data for table `vecino`
 --
 
-INSERT INTO `vecino` (`id`, `nombre`, `direccion`, `numero`, `nif`, `iban`, `num_mandato`, `fecha_mandato`, `porcentaje_participacion`, `id_comunidad`, `email`, `telefono`, `id_tipovecino`, `cod_poblacion`, `login`, `pass`) VALUES
-(2, 'test', 'test', 'test', 'test', 'test', 'test', '2019-01-02 00:00:00', '1.00', 1, 'test', 'test', 1, 1, 'admin', 'admin'),
-(3, 'qwe', 'ewq', 'qweeee', 'qwe', 'qwe', 'qwe', '2019-01-15 00:00:00', '1.00', 1, 'qwe', 'qwe', 3, 2, 'user', 'qwe');
+INSERT INTO `vecino` (`id`, `nombre`, `direccion`, `numero`, `nif`, `iban`, `porcentaje_participacion`, `id_comunidad`, `email`, `telefono`, `id_tipovecino`, `cod_poblacion`, `login`, `pass`) VALUES
+(2, 'test', 'test', 'test', 'test', 'test', '1.00', 1, 'test', 'test', 1, 1, 'admin', 'admin'),
+(3, 'qweqweqwewqe', 'ewqqweqwe', 'qweeee', 'qwe', 'qwe', '1.00', 1, 'qwe', 'qwe', 3, 2, 'user', 'qwe'),
+(7, 'qweqweqwewqe', 'ewqqweqwe', 'qweeee', 'qwe', 'qwe', '1.00', 1, 'qwe', 'qwe', 3, 2, 'user', 'qwe'),
+(34, 'pepe', 'qwe', '12', 'qwe', 'qweqweqwe', '12.00', 2, 'qw', 'qw', 7, 1, 'q', 'q'),
+(35, 'q', 'qwe', 'qwe', 'qwe', 'qweqwe', '12.00', 1, 'qwe', 'qwe', 1, 1, 'qwe', 'qwe'),
+(36, 'q', 'qwe', 'qwe', 'qwe', 'qwe', '1.00', 1, 'qwe', 'qwe', 2, 1, 'qweqwe', 'qwe');
 
 --
 -- Indexes for dumped tables
@@ -353,7 +363,7 @@ ALTER TABLE `incidencia`
 -- Indexes for table `poblacion`
 --
 ALTER TABLE `poblacion`
-  ADD PRIMARY KEY (`cod_postal`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `poblacion_provincia_fk` (`cod_provincia`);
 
 --
@@ -367,7 +377,7 @@ ALTER TABLE `proveedor`
 -- Indexes for table `provincia`
 --
 ALTER TABLE `provincia`
-  ADD PRIMARY KEY (`cod_provincia`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `recibo`
@@ -439,10 +449,22 @@ ALTER TABLE `incidencia`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `poblacion`
+--
+ALTER TABLE `poblacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `proveedor`
 --
 ALTER TABLE `proveedor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `provincia`
+--
+ALTER TABLE `provincia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `recibo`
@@ -466,19 +488,19 @@ ALTER TABLE `tarea`
 -- AUTO_INCREMENT for table `tipofactura`
 --
 ALTER TABLE `tipofactura`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tipovecino`
 --
 ALTER TABLE `tipovecino`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `vecino`
 --
 ALTER TABLE `vecino`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Constraints for dumped tables
@@ -488,7 +510,7 @@ ALTER TABLE `vecino`
 -- Constraints for table `comunidad`
 --
 ALTER TABLE `comunidad`
-  ADD CONSTRAINT `comunidad_poblacion_fk` FOREIGN KEY (`cod_poblacion`) REFERENCES `poblacion` (`cod_postal`);
+  ADD CONSTRAINT `comunidad_poblacion_fk` FOREIGN KEY (`cod_poblacion`) REFERENCES `poblacion` (`id`);
 
 --
 -- Constraints for table `factura_proveedor`
@@ -508,13 +530,13 @@ ALTER TABLE `incidencia`
 -- Constraints for table `poblacion`
 --
 ALTER TABLE `poblacion`
-  ADD CONSTRAINT `poblacion_provincia_fk` FOREIGN KEY (`cod_provincia`) REFERENCES `provincia` (`cod_provincia`);
+  ADD CONSTRAINT `poblacion_provincia_fk` FOREIGN KEY (`cod_provincia`) REFERENCES `provincia` (`id`);
 
 --
 -- Constraints for table `proveedor`
 --
 ALTER TABLE `proveedor`
-  ADD CONSTRAINT `proveedor_poblacion_fk` FOREIGN KEY (`cod_poblacion`) REFERENCES `poblacion` (`cod_postal`);
+  ADD CONSTRAINT `proveedor_poblacion_fk` FOREIGN KEY (`cod_poblacion`) REFERENCES `poblacion` (`id`);
 
 --
 -- Constraints for table `recibo`
@@ -534,7 +556,7 @@ ALTER TABLE `tarea_tag`
 --
 ALTER TABLE `vecino`
   ADD CONSTRAINT `vecino_comunidad_fk` FOREIGN KEY (`id_comunidad`) REFERENCES `comunidad` (`id`),
-  ADD CONSTRAINT `vecino_poblacion_fk` FOREIGN KEY (`cod_poblacion`) REFERENCES `poblacion` (`cod_postal`),
+  ADD CONSTRAINT `vecino_poblacion_fk` FOREIGN KEY (`cod_poblacion`) REFERENCES `poblacion` (`id`),
   ADD CONSTRAINT `vecino_tipovecino_fk` FOREIGN KEY (`id_tipovecino`) REFERENCES `tipovecino` (`id`);
 COMMIT;
 

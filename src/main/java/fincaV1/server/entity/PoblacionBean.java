@@ -25,6 +25,7 @@ public class PoblacionBean {
 	private int id;
 	
 	@Column(name = "cod_postal")
+	@NotNull
 	private int cod_postal;
 	
 	@Column(name="descripcion")
