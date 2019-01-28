@@ -37,6 +37,14 @@ public class PoblacionBean {
 	@NotNull
 	private ProvinciaBean cod_provincia;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public int getCod_postal() {
 		return cod_postal;
 	}
@@ -63,8 +71,10 @@ public class PoblacionBean {
 
 	@Override
 	public String toString() {
-		return "PoblacionBean [cod_postal=" + cod_postal + ", descripcion=" + descripcion + ", cod_provincia="
-				+ cod_provincia + "]";
+		return "PoblacionBean [id=" + id + ", cod_postal=" + cod_postal + ", descripcion=" + descripcion
+				+ ", cod_provincia=" + cod_provincia + "]";
 	}
+
+
 
 }
