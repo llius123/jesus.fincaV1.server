@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2019 at 12:39 PM
+-- Generation Time: Jan 30, 2019 at 09:51 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -44,7 +44,7 @@ CREATE TABLE `comunidad` (
 
 INSERT INTO `comunidad` (`id`, `nombre`, `direccion`, `nif`, `iban`, `sufijo`, `cod_poblacion`) VALUES
 (1, 'test', 'test', 'test', 'test', 'test', 1),
-(2, 'test', 'q', 'qweqweqwewq', 'qwe', 'test', 1);
+(2, 'test', 'q', 'q', 'qwe', 'q', 1);
 
 -- --------------------------------------------------------
 
@@ -93,7 +93,7 @@ CREATE TABLE `incidencia` (
 
 INSERT INTO `incidencia` (`id`, `id_vecino`, `descripcion`, `fecha_creacion`, `atendido`) VALUES
 (1, 2, 'post', '2018-12-12', 'n'),
-(2, 2, 'post', '2018-12-12', 'n'),
+(2, 2, 'post', '2018-12-12', 's'),
 (3, 2, 'post', '2018-12-12', 'n'),
 (4, 2, 'post', '2018-12-12', 'n'),
 (5, 2, 'post', '2018-12-12', 'n'),
@@ -108,7 +108,7 @@ INSERT INTO `incidencia` (`id`, `id_vecino`, `descripcion`, `fecha_creacion`, `a
 (14, 2, 'post', '2018-12-11', 'n'),
 (15, 2, 'post', '2018-12-12', 'n'),
 (16, 2, 'post', '1970-01-01', 'n'),
-(17, 2, '12', '1970-01-01', 'n'),
+(17, 2, '12', '1970-01-01', 's'),
 (18, 2, '12', '1973-11-26', 's'),
 (19, 2, 'hola', '2018-12-12', 's');
 
@@ -131,10 +131,7 @@ CREATE TABLE `poblacion` (
 
 INSERT INTO `poblacion` (`id`, `descripcion`, `cod_provincia`, `cod_postal`) VALUES
 (1, 'test2', 1, 1),
-(2, 'qweqwewqe', 1, 2),
-(3, 'e', 2, 3),
-(4, 'e', 2, 3),
-(5, 'e', 2, 3);
+(2, 'q', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -155,7 +152,11 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`id`, `direccion`, `telefono`, `email`, `cod_poblacion`) VALUES
-(1, 'qwe', 'wqe', 'qwe', 2);
+(1, 'LUL', 'wqe', 'qwqweqwe', 2),
+(2, 's', 'qwe', 'qwe', 2),
+(4, 'qwe', 'e', 'e', 2),
+(5, 'qwe', 'e', 'e', 2),
+(6, 'qwe', 'qwe', 'q', 2);
 
 -- --------------------------------------------------------
 
@@ -175,7 +176,7 @@ CREATE TABLE `provincia` (
 
 INSERT INTO `provincia` (`id`, `descripcion`, `cod_provincia`) VALUES
 (1, 'qweqw', '1'),
-(2, 'qwe', 'qwe');
+(2, 'q', 'qwe');
 
 -- --------------------------------------------------------
 
@@ -230,9 +231,9 @@ CREATE TABLE `tarea` (
 
 INSERT INTO `tarea` (`id`, `fecha`, `descripcion`) VALUES
 (2, '2019-01-16', 'qwe'),
-(3, '2019-01-17', 'qwe'),
 (6, '2019-01-17', 'qwe'),
-(8, '2019-01-22', 'qwe');
+(8, '2019-01-22', 'qwe'),
+(12, '2019-01-30', 'q');
 
 -- --------------------------------------------------------
 
@@ -270,7 +271,7 @@ CREATE TABLE `tipofactura` (
 
 INSERT INTO `tipofactura` (`id`, `descripcion`) VALUES
 (1, 'qweqweqweqwe'),
-(3, 'qweqweqwe');
+(3, 'q');
 
 -- --------------------------------------------------------
 
@@ -295,7 +296,7 @@ INSERT INTO `tipovecino` (`id`, `descripcion`) VALUES
 (8, 'qeqweqweqwe'),
 (12, 'qwe'),
 (13, 'qweqwe'),
-(14, 'qweqweeqwe');
+(14, 'q');
 
 -- --------------------------------------------------------
 
@@ -329,8 +330,7 @@ INSERT INTO `vecino` (`id`, `nombre`, `direccion`, `numero`, `nif`, `iban`, `por
 (3, 'qweqweqwewqe', 'ewqqweqwe', 'qweeee', 'qwe', 'qwe', '1.00', 1, 'qwe', 'qwe', 3, 2, 'user', 'qwe'),
 (7, 'qweqweqwewqe', 'ewqqweqwe', 'qweeee', 'qwe', 'qwe', '1.00', 1, 'qwe', 'qwe', 3, 2, 'user', 'qwe'),
 (34, 'pepe', 'qwe', '12', 'qwe', 'qweqweqwe', '12.00', 2, 'qw', 'qw', 7, 1, 'q', 'q'),
-(35, 'q', 'qwe', 'qwe', 'qwe', 'qweqwe', '12.00', 1, 'qwe', 'qwe', 1, 1, 'qwe', 'qwe'),
-(36, 'q', 'qwe', 'qwe', 'qwe', 'qwe', '1.00', 1, 'qwe', 'qwe', 2, 1, 'qweqwe', 'qwe');
+(35, 'q', 'qwe', 'qwe', 'qwe', 'qweqwe', '12.00', 1, 'qwe', 'qwe', 1, 1, 'qwe', 'qwe');
 
 --
 -- Indexes for dumped tables
@@ -452,13 +452,13 @@ ALTER TABLE `incidencia`
 -- AUTO_INCREMENT for table `poblacion`
 --
 ALTER TABLE `poblacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `provincia`
@@ -482,25 +482,25 @@ ALTER TABLE `tag`
 -- AUTO_INCREMENT for table `tarea`
 --
 ALTER TABLE `tarea`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tipofactura`
 --
 ALTER TABLE `tipofactura`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tipovecino`
 --
 ALTER TABLE `tipovecino`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `vecino`
 --
 ALTER TABLE `vecino`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- Constraints for dumped tables
@@ -510,39 +510,39 @@ ALTER TABLE `vecino`
 -- Constraints for table `comunidad`
 --
 ALTER TABLE `comunidad`
-  ADD CONSTRAINT `comunidad_poblacion_fk` FOREIGN KEY (`cod_poblacion`) REFERENCES `poblacion` (`id`);
+  ADD CONSTRAINT `comunidad_poblacion_fk` FOREIGN KEY (`cod_poblacion`) REFERENCES `poblacion` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `factura_proveedor`
 --
 ALTER TABLE `factura_proveedor`
-  ADD CONSTRAINT `factura_proveedor_comunidad_fk` FOREIGN KEY (`id_comunidad`) REFERENCES `comunidad` (`id`),
-  ADD CONSTRAINT `factura_proveedor_proveedor_fk` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id`),
-  ADD CONSTRAINT `factura_proveedor_tipofactura_fk` FOREIGN KEY (`id_tipofactura`) REFERENCES `tipofactura` (`id`);
+  ADD CONSTRAINT `factura_proveedor_comunidad_fk` FOREIGN KEY (`id_comunidad`) REFERENCES `comunidad` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `factura_proveedor_proveedor_fk` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `factura_proveedor_tipofactura_fk` FOREIGN KEY (`id_tipofactura`) REFERENCES `tipofactura` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `incidencia`
 --
 ALTER TABLE `incidencia`
-  ADD CONSTRAINT `incidencia_vecino_fk` FOREIGN KEY (`id_vecino`) REFERENCES `vecino` (`id`);
+  ADD CONSTRAINT `incidencia_vecino_fk` FOREIGN KEY (`id_vecino`) REFERENCES `vecino` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `poblacion`
 --
 ALTER TABLE `poblacion`
-  ADD CONSTRAINT `poblacion_provincia_fk` FOREIGN KEY (`cod_provincia`) REFERENCES `provincia` (`id`);
+  ADD CONSTRAINT `poblacion_provincia_fk` FOREIGN KEY (`cod_provincia`) REFERENCES `provincia` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `proveedor`
 --
 ALTER TABLE `proveedor`
-  ADD CONSTRAINT `proveedor_poblacion_fk` FOREIGN KEY (`cod_poblacion`) REFERENCES `poblacion` (`id`);
+  ADD CONSTRAINT `proveedor_poblacion_fk` FOREIGN KEY (`cod_poblacion`) REFERENCES `poblacion` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `recibo`
 --
 ALTER TABLE `recibo`
-  ADD CONSTRAINT `recibo_vecino_fk` FOREIGN KEY (`id_vecino`) REFERENCES `vecino` (`id`);
+  ADD CONSTRAINT `recibo_vecino_fk` FOREIGN KEY (`id_vecino`) REFERENCES `vecino` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tarea_tag`
@@ -555,9 +555,8 @@ ALTER TABLE `tarea_tag`
 -- Constraints for table `vecino`
 --
 ALTER TABLE `vecino`
-  ADD CONSTRAINT `vecino_comunidad_fk` FOREIGN KEY (`id_comunidad`) REFERENCES `comunidad` (`id`),
-  ADD CONSTRAINT `vecino_poblacion_fk` FOREIGN KEY (`cod_poblacion`) REFERENCES `poblacion` (`id`),
-  ADD CONSTRAINT `vecino_tipovecino_fk` FOREIGN KEY (`id_tipovecino`) REFERENCES `tipovecino` (`id`);
+  ADD CONSTRAINT `vecino_poblacion_fk` FOREIGN KEY (`cod_poblacion`) REFERENCES `poblacion` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `vecino_tipovecino_fk` FOREIGN KEY (`id_tipovecino`) REFERENCES `tipovecino` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
