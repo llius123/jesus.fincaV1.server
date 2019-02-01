@@ -69,10 +69,15 @@ public class FacturaProveedorRestController {
 		return new ResponseBean(200, genericService.saveOrUpdate(factura));
 	}
 	
-	@RequestMapping(value="/facturaproveedores/{desde}/{hasta}", method=RequestMethod.GET)
+	@RequestMapping(value="/facturaproveedores/filtrofecha/{desde}/{hasta}", method=RequestMethod.GET)
 	public List<FacturaProveedorBean> facturafiltrofecha(@PathVariable String desde, @PathVariable String hasta){
 		specificValidator.isDateValid(desde);
 		specificValidator.isDateValid(hasta);
 		return facturaProveedorServiceImp.facturaFiltroFecha(desde, hasta);
+	}
+	
+	@RequestMapping(value="/facturaproveedores/filtrogeneral/{tabla}/{dato}", method=RequestMethod.GET)
+	public List<FacturaProveedorBean> facturafiltrogeneral(@PathVariable String tabla, @PathVariable Integer dato){
+		return facturaProveedorServiceImp.facturaFiltroGeneral(tabla, dato);
 	}
 }

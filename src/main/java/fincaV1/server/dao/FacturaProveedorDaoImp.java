@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.sql.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -31,6 +32,16 @@ public class FacturaProveedorDaoImp {
 				.addEntity(FacturaProveedorBean.class)
 				.setParameter("desde", desde)
 				.setParameter("hasta", hasta);
+		List<FacturaProveedorBean> list = query.list();
+		return list;
+	}
+	
+	public List<FacturaProveedorBean> facturaFiltroGeneral(String tabla, Integer dato){
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query query = currentSession.createSQLQuery("select * from `factura_proveedor` where ? = ?")
+				.addEntity(FacturaProveedorBean.class)
+				.setString(0, tabla)
+				.setInteger(1, dato);
 		List<FacturaProveedorBean> list = query.list();
 		return list;
 	}

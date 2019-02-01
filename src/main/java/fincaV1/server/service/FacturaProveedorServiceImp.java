@@ -20,4 +20,9 @@ public class FacturaProveedorServiceImp {
 	public List<FacturaProveedorBean> facturaFiltroFecha(String desde, String hasta){
 		return facturaProveedorDaoImp.facturaFiltroFecha(desde, hasta);
 	};
+	
+	@Transactional
+	public List<FacturaProveedorBean> facturaFiltroGeneral(String tabla, Integer dato){
+		return facturaProveedorDaoImp.facturaFiltroGeneral(tabla, dato);
+	}
 }
