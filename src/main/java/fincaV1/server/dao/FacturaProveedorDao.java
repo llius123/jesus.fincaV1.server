@@ -8,4 +8,6 @@ import fincaV1.server.entity.FacturaProveedorBean;
 public interface FacturaProveedorDao {
 
 	public List<FacturaProveedorBean> facturaFiltroFecha(String desde, String hasta);
+	
+	public List<FacturaProveedorBean> facturaFiltroGeneral(String tabla, Integer dato);
 }
