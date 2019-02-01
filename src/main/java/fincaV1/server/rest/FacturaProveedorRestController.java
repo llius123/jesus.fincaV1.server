@@ -1,5 +1,6 @@
 package fincaV1.server.rest;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fincaV1.server.entity.FacturaProveedorBean;
 import fincaV1.server.entity.ResponseBean;
+import fincaV1.server.service.FacturaProveedorServiceImp;
 import fincaV1.server.servicegeneric.GenericServiceImp;
 import fincaV1.server.validator.CheckForeignKey;
 import fincaV1.server.validator.SpecificValidators;
@@ -26,6 +28,8 @@ public class FacturaProveedorRestController {
 	private CheckForeignKey checkForeignKey;
 	@Autowired
 	private SpecificValidators specificValidator;
+	@Autowired
+	FacturaProveedorServiceImp facturaProveedorServiceImp;
 	
 	@RequestMapping(value="/facturaproveedores", method=RequestMethod.GET)
 	public List<FacturaProveedorBean> facturas() {
@@ -63,5 +67,12 @@ public class FacturaProveedorRestController {
 		checkForeignKey.checkForeignKey(datos);
 		specificValidator.isDateValid(factura.getFecha_registro().toString());
 		return new ResponseBean(200, genericService.saveOrUpdate(factura));
+	}
+	
+	@RequestMapping(value="/facturaproveedores/{desde}/{hasta}", method=RequestMethod.GET)
+	public List<FacturaProveedorBean> facturafiltrofecha(@PathVariable String desde, @PathVariable String hasta){
+		specificValidator.isDateValid(desde);
+		specificValidator.isDateValid(hasta);
+		return facturaProveedorServiceImp.facturaFiltroFecha(desde, hasta);
 	}
 }
