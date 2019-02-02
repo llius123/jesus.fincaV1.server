@@ -36,12 +36,12 @@ public class FacturaProveedorDaoImp {
 		return list;
 	}
 	
-	public List<FacturaProveedorBean> facturaFiltroGeneral(String tabla, Integer dato){
+	public List<FacturaProveedorBean> facturaFiltroGeneral(String tabla, String dato){
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query query = currentSession.createSQLQuery("select * from `factura_proveedor` where ? = ?")
-				.addEntity(FacturaProveedorBean.class)
-				.setString(0, tabla)
-				.setInteger(1, dato);
+		Query query = currentSession.createSQLQuery("select * from `factura_proveedor` where " + tabla + " = " + "'"+dato+"'")
+				.addEntity(FacturaProveedorBean.class);
+		System.err.println(query.toString());
+		System.err.print(query.toString());
 		List<FacturaProveedorBean> list = query.list();
 		return list;
 	}

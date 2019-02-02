@@ -60,6 +60,7 @@ public class FacturaProveedorRestController {
 	@RequestMapping(value="/facturaproveedores", method=RequestMethod.PUT)
 	public<T> ResponseBean facturaupdate(@RequestBody FacturaProveedorBean factura) {
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
+		System.err.println(factura);
 		datos.put((T) factura,factura.getId());
 		datos.put((T) factura.getProveedor(),factura.getProveedor().getId());
 		datos.put((T) factura.getTipofactura(), factura.getTipofactura().getId());
@@ -77,7 +78,7 @@ public class FacturaProveedorRestController {
 	}
 	
 	@RequestMapping(value="/facturaproveedores/filtrogeneral/{tabla}/{dato}", method=RequestMethod.GET)
-	public List<FacturaProveedorBean> facturafiltrogeneral(@PathVariable String tabla, @PathVariable Integer dato){
+	public List<FacturaProveedorBean> facturafiltrogeneral(@PathVariable String tabla, @PathVariable String dato){
 		return facturaProveedorServiceImp.facturaFiltroGeneral(tabla, dato);
 	}
 }

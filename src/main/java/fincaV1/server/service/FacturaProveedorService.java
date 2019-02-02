@@ -9,6 +9,6 @@ public interface FacturaProveedorService {
 	
 	public List<FacturaProveedorBean> facturaFiltroFecha(String desde, String hasta);
 	
-	public List<FacturaProveedorBean> facturaFiltroGeneral(String tabla, Integer dato);
+	public List<FacturaProveedorBean> facturaFiltroGeneral(String tabla, String dato);
 
 }

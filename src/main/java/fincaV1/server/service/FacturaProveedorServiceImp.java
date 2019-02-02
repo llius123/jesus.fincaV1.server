@@ -22,7 +22,7 @@ public class FacturaProveedorServiceImp {
 	};
 	
 	@Transactional
-	public List<FacturaProveedorBean> facturaFiltroGeneral(String tabla, Integer dato){
+	public List<FacturaProveedorBean> facturaFiltroGeneral(String tabla, String dato){
 		return facturaProveedorDaoImp.facturaFiltroGeneral(tabla, dato);
 	}
 }
