@@ -1,6 +1,7 @@
 package fincaV1.server.rest;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -86,12 +87,12 @@ public class FacturaProveedorRestController {
 	}
 
 	@RequestMapping(value = "/facturaproveedores/facturagraficocobrado", method = RequestMethod.GET)
-	public ResponseBean facturaGraficoCobrado() {
-		return new ResponseBean(200, graficoService.graficoCobrado().toString());
+	public ArrayList<ArrayList<String>> facturaGraficoCobrado() {
+		return graficoService.graficoCobrado();
 	}
 	
 	@RequestMapping(value="/facturaproveedores/facturagraficotipofactura", method = RequestMethod.GET)
-	public ResponseBean facturaGraficoTipoFactura() {
-		return new ResponseBean(200, graficoService.graficoTipofactura().toString());
+	public ArrayList<ArrayList<String>> facturaGraficoTipoFactura() {
+		return graficoService.graficoTipofactura();
 	}
 }
