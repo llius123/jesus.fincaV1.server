@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2019 at 09:51 AM
+-- Generation Time: Feb 06, 2019 at 12:35 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -43,8 +43,7 @@ CREATE TABLE `comunidad` (
 --
 
 INSERT INTO `comunidad` (`id`, `nombre`, `direccion`, `nif`, `iban`, `sufijo`, `cod_poblacion`) VALUES
-(1, 'test', 'test', 'test', 'test', 'test', 1),
-(2, 'test', 'q', 'q', 'qwe', 'q', 1);
+(1, 'Comunidad Serreria', 'Jeronimo de monsoriu', '0123456A', 'ES7620770024003102575766', 'Datos que da el banco', 1);
 
 -- --------------------------------------------------------
 
@@ -73,6 +72,13 @@ CREATE TABLE `factura_proveedor` (
   `cobrado` char(1) DEFAULT 'n'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `factura_proveedor`
+--
+
+INSERT INTO `factura_proveedor` (`id`, `fecha_registro`, `id_proveedor`, `id_tipofactura`, `base_imponible0`, `base_imponible1`, `base_imponible2`, `base_imponible3`, `tipo_iva1`, `tipo_iva2`, `tipo_iva3`, `cuota_iva1`, `cuota_iva2`, `cuota_iva3`, `total`, `id_comunidad`, `num_factura`, `cobrado`) VALUES
+(1, '2019-02-01 00:00:00', 1, 1, '0.00', '1.00', '2.00', '3.00', '1.00', '2.00', '3.00', '1.00', '2.00', '3.00', '12.00', 1, 'ACDB', 's');
+
 -- --------------------------------------------------------
 
 --
@@ -92,25 +98,8 @@ CREATE TABLE `incidencia` (
 --
 
 INSERT INTO `incidencia` (`id`, `id_vecino`, `descripcion`, `fecha_creacion`, `atendido`) VALUES
-(1, 2, 'post', '2018-12-12', 'n'),
-(2, 2, 'post', '2018-12-12', 's'),
-(3, 2, 'post', '2018-12-12', 'n'),
-(4, 2, 'post', '2018-12-12', 'n'),
-(5, 2, 'post', '2018-12-12', 'n'),
-(6, 2, 'post', '1970-01-01', 'n'),
-(7, 2, 'post', '1970-01-01', 'n'),
-(8, 2, 'post', '1970-01-01', 'n'),
-(9, 2, 'post', '1970-01-01', 'n'),
-(10, 2, 'post', '1970-01-01', 's'),
-(11, 2, 'post', '1973-11-26', 'n'),
-(12, 2, 'post', '2018-12-11', 'n'),
-(13, 2, 'post', '2018-12-11', 'n'),
-(14, 2, 'post', '2018-12-11', 'n'),
-(15, 2, 'post', '2018-12-12', 'n'),
-(16, 2, 'post', '1970-01-01', 'n'),
-(17, 2, '12', '1970-01-01', 's'),
-(18, 2, '12', '1973-11-26', 's'),
-(19, 2, 'hola', '2018-12-12', 's');
+(1, 2, 'Bombilla del piso 3 apagada', '2018-12-12', 'n'),
+(2, 2, 'Ascensor averiado', '2018-12-12', 's');
 
 -- --------------------------------------------------------
 
@@ -130,8 +119,8 @@ CREATE TABLE `poblacion` (
 --
 
 INSERT INTO `poblacion` (`id`, `descripcion`, `cod_provincia`, `cod_postal`) VALUES
-(1, 'test2', 1, 1),
-(2, 'q', 1, 2);
+(1, 'Valencia', 1, 46000),
+(2, 'Castellon', 1, 12000);
 
 -- --------------------------------------------------------
 
@@ -152,11 +141,8 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`id`, `direccion`, `telefono`, `email`, `cod_poblacion`) VALUES
-(1, 'LUL', 'wqe', 'qwqweqwe', 2),
-(2, 's', 'qwe', 'qwe', 2),
-(4, 'qwe', 'e', 'e', 2),
-(5, 'qwe', 'e', 'e', 2),
-(6, 'qwe', 'qwe', 'q', 2);
+(1, 'Avenida alameda 32', '123456789', 'pepito@gmail.com', 1),
+(2, 'Avenida Castellon 12', '987654321', 'juanito@gmail.com', 2);
 
 -- --------------------------------------------------------
 
@@ -175,8 +161,7 @@ CREATE TABLE `provincia` (
 --
 
 INSERT INTO `provincia` (`id`, `descripcion`, `cod_provincia`) VALUES
-(1, 'qweqw', '1'),
-(2, 'q', 'qwe');
+(1, 'Comunidad Valenciana', '1');
 
 -- --------------------------------------------------------
 
@@ -205,14 +190,6 @@ CREATE TABLE `tag` (
   `descripcion` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `tag`
---
-
-INSERT INTO `tag` (`id`, `descripcion`) VALUES
-(1, 'test'),
-(2, 'segundo');
-
 -- --------------------------------------------------------
 
 --
@@ -230,10 +207,8 @@ CREATE TABLE `tarea` (
 --
 
 INSERT INTO `tarea` (`id`, `fecha`, `descripcion`) VALUES
-(2, '2019-01-16', 'qwe'),
-(6, '2019-01-17', 'qwe'),
-(8, '2019-01-22', 'qwe'),
-(12, '2019-01-30', 'q');
+(6, '2019-01-17', 'Llamar al electricista'),
+(8, '2019-01-22', 'Añadir al servidor la factura de agua de este mes');
 
 -- --------------------------------------------------------
 
@@ -251,8 +226,8 @@ CREATE TABLE `tarea_tag` (
 --
 
 INSERT INTO `tarea_tag` (`id_tarea`, `id_tag`) VALUES
-(2, 2),
-(2, 1);
+(NULL, NULL),
+(NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -270,8 +245,8 @@ CREATE TABLE `tipofactura` (
 --
 
 INSERT INTO `tipofactura` (`id`, `descripcion`) VALUES
-(1, 'qweqweqweqwe'),
-(3, 'q');
+(1, 'Agua'),
+(3, 'Gas');
 
 -- --------------------------------------------------------
 
@@ -289,14 +264,8 @@ CREATE TABLE `tipovecino` (
 --
 
 INSERT INTO `tipovecino` (`id`, `descripcion`) VALUES
-(1, 'qweqweqwe'),
-(2, 'vecino'),
-(3, 'qweqweqwe'),
-(7, 'qweqwee'),
-(8, 'qeqweqweqwe'),
-(12, 'qwe'),
-(13, 'qweqwe'),
-(14, 'q');
+(1, 'Administrador'),
+(2, 'vecino');
 
 -- --------------------------------------------------------
 
@@ -312,7 +281,7 @@ CREATE TABLE `vecino` (
   `nif` varchar(100) DEFAULT NULL,
   `iban` varchar(100) DEFAULT NULL,
   `porcentaje_participacion` decimal(5,2) DEFAULT NULL,
-  `id_comunidad` int(11) NOT NULL,
+  `id_comunidad` int(11) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `telefono` varchar(100) DEFAULT NULL,
   `id_tipovecino` int(11) DEFAULT NULL,
@@ -326,11 +295,8 @@ CREATE TABLE `vecino` (
 --
 
 INSERT INTO `vecino` (`id`, `nombre`, `direccion`, `numero`, `nif`, `iban`, `porcentaje_participacion`, `id_comunidad`, `email`, `telefono`, `id_tipovecino`, `cod_poblacion`, `login`, `pass`) VALUES
-(2, 'test', 'test', 'test', 'test', 'test', '1.00', 1, 'test', 'test', 1, 1, 'admin', 'admin'),
-(3, 'qweqweqwewqe', 'ewqqweqwe', 'qweeee', 'qwe', 'qwe', '1.00', 1, 'qwe', 'qwe', 3, 2, 'user', 'qwe'),
-(7, 'qweqweqwewqe', 'ewqqweqwe', 'qweeee', 'qwe', 'qwe', '1.00', 1, 'qwe', 'qwe', 3, 2, 'user', 'qwe'),
-(34, 'pepe', 'qwe', '12', 'qwe', 'qweqweqwe', '12.00', 2, 'qw', 'qw', 7, 1, 'q', 'q'),
-(35, 'q', 'qwe', 'qwe', 'qwe', 'qweqwe', '12.00', 1, 'qwe', 'qwe', 1, 1, 'qwe', 'qwe');
+(2, 'Jesus Berisa Nuñez', 'Jeronimo monsoriu', '999', '1234567A', '123456789', '10.00', 1, 'jesus@gmail.com', '123456789', 1, 1, 'admin', 'admin'),
+(38, 'Juanita Pepita', 'Jeronimo monsoriu', '999', '1234567A', '123456789', '10.00', 1, 'juanita@gmail.com', '123456789', 2, 1, 'vecino', 'vecino');
 
 --
 -- Indexes for dumped tables
@@ -440,7 +406,7 @@ ALTER TABLE `comunidad`
 -- AUTO_INCREMENT for table `factura_proveedor`
 --
 ALTER TABLE `factura_proveedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `incidencia`
@@ -482,7 +448,7 @@ ALTER TABLE `tag`
 -- AUTO_INCREMENT for table `tarea`
 --
 ALTER TABLE `tarea`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tipofactura`
@@ -500,7 +466,7 @@ ALTER TABLE `tipovecino`
 -- AUTO_INCREMENT for table `vecino`
 --
 ALTER TABLE `vecino`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Constraints for dumped tables
@@ -548,13 +514,14 @@ ALTER TABLE `recibo`
 -- Constraints for table `tarea_tag`
 --
 ALTER TABLE `tarea_tag`
-  ADD CONSTRAINT `FK_tarea_tag_tag` FOREIGN KEY (`id_tag`) REFERENCES `tag` (`id`),
-  ADD CONSTRAINT `FK_tarea_tag_tarea` FOREIGN KEY (`id_tarea`) REFERENCES `tarea` (`id`);
+  ADD CONSTRAINT `FK_tarea_tag_tag` FOREIGN KEY (`id_tag`) REFERENCES `tag` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_tarea_tag_tarea` FOREIGN KEY (`id_tarea`) REFERENCES `tarea` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `vecino`
 --
 ALTER TABLE `vecino`
+  ADD CONSTRAINT `vecino_comunidad_fk` FOREIGN KEY (`id_comunidad`) REFERENCES `comunidad` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `vecino_poblacion_fk` FOREIGN KEY (`cod_poblacion`) REFERENCES `poblacion` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `vecino_tipovecino_fk` FOREIGN KEY (`id_tipovecino`) REFERENCES `tipovecino` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 COMMIT;
