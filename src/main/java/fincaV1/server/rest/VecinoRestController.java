@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ public class VecinoRestController {
 	@Autowired
 	SpecificValidators specificValidator;
 	
+	@PreAuthorize("ADMIN")
 	@RequestMapping(value="/vecinos", method=RequestMethod.GET)
 	public List<VecinoBean> vecinos() {
 		return (List<VecinoBean>) genericService.getAll(VecinoBean.class);
