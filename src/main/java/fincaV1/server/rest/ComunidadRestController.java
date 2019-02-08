@@ -50,7 +50,7 @@ public class ComunidadRestController {
 	public<T> ResponseBean save(@RequestBody ComunidadBean comunidad) {
 		check.checkPermissions(1);
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
-		datos.put((T) comunidad.getPoblacion(), comunidad.getPoblacion().getCod_postal() );
+		datos.put((T) comunidad.getPoblacion(), comunidad.getPoblacion().getId());
 		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(comunidad));
 	}
@@ -60,7 +60,7 @@ public class ComunidadRestController {
 		check.checkPermissions(1);
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		datos.put((T) comunidad, comunidad.getId());
-		datos.put((T) comunidad.getPoblacion(), comunidad.getPoblacion().getCod_postal() );
+		datos.put((T) comunidad.getPoblacion(), comunidad.getPoblacion().getId());
 		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, genericService.saveOrUpdate(comunidad));
 	}
