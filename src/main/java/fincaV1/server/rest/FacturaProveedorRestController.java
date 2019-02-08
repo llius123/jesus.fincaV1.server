@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,7 @@ import fincaV1.server.service.FacturaProveedorServiceImp;
 import fincaV1.server.service.GraficoService;
 import fincaV1.server.servicegeneric.GenericServiceImp;
 import fincaV1.server.validator.CheckForeignKey;
+import fincaV1.server.validator.CheckPermission;
 import fincaV1.server.validator.SpecificValidators;
 
 @RestController
@@ -34,24 +37,30 @@ public class FacturaProveedorRestController {
 	FacturaProveedorServiceImp facturaProveedorServiceImp;
 	@Autowired
 	GraficoService graficoService;
+	@Autowired
+	CheckPermission check;
 
 	@RequestMapping(value = "/facturaproveedores", method = RequestMethod.GET)
 	public List<FacturaProveedorBean> facturas() {
+		check.checkPermissions(1);
 		return (List<FacturaProveedorBean>) genericService.getAll(FacturaProveedorBean.class);
 	}
 
 	@RequestMapping(value = "/facturaproveedores/{id}", method = RequestMethod.GET)
 	public FacturaProveedorBean factura(@PathVariable int id) {
+		check.checkPermissions(1);
 		return (FacturaProveedorBean) genericService.get(FacturaProveedorBean.class, id);
 	}
 
 	@RequestMapping(value = "/facturaproveedores/{id}", method = RequestMethod.DELETE)
 	public ResponseBean facturadelete(@PathVariable int id) {
+		check.checkPermissions(1);
 		return new ResponseBean(200, genericService.delete(genericService.get(FacturaProveedorBean.class, id)));
 	}
 
 	@RequestMapping(value = "/facturaproveedores", method = RequestMethod.POST)
 	public <T> ResponseBean facturasave(@RequestBody FacturaProveedorBean factura) {
+		check.checkPermissions(1);
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		datos.put((T) factura.getProveedor(), factura.getProveedor().getId());
 		datos.put((T) factura.getTipofactura(), factura.getTipofactura().getId());
@@ -63,6 +72,7 @@ public class FacturaProveedorRestController {
 
 	@RequestMapping(value = "/facturaproveedores", method = RequestMethod.PUT)
 	public <T> ResponseBean facturaupdate(@RequestBody FacturaProveedorBean factura) {
+		check.checkPermissions(1);
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		System.err.println(factura);
 		datos.put((T) factura, factura.getId());
@@ -76,6 +86,7 @@ public class FacturaProveedorRestController {
 
 	@RequestMapping(value = "/facturaproveedores/filtrofecha/{desde}/{hasta}", method = RequestMethod.GET)
 	public List<FacturaProveedorBean> facturafiltrofecha(@PathVariable String desde, @PathVariable String hasta) {
+		check.checkPermissions(1);
 		specificValidator.isDateValid(desde);
 		specificValidator.isDateValid(hasta);
 		return facturaProveedorServiceImp.facturaFiltroFecha(desde, hasta);
@@ -83,16 +94,19 @@ public class FacturaProveedorRestController {
 
 	@RequestMapping(value = "/facturaproveedores/filtrogeneral/{tabla}/{dato}", method = RequestMethod.GET)
 	public List<FacturaProveedorBean> facturafiltrogeneral(@PathVariable String tabla, @PathVariable String dato) {
+		check.checkPermissions(1);
 		return facturaProveedorServiceImp.facturaFiltroGeneral(tabla, dato);
 	}
 
 	@RequestMapping(value = "/facturaproveedores/facturagraficocobrado", method = RequestMethod.GET)
 	public ArrayList<ArrayList<String>> facturaGraficoCobrado() {
+		check.checkPermissions(1);
 		return graficoService.graficoCobrado();
 	}
 	
 	@RequestMapping(value="/facturaproveedores/facturagraficotipofactura", method = RequestMethod.GET)
 	public ArrayList<ArrayList<String>> facturaGraficoTipoFactura() {
+		check.checkPermissions(1);
 		return graficoService.graficoTipofactura();
 	}
 }

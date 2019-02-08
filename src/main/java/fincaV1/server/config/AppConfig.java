@@ -27,7 +27,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
-import fincaV1.server.interceptor.FactoryInterceptor;
 
 @Configuration
 @EnableWebMvc
@@ -121,15 +120,6 @@ public class AppConfig implements WebMvcConfigurer {
 		txManager.setSessionFactory(sessionFactory);
 
 		return txManager;
-	}
-
-	// Intercepto todas las peticiones aqui
-	@Autowired
-	FactoryInterceptor factoryInterceptor;
-
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		//registry.addInterceptor(factoryInterceptor).addPathPatterns("/**");
 	}
 
 	// Cors

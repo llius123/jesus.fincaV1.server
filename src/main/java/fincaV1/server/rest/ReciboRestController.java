@@ -14,6 +14,7 @@ import fincaV1.server.entity.ReciboBean;
 import fincaV1.server.entity.ResponseBean;
 import fincaV1.server.servicegeneric.GenericServiceImp;
 import fincaV1.server.validator.CheckForeignKey;
+import fincaV1.server.validator.CheckPermission;
 import fincaV1.server.validator.SpecificValidators;
 
 @RestController
@@ -25,24 +26,30 @@ public class ReciboRestController {
 	private CheckForeignKey checkForeignKey;
 	@Autowired
 	SpecificValidators specificValidator;
+	@Autowired
+	CheckPermission check;
 	
 	@RequestMapping(value="/recibos", method=RequestMethod.GET)
 	public List<ReciboBean> recibos() {
+		check.checkPermissions(1);
 		return (List<ReciboBean>) genericService.getAll(ReciboBean.class);
 	}
 	
 	@RequestMapping(value="/recibos/{id}", method=RequestMethod.GET)
 	public ReciboBean recibo(@PathVariable int id) {
+		check.checkPermissions(1);
 		return (ReciboBean) genericService.get(ReciboBean.class, id);
 	}
 	
 	@RequestMapping(value="/recibos/{id}", method=RequestMethod.DELETE)
 	public ResponseBean recibodelete(@PathVariable int id) {
+		check.checkPermissions(1);
 		return new ResponseBean(200, genericService.delete(genericService.get(ReciboBean.class, id)));
 	}
 	
 	@RequestMapping(value="/recibos", method=RequestMethod.POST)
 	public<T> ResponseBean recibosave(@RequestBody ReciboBean recibo) {
+		check.checkPermissions(1);
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		datos.put((T) recibo.getVecino(), recibo.getVecino().getId());
 		checkForeignKey.checkForeignKey(datos);
@@ -53,6 +60,7 @@ public class ReciboRestController {
 	
 	@RequestMapping(value="/recibos", method=RequestMethod.PUT)
 	public<T> ResponseBean reciboupdate(@RequestBody ReciboBean recibo) {
+		check.checkPermissions(1);
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		datos.put((T) recibo, recibo.getId());
 		datos.put((T) recibo.getVecino(), recibo.getVecino().getId());

@@ -3,6 +3,8 @@ package fincaV1.server.rest;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,6 +18,7 @@ import fincaV1.server.entity.VecinoBean;
 import fincaV1.server.entity.ResponseBean;
 import fincaV1.server.servicegeneric.GenericServiceImp;
 import fincaV1.server.validator.CheckForeignKey;
+import fincaV1.server.validator.CheckPermission;
 import fincaV1.server.validator.SpecificValidators;
 
 @RestController
@@ -27,41 +30,48 @@ public class VecinoRestController {
 	private CheckForeignKey checkForeignKey;
 	@Autowired
 	SpecificValidators specificValidator;
+	@Autowired
+	CheckPermission check;
 	
 	@PreAuthorize("ADMIN")
 	@RequestMapping(value="/vecinos", method=RequestMethod.GET)
 	public List<VecinoBean> vecinos() {
+		check.checkPermissions(1);
 		return (List<VecinoBean>) genericService.getAll(VecinoBean.class);
 	}
 	
 	@RequestMapping(value="/vecinos/{id}", method=RequestMethod.GET)
 	public VecinoBean vecino(@PathVariable int id) {
+		check.checkPermissions(1);
 		return (VecinoBean) genericService.get(VecinoBean.class, id);
 	}
 	
 	@RequestMapping(value="/vecinos/{id}", method=RequestMethod.DELETE)
 	public ResponseBean vecinodelete(@PathVariable int id) {
+		check.checkPermissions(1);
 		return new ResponseBean(200, genericService.delete(genericService.get(VecinoBean.class, id)));
 	}
 	
 	@Before("execution(* fincaV1.server.before.BeforeBody*.checkBody*()")
 	@RequestMapping(value="/vecinos", method=RequestMethod.POST)
 	public<T> ResponseBean vecinosave(@RequestBody VecinoBean vecino) {
+		check.checkPermissions(1);
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		datos.put((T) vecino.getComunidad(),vecino.getComunidad().getId());
 		datos.put((T) vecino.getId_tipovecino() ,vecino.getId_tipovecino().getId());
-		datos.put((T) vecino.getPoblacion(),vecino.getPoblacion().getCod_postal());
+		datos.put((T) vecino.getPoblacion(),vecino.getPoblacion().getId());
 		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(vecino));
 	}
 	
 	@RequestMapping(value="/vecinos", method=RequestMethod.PUT)
 	public<T> ResponseBean vecinoupdate(@RequestBody VecinoBean vecino) {
+		check.checkPermissions(1);
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		datos.put((T) vecino,vecino.getId());
 		datos.put((T) vecino.getComunidad(),vecino.getComunidad().getId());
 		datos.put((T) vecino.getId_tipovecino() ,vecino.getId_tipovecino().getId());
-		datos.put((T) vecino.getPoblacion(),vecino.getPoblacion().getCod_postal());
+		datos.put((T) vecino.getPoblacion(),vecino.getPoblacion().getId());
 		checkForeignKey.checkForeignKey(datos);
 		
 		if(vecino.getPass().equals("")) {

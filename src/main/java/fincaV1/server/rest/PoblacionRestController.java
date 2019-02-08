@@ -17,6 +17,7 @@ import fincaV1.server.entity.ProvinciaBean;
 import fincaV1.server.entity.ResponseBean;
 import fincaV1.server.servicegeneric.GenericServiceImp;
 import fincaV1.server.validator.CheckForeignKey;
+import fincaV1.server.validator.CheckPermission;
 
 @RestController
 public class PoblacionRestController {
@@ -25,24 +26,30 @@ public class PoblacionRestController {
 	private GenericServiceImp genericService;
 	@Autowired
 	private CheckForeignKey checkForeignKey;
+	@Autowired
+	CheckPermission check;
 	
 	@RequestMapping(value="/poblaciones", method=RequestMethod.GET)
 	public List<PoblacionBean> poblacions() {
+		check.checkPermissions(1);
 		return (List<PoblacionBean>) genericService.getAll(PoblacionBean.class);
 	}
 	
 	@RequestMapping(value="/poblaciones/{id}", method=RequestMethod.GET)
 	public PoblacionBean poblacion(@PathVariable int id) {
+		check.checkPermissions(1);
 		return (PoblacionBean) genericService.get(PoblacionBean.class, id);
 	}
 	
 	@RequestMapping(value="/poblaciones/{id}", method=RequestMethod.DELETE)
 	public ResponseBean poblaciondelete(@PathVariable int id) {
+		check.checkPermissions(1);
 		return new ResponseBean(200, genericService.delete(genericService.get(PoblacionBean.class, id)));
 	}
 	
 	@RequestMapping(value="/poblaciones", method=RequestMethod.POST)
 	public <T> ResponseBean poblacionsave(@RequestBody PoblacionBean poblacion) {
+		check.checkPermissions(1);
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		datos.put((T) poblacion.getCod_provincia(), poblacion.getCod_provincia().getId());
 		checkForeignKey.checkForeignKey(datos);
@@ -51,6 +58,7 @@ public class PoblacionRestController {
 	
 	@RequestMapping(value="/poblaciones", method=RequestMethod.PUT)
 	public <T> ResponseBean poblacionupdate(@RequestBody PoblacionBean poblacion) {
+		check.checkPermissions(1);
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		datos.put((T) poblacion, poblacion.getId());
 		datos.put((T) poblacion.getCod_provincia(), poblacion.getCod_provincia().getId());

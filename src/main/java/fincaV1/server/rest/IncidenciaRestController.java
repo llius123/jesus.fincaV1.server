@@ -3,6 +3,8 @@ package fincaV1.server.rest;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +17,7 @@ import fincaV1.server.entity.ResponseBean;
 import fincaV1.server.service.IncidenciaServiceImp;
 import fincaV1.server.servicegeneric.GenericServiceImp;
 import fincaV1.server.validator.CheckForeignKey;
+import fincaV1.server.validator.CheckPermission;
 import fincaV1.server.validator.SpecificValidators;
 
 
@@ -29,24 +32,30 @@ public class IncidenciaRestController {
 	private CheckForeignKey checkForeignKey;
 	@Autowired
 	SpecificValidators specificValidator;
+	@Autowired
+	CheckPermission check;
 	
 	@RequestMapping(value="/incidencias", method=RequestMethod.GET)
 	public List<IncidenciaBean> incidencias() {
+		check.checkPermissions(1);
 		return (List<IncidenciaBean>) genericService.getAll(IncidenciaBean.class);
 	}
 	
 	@RequestMapping(value="/incidencias/{id}", method=RequestMethod.GET)
 	public IncidenciaBean incidencia(@PathVariable int id){
+		check.checkPermissions(1);
 		return (IncidenciaBean) genericService.get(IncidenciaBean.class, id);			
 	}
 	
 	@RequestMapping(value="/incidencias/{id}", method=RequestMethod.DELETE)
 	public ResponseBean incidenciadelete(@PathVariable int id) {
+		check.checkPermissions(1);
 		return new ResponseBean(200, genericService.delete(genericService.get(IncidenciaBean.class, id)));
 	}
 	
 	@RequestMapping(value="/incidencias", method=RequestMethod.POST)
 	public<T> ResponseBean incidenciasave(@RequestBody IncidenciaBean incidencia){
+		check.checkPermissions(1);
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		datos.put((T) incidencia.getVecino(),incidencia.getVecino().getId());
 		checkForeignKey.checkForeignKey(datos);
