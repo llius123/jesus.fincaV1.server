@@ -48,7 +48,7 @@ public class ProveedorRestController {
 	public <T> ResponseBean proveedorsave(@RequestBody ProveedorBean proveedor) {
 		check.checkPermissions(1);
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
-		datos.put((T) proveedor.getPoblacion(), proveedor.getPoblacion().getCod_postal());
+		datos.put((T) proveedor.getPoblacion(), proveedor.getPoblacion().getId());
 		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(proveedor));
 	}
@@ -58,7 +58,7 @@ public class ProveedorRestController {
 		check.checkPermissions(1);
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		datos.put((T) proveedor, proveedor.getId());
-		datos.put((T) proveedor.getPoblacion(), proveedor.getPoblacion().getCod_postal());
+		datos.put((T) proveedor.getPoblacion(), proveedor.getPoblacion().getId());
 		checkForeignKey.checkForeignKey(datos);
 		return new ResponseBean(200, genericService.saveOrUpdate(proveedor));
 	}
