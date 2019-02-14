@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.ws.Response;
 
 import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import fincaV1.server.entity.ResponseBean;
 import fincaV1.server.servicegeneric.GenericServiceImp;
 import fincaV1.server.validator.CheckForeignKey;
 import fincaV1.server.validator.CheckPermission;
+import fincaV1.server.validator.EditProfileValidators;
 import fincaV1.server.validator.SpecificValidators;
 
 @RestController
@@ -32,6 +34,8 @@ public class VecinoRestController {
 	SpecificValidators specificValidator;
 	@Autowired
 	CheckPermission check;
+	@Autowired
+	EditProfileValidators editProfileValidator;
 	
 	@PreAuthorize("ADMIN")
 	@RequestMapping(value="/vecinos", method=RequestMethod.GET)
@@ -81,5 +85,22 @@ public class VecinoRestController {
 		
 		
 		return new ResponseBean(200, genericService.saveOrUpdate(vecino));
+	}
+	
+	@RequestMapping(value="/editperfil", method=RequestMethod.POST)
+	public<T> ResponseBean editperfil(@RequestBody VecinoBean vecino) {
+		check.checkPermissions(2);
+		
+		HashMap<T, Integer> datos = new HashMap<T, Integer>();
+		datos.put((T) vecino,vecino.getId());
+		datos.put((T) vecino.getComunidad(),vecino.getComunidad().getId());
+		datos.put((T) vecino.getId_tipovecino() ,vecino.getId_tipovecino().getId());
+		datos.put((T) vecino.getPoblacion(),vecino.getPoblacion().getId());
+		checkForeignKey.checkForeignKey(datos);
+		
+		VecinoBean vecinoEdited = editProfileValidator.validatorChangeProfile(vecino);
+		
+		return new ResponseBean(200, genericService.saveOrUpdate(vecinoEdited));
+		
 	}
 }
