@@ -97,9 +97,10 @@ public class FacturaProveedorRestController {
 		specificValidator.isDateValid(hasta);
 		return facturaProveedorServiceImp.facturaFiltroFecha(desde, hasta);
 	}
-	@RequestMapping(value = "/facturaproveedoresusuario/filtrofecha/{desde}/{hasta}", method = RequestMethod.GET)
-	public List<FacturaProveedorBean> facturafiltrofecha2(@PathVariable String desde, @PathVariable String hasta) {
-		check.checkPermissions(1);
+        
+        @RequestMapping(value = "/facturaproveedoresusuario/filtrofecha/{desde}/{hasta}", method = RequestMethod.GET)
+	public List<FacturaProveedorBean> facturafiltrofechausuario(@PathVariable String desde, @PathVariable String hasta) {
+		check.checkPermissions(2);
 		specificValidator.isDateValid(desde);
 		specificValidator.isDateValid(hasta);
 		return facturaProveedorServiceImp.facturaFiltroFecha(desde, hasta);
@@ -108,6 +109,12 @@ public class FacturaProveedorRestController {
 	@RequestMapping(value = "/facturaproveedores/filtrogeneral/{tabla}/{dato}", method = RequestMethod.GET)
 	public List<FacturaProveedorBean> facturafiltrogeneral(@PathVariable String tabla, @PathVariable String dato) {
 		check.checkPermissions(1);
+		return facturaProveedorServiceImp.facturaFiltroGeneral(tabla, dato);
+	}
+	
+	@RequestMapping(value = "/facturaproveedoresusuario/filtrogeneral/{tabla}/{dato}", method = RequestMethod.GET)
+	public List<FacturaProveedorBean> facturafiltrogeneralusuario(@PathVariable String tabla, @PathVariable String dato) {
+		check.checkPermissions(2);
 		return facturaProveedorServiceImp.facturaFiltroGeneral(tabla, dato);
 	}
 

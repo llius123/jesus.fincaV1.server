@@ -31,6 +31,11 @@ public class ProveedorRestController {
 		check.checkPermissions(1);
 		return (List<ProveedorBean>) genericService.getAll(ProveedorBean.class);
 	}
+	@RequestMapping(value="/proveedoresusuario", method=RequestMethod.GET)
+	public List<ProveedorBean> proveedorsusuario() {
+		check.checkPermissions(2);
+		return (List<ProveedorBean>) genericService.getAll(ProveedorBean.class);
+	}
 	
 	@RequestMapping(value="/proveedores/{id}", method=RequestMethod.GET)
 	public ProveedorBean proveedor(@PathVariable int id) {

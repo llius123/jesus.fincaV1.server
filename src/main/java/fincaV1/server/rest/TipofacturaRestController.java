@@ -28,7 +28,6 @@ public class TipofacturaRestController {
 	
 	@RequestMapping(value="/tipofacturas", method=RequestMethod.GET)
 	public List<TipofacturaBean> tipofacturas() {
-		check.checkPermissions(1);
 		return (List<TipofacturaBean>) genericService.getAll(TipofacturaBean.class);
 	}
 	
