@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fincaV1.server.entity.TareaBean;
 import fincaV1.server.entity.ResponseBean;
-import fincaV1.server.entity.TagBean;
 import fincaV1.server.entity.TareaBean;
 import fincaV1.server.entity.TipofacturaBean;
 import fincaV1.server.servicegeneric.GenericServiceImp;

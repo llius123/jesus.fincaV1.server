@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fincaV1.server.daogeneric.GenericDao;
 import fincaV1.server.daogeneric.GenericDaoImp;
-import fincaV1.server.test.TestDao;
 
 @Service
 public class GenericServiceImp implements GenericService{

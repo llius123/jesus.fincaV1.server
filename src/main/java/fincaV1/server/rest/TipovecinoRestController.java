@@ -39,24 +39,24 @@ public class TipovecinoRestController {
 		return (TipovecinoBean) genericService.get(TipovecinoBean.class, id);
 	}
 	
-	@RequestMapping(value="/tipovecinos/{id}", method=RequestMethod.DELETE)
-	public ResponseBean tipovecinodelete(@PathVariable int id) {
-		check.checkPermissions(1);
-		return new ResponseBean(200, genericService.delete(genericService.get(TipovecinoBean.class, id)));
-	}
-	
-	@RequestMapping(value="/tipovecinos", method=RequestMethod.POST)
-	public ResponseBean tipovecinosave(@RequestBody TipovecinoBean tipovecino) {
-		check.checkPermissions(1);
-		return new ResponseBean(200, "Registro creado con id: " + genericService.save(tipovecino));
-	}
-	
-	@RequestMapping(value="/tipovecinos", method=RequestMethod.PUT)
-	public<T> ResponseBean tipovecinoupdate(@RequestBody TipovecinoBean tipovecino) {
-		check.checkPermissions(1);
-		HashMap<T, Integer> datos = new HashMap<T, Integer>();
-		datos.put((T) tipovecino, tipovecino.getId());
-		checkForeignKey.checkForeignKey(datos);
-		return new ResponseBean(200, genericService.saveOrUpdate(tipovecino));
-	}
+//	@RequestMapping(value="/tipovecinos/{id}", method=RequestMethod.DELETE)
+//	public ResponseBean tipovecinodelete(@PathVariable int id) {
+//		check.checkPermissions(1);
+//		return new ResponseBean(200, genericService.delete(genericService.get(TipovecinoBean.class, id)));
+//	}
+//	
+//	@RequestMapping(value="/tipovecinos", method=RequestMethod.POST)
+//	public ResponseBean tipovecinosave(@RequestBody TipovecinoBean tipovecino) {
+//		check.checkPermissions(1);
+//		return new ResponseBean(200, "Registro creado con id: " + genericService.save(tipovecino));
+//	}
+//	
+//	@RequestMapping(value="/tipovecinos", method=RequestMethod.PUT)
+//	public<T> ResponseBean tipovecinoupdate(@RequestBody TipovecinoBean tipovecino) {
+//		check.checkPermissions(1);
+//		HashMap<T, Integer> datos = new HashMap<T, Integer>();
+//		datos.put((T) tipovecino, tipovecino.getId());
+//		checkForeignKey.checkForeignKey(datos);
+//		return new ResponseBean(200, genericService.saveOrUpdate(tipovecino));
+//	}
 }
