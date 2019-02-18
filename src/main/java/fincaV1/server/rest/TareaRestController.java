@@ -37,7 +37,6 @@ public class TareaRestController {
 	SpecificValidators specificValidator;
 	
 	@RequestMapping(value="/tareas", method=RequestMethod.GET)
-	@Transactional
 	public List<TareaBean> tareas() {
 		//Si quito este system.err.println explota la aplicacion,no entiendo el porque
 		System.err.print(genericService.getAll(TareaBean.class));
@@ -45,26 +44,22 @@ public class TareaRestController {
 	}
 	
 	@RequestMapping(value="/tareas/{id}", method=RequestMethod.GET)
-	@Transactional
 	public TareaBean tareas(@PathVariable int id) {
 		return genericService.get(TareaBean.class, id);
 	}
 	
 	@RequestMapping(value="/tareas/{id}", method=RequestMethod.DELETE)
-	@Transactional
 	public ResponseBean tareasdelete(@PathVariable int id) {
 		return new ResponseBean(200, genericService.delete(genericService.get(TareaBean.class, id)));
 	}
 	
 	@RequestMapping(value="/tareas", method=RequestMethod.POST)
-	@Transactional
 	public<T> ResponseBean tareassave(@RequestBody TareaBean tarea) {
 		System.err.println(tarea);
 		return new ResponseBean(200, "Registro creado con id: " + genericService.save(tarea));
 	}
 	
 	@RequestMapping(value="/tareas", method=RequestMethod.PUT)
-	@Transactional
 	public<T> ResponseBean tareasupdate(@RequestBody TareaBean tarea) {
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		datos.put((T) tarea, tarea.getId());
