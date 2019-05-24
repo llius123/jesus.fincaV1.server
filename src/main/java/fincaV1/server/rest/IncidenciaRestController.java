@@ -55,7 +55,7 @@ public class IncidenciaRestController {
 	
 	@RequestMapping(value="/incidencias", method=RequestMethod.POST)
 	public<T> ResponseBean incidenciasave(@RequestBody IncidenciaBean incidencia){
-		check.checkPermissions(1);
+		check.checkPermissions(2);
 		HashMap<T, Integer> datos = new HashMap<T, Integer>();
 		datos.put((T) incidencia.getVecino(),incidencia.getVecino().getId());
 		checkForeignKey.checkForeignKey(datos);

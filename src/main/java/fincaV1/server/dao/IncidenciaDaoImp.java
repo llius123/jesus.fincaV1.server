@@ -16,7 +16,6 @@ public class IncidenciaDaoImp implements IncidenciaDao{
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	@Override
 	public List<Integer> incidenciacount() {
 		Session currentSession = sessionFactory.getCurrentSession();
 		return currentSession.createQuery("SELECT count(id) from IncidenciaBean where atendido='n'").getResultList();

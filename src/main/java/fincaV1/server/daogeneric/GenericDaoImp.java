@@ -39,7 +39,6 @@ public class GenericDaoImp implements GenericDao {
 		return  (Integer) sessionFactory.getCurrentSession().save(o);
 	}
 
-	@Override
 	public int count(String table) {
 		System.err.print(sessionFactory.getCurrentSession().createQuery("select count(*) from " + table).uniqueResult());
 		return ((Long)sessionFactory.getCurrentSession().createQuery("select count(*) from " + table).uniqueResult()).intValue();
